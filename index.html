@@ -51,35 +51,10 @@
 
   <!-- The page content is grouped in a main landmark for accessibility. -->
   <main class="page-shell">
-    <!-- The hero introduces the service and highlights a featured event. -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-copy">
-        <span class="eyebrow">EVENT DISCOVERY</span>
-        <h1 id="heroTitle">Discover events<br><span>worth attending.</span></h1>
-        <p>Explore campus gatherings, live music, arts, nightlife and professional events across Ghana.</p>
-        <a class="primary-button hero-button" href="#events">Explore events <i class="fa-solid fa-arrow-down"></i></a>
-      </div>
-      <!-- The featured event uses a background image with a gradient for readable text. -->
-      <article class="featured-event">
-        <div class="featured-top"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
-        <div class="featured-bottom">
-          <div><p class="featured-location"><i class="fa-solid fa-location-dot"></i> Accra, Ghana</p><h2>Golden Hour Festival</h2><p>Music, art, food & good energy.</p></div>
-          <button class="round-arrow" id="featuredBook" aria-label="Book Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
-        </div>
-      </article>
-    </section>
-
-    <!-- Short service highlights explain the main benefits without decorative effects. -->
-    <section class="trust-row" aria-label="Service highlights">
-      <div><strong>Events in one place</strong><span>Browse different experiences across Ghana</span></div>
-      <div><strong>Clear ticket prices</strong><span>Compare prices before choosing tickets</span></div>
-      <div><strong>Easy discovery</strong><span>Search by event, category or location</span></div>
-    </section>
-
     <!-- Category buttons act as filters for the event cards below. -->
     <section class="events-section" id="events" aria-labelledby="eventsTitle">
       <div class="section-heading">
-        <div><span class="eyebrow">EXPLORE EVENTS</span><h2 id="eventsTitle">Upcoming <span>events.</span></h2><p>Find an event, review the details and choose your tickets.</p></div>
+        <div><h2 id="eventsTitle">Events</h2></div>
         <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
       </div>
       <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
@@ -96,16 +71,8 @@
       <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
     </section>
 
-    <!-- A call-to-action invites event organizers to express interest in listing events. -->
-    <section class="organizer-banner">
-      <div class="organizer-icon"><i class="fa-regular fa-calendar" aria-hidden="true"></i></div>
-      <div><span class="eyebrow">FOR EVENT ORGANIZERS</span><h2>Have an event in mind?</h2><p>List your event and help people discover it.</p></div>
-      <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
-    </section>
-    <!-- Footer keeps the original reference tagline while leaving the project name undecided. -->
-    <footer class="footer">
+    <footer class="footer" aria-label="Footer">
       <span class="footer-mark" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
-      <span class="footer-tagline">Find something worth showing up for.</span>
     </footer>
   </main>
 
