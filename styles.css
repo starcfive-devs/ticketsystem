@@ -365,3 +365,34 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
   .side-menu.open{transform:translateY(0) scale(1)}
   .events-section{padding-top:28px}
 }
+
+
+/* Keep the menu directly beneath its own button and let notifications float beneath the bell. */
+@media(min-width:621px){
+  .side-menu{inset:92px auto auto max(24px,calc((100% - 1180px)/2));}
+}
+@media(max-width:620px){
+  .side-menu{inset:78px auto auto 12px;transform-origin:top left;}
+  .side-menu.open{transform:translateY(0) scale(1);}
+}
+.notification-panel{
+  position:fixed;z-index:52;top:92px;
+  right:max(24px,calc((100% - 1180px)/2));
+  width:min(340px,calc(100vw - 32px));
+  padding:18px;background:#fff;color:#24352d;
+  border:1px solid rgba(20,35,28,.08);border-radius:18px;
+  box-shadow:0 22px 60px rgba(9,28,20,.24);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(-10px) scale(.98);transform-origin:top right;
+  transition:transform .22s ease,opacity .22s ease,visibility .22s ease;
+}
+.notification-panel.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
+.notification-panel-heading{display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;border-bottom:1px solid #e8ece9;font-size:14px}
+.notification-close{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#47554d;font-size:17px}
+.notification-close:hover{background:#f1f3f4}
+.notification-panel-content{display:flex;align-items:center;flex-direction:column;text-align:center;padding:24px 8px 14px}
+.notification-panel-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#f1f3f4;color:#006b50;font-size:18px}
+.notification-panel-content p{margin:12px 0 5px;font-size:13px;font-weight:700}
+.notification-panel-content small{max-width:240px;color:#77837d;font-size:11px;line-height:1.6}
+@media(max-width:620px){.notification-panel{top:78px;right:12px;width:min(320px,calc(100vw - 24px))}}
+@media(prefers-reduced-motion:reduce){.notification-panel{transition:none}}
