@@ -20,24 +20,37 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Main navigation follows the uploaded reference: a solid green bar, a clear search field, and simple account actions. -->
+  <!-- Header follows the reference layout: menu button, neutral mark, wide search, and notification action. -->
   <header class="topbar">
-    <a class="brand" href="#" aria-label="Events home">
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <a class="brand" href="#home" aria-label="Home">
       <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
     </a>
-    <!-- Search filters events by name, category, description, or venue. -->
+    <!-- Search remains centered between the menu and account actions. -->
     <form class="search-box" id="searchForm" role="search">
-      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-      <input id="eventSearch" type="search" placeholder="Search events, artists, or venues" aria-label="Search events">
+      <input id="eventSearch" type="search" placeholder="Search for event" aria-label="Search for event">
+      <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
     </form>
-    <!-- Keep saved events and the account entry point easy to find without crowding the header. -->
-    <div class="top-actions">
-      <button class="icon-button" id="savedShortcut" aria-label="Show saved events" title="Saved events">
-        <i class="fa-regular fa-heart" aria-hidden="true"></i><span class="saved-count" id="savedCount">0</span>
-      </button>
-      <button class="avatar-button" id="accountButton" aria-label="Open account menu"><i class="fa-regular fa-user" aria-hidden="true"></i></button>
-    </div>
+    <button class="notification-button" id="notificationsButton" type="button" aria-label="Notifications" title="Notifications">
+      <i class="fa-regular fa-bell" aria-hidden="true"></i>
+    </button>
   </header>
+
+  <!-- The menu drawer provides the same simple navigation pattern as the reference UI. -->
+  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <div class="side-menu-heading">
+      <span class="menu-heading-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span>
+      <button class="menu-close" id="closeMenu" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <button type="button" data-menu-view="home"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</button>
+    <button type="button" data-menu-view="categories"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Categories</button>
+    <button type="button" data-menu-view="saved"><i class="fa-regular fa-heart" aria-hidden="true"></i> Saved events</button>
+    <button type="button" data-menu-view="account"><i class="fa-regular fa-user" aria-hidden="true"></i> Account</button>
+    <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About</button>
+  </aside>
+  <button class="menu-scrim" id="menuScrim" type="button" aria-label="Close menu" tabindex="-1"></button>
 
   <!-- The page content is grouped in a main landmark for accessibility. -->
   <main class="page-shell">
@@ -92,11 +105,10 @@
       <div><span class="eyebrow">FOR EVENT ORGANIZERS</span><h2>Have an event in mind?</h2><p>List your event and help people discover it.</p></div>
       <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
     </section>
-    <!-- A restrained footer keeps the page grounded and avoids introducing an unapproved brand name. -->
+    <!-- Footer keeps the original reference tagline while leaving the project name undecided. -->
     <footer class="footer">
       <span class="footer-mark" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
-      <p>Discover events. Choose your tickets. Make plans.</p>
-      <span class="footer-note">Event discovery and ticketing</span>
+      <span class="footer-tagline">Find something worth showing up for.</span>
     </footer>
   </main>
 
