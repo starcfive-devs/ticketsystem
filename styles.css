@@ -81,3 +81,35 @@ button,a,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoratio
 
 /* Respect visitors who prefer reduced motion in their device accessibility settings. */
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Header and bottom navigation styling adapted from the supplied reference design. */
+:root{--header-green:#006b50;--header-green-dark:#00513e}
+.topbar{background:var(--header-green);border-bottom:0;color:#fff;box-shadow:none}
+.brand{color:#fff}
+.brand-mark{background:transparent;border:1px solid #ffffff55;color:#fff;border-radius:10px}
+.brand-dot{color:#d7bd59}
+.search-box{background:#fff;border:0;border-radius:999px;color:#89948d}
+.search-box input{color:#24352d}
+.search-box input::placeholder{color:#9aa49e}
+.search-box kbd{border-color:#e2e8e3;background:#f7f9f7;color:#5d6a62}
+.top-actions .icon-button,.top-actions .avatar-button{color:#fff}
+.top-actions .icon-button:hover,.top-actions .avatar-button:hover{background:#ffffff1c}
+.top-actions .avatar-button{background:#ffffff1c}
+.top-actions .saved-count{border:1px solid var(--header-green)}
+.footer{margin-top:34px;padding:25px 24px 100px;border-top:1px solid var(--line)}
+.footer-brand{color:var(--ink)}
+.footer-brand .brand-mark{background:var(--header-green);border:0;color:#fff}
+.mobile-nav{background:var(--header-green);border-top:0;color:#c6ded5}
+.mobile-nav-link{color:#c6ded5}
+.mobile-nav-link.active{color:#fff}
+.mobile-add{background:#fff;color:var(--header-green);border:4px solid #ffffffcc;box-shadow:none}
+@media(max-width:620px){
+ .topbar{height:68px;padding:0 15px;gap:11px}
+ .brand{font-size:20px;gap:5px}
+ .brand-mark{width:30px;height:30px;border-radius:9px;font-size:14px}
+ .search-box{background:#fff;padding:0 10px}
+ .top-actions .icon-button{color:#fff}
+ .footer{padding:25px 0 105px}
+ .mobile-nav{height:76px;padding:7px 7px max(7px,env(safe-area-inset-bottom))}
+ .mobile-add{border-color:#fff}
+}
