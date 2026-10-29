@@ -1,7 +1,7 @@
 /* Use familiar system fonts for a professional, fast-loading interface. */
 
 /* Store the shared colors and sizes here so the visual theme is easy to adjust. */
-:root{--green:#08785c;--green-dark:#055640;--green-light:#e4f4ed;--ink:#14231e;--muted:#77837d;--paper:#fff;--canvas:#f6f8f6;--line:#e7ece8;--gold:#f6c76b;--radius:22px;--shadow:0 18px 55px rgba(12,48,35,.10)}
+:root{--green:#08785c;--green-dark:#055640;--green-light:#f1f3f4;--ink:#14231e;--muted:#77837d;--paper:#fff;--canvas:#f6f8f6;--line:#e7ece8;--gold:#f6c76b;--radius:22px;--shadow:0 18px 55px rgba(12,48,35,.10)}
 
 /* Apply consistent box sizing and smooth scrolling across the whole page. */
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}
@@ -270,66 +270,23 @@ button,a,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoratio
 }
 
 
-/* Professional neutral and royal-blue palette; avoid pale-green surfaces. */
-:root{
-  --green:#2457d6;
-  --green-dark:#1946b3;
-  --green-light:#edf2ff;
-  --ink:#171b24;
-  --muted:#697386;
-  --paper:#ffffff;
-  --canvas:#f8f9fb;
-  --line:#e5e8ef;
-  --gold:#dce5ff;
-  --shadow:0 16px 42px rgba(21,34,67,.10);
-}
-body{background:var(--canvas);color:var(--ink)}
-.topbar{background:#fff;color:#171b24;border-bottom:1px solid #e5e8ef;box-shadow:0 2px 10px rgba(20,30,55,.04)}
-.menu-button,.notification-button{color:#202633}
-.menu-button:hover,.notification-button:hover{background:#f0f3f9}
-.search-box{background:#f8f9fc;border-color:#e1e5ed}
-.search-box:focus-within{border-color:#2457d6;box-shadow:0 0 0 3px rgba(36,87,214,.10)}
-.brand,.brand-mark,.topbar .brand-mark{display:none}
-.eyebrow{color:#2457d6}
-.hero h1 span,.section-heading h2 span{color:#2457d6}
-.primary-button{background:#2457d6;box-shadow:none}
-.primary-button:hover{background:#1946b3}
-.hero-button{box-shadow:0 5px 14px rgba(36,87,214,.16)}
-.trust-row div{border-left-color:#dfe5f2}
-.filter-chip{border-color:#e1e5ed;background:#fff;color:#596273}
-.filter-chip:hover,.filter-chip.active{border-color:#2457d6;background:#2457d6;color:#fff}
-.event-image-wrap{background:#edf0f5}
-.event-category{color:#244db5}
-.event-date{color:#2457d6}
-.card-book{background:#eef2ff;color:#244db5}
-.card-book:hover{background:#2457d6;color:#fff}
-.round-arrow{color:#2457d6}
-.round-arrow:hover{background:#edf2ff}
-.organizer-icon{background:#fff;border-color:#e2e6ee}
-.menu-heading-mark,.footer-mark{border-color:#e1e5ed;color:#2457d6}
-.side-menu>button:not(.menu-close) i{color:#2457d6}
-.side-menu>button:not(.menu-close):hover{background:#f2f5fb}
-.footer{border-top-color:#e5e8ef}
-.footer-tagline{color:#626b7b}
 
-/* Keep the floating plus button visually lifted above the mobile navigation. */
-.mobile-add{position:relative;top:-8px;box-shadow:0 5px 14px rgba(36,87,214,.18);background:#2457d6;color:#fff;border-color:#fff}
-.mobile-add:hover{transform:translateY(-3px);background:#1946b3}
 
-/* Use consistent, restrained transitions for controls and page elements. */
+/* Requested refinements only: neutralize pale-green surfaces while keeping the original green design. */
+.filter-chip.active,.filter-chip:hover{background:#006b50}
+.mobile-add{position:relative;top:-8px}
 a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.side-menu,.menu-scrim,.organizer-banner,.featured-event{
   transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .22s ease,transform .22s ease,opacity .22s ease;
 }
-.event-card{animation:card-enter .42s both}
-.event-card:nth-child(2){animation-delay:.05s}
-.event-card:nth-child(3){animation-delay:.1s}
-.event-card:nth-child(4){animation-delay:.15s}
-.event-card:nth-child(5){animation-delay:.2s}
-.event-card:nth-child(6){animation-delay:.25s}
-@keyframes card-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.featured-event{animation:hero-enter .55s ease-out both}
-@keyframes hero-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid rgba(36,87,214,.35);outline-offset:3px}
+.event-card{animation:card-enter .35s ease both}
+.event-card:nth-child(2){animation-delay:.04s}
+.event-card:nth-child(3){animation-delay:.08s}
+.event-card:nth-child(4){animation-delay:.12s}
+.event-card:nth-child(5){animation-delay:.16s}
+.event-card:nth-child(6){animation-delay:.2s}
+@keyframes card-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.featured-event{animation:hero-enter .45s ease-out both}
+@keyframes hero-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
