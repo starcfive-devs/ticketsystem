@@ -6,38 +6,36 @@
   <!-- Makes the layout adapt to mobile phones, tablets, and desktop screens. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Brief description used by browsers and search engines. -->
-  <meta name="description" content="Discover events and reserve tickets with Gather.">
+  <meta name="description" content="Discover events across Ghana and explore ticket options.">
   <!-- Sets the browser tab color on supported mobile browsers. -->
-  <meta name="theme-color" content="#08785c">
+  <meta name="theme-color" content="#006b50">
   <!-- Loads the stylesheet that controls the complete visual design. -->
   <link rel="stylesheet" href="styles.css">
   <!-- Loads Font Awesome icons for the navigation and event actions. -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- Gives the browser the title shown in the tab. -->
-  <title>Gather — Find your next experience</title>
+  <title>Events &amp; Tickets</title>
   <!-- Loads the JavaScript after HTML parsing so page elements are available. -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- The top navigation contains the brand, search field, and account actions. -->
+  <!-- Main navigation follows the uploaded reference: a solid green bar, a clear search field, and simple account actions. -->
   <header class="topbar">
-    <a class="brand" href="#" aria-label="Gather home">
-      <span class="brand-mark"><i class="fa-solid fa-ticket"></i></span>
-      <span>gather<span class="brand-dot">.</span></span>
+    <a class="brand" href="#" aria-label="Events home">
+      <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
     </a>
-    <!-- This search form lets visitors filter the sample events by name or location. -->
+    <!-- Search filters events by name, category, description, or venue. -->
     <form class="search-box" id="searchForm" role="search">
       <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
       <input id="eventSearch" type="search" placeholder="Search events, artists, or venues" aria-label="Search events">
-      <kbd>/</kbd>
     </form>
-    <!-- These controls open the saved-event view and the simple account panel. -->
+    <!-- Keep saved events and the account entry point easy to find without crowding the header. -->
     <div class="top-actions">
       <button class="icon-button" id="savedShortcut" aria-label="Show saved events" title="Saved events">
-        <i class="fa-regular fa-heart"></i><span class="saved-count" id="savedCount">0</span>
+        <i class="fa-regular fa-heart" aria-hidden="true"></i><span class="saved-count" id="savedCount">0</span>
       </button>
-      <button class="avatar-button" id="accountButton" aria-label="Open account menu"><i class="fa-regular fa-user"></i></button>
+      <button class="avatar-button" id="accountButton" aria-label="Open account menu"><i class="fa-regular fa-user" aria-hidden="true"></i></button>
     </div>
   </header>
 
@@ -46,9 +44,9 @@
     <!-- The hero introduces the service and highlights a featured event. -->
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
-        <span class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR MOMENT</span>
-        <h1 id="heroTitle">Make room for<br><span>something memorable.</span></h1>
-        <p>Discover the music, people, and experiences bringing Ghana together.</p>
+        <span class="eyebrow">EVENTS ACROSS GHANA</span>
+        <h1 id="heroTitle">Discover events<br><span>worth attending.</span></h1>
+        <p>Explore campus gatherings, live music, arts, nightlife and professional events across Ghana.</p>
         <a class="primary-button hero-button" href="#events">Explore events <i class="fa-solid fa-arrow-down"></i></a>
       </div>
       <!-- The featured event uses a background image with a gradient for readable text. -->
@@ -61,17 +59,17 @@
       </article>
     </section>
 
-    <!-- Quick statistics build confidence while clearly describing the demo content. -->
+    <!-- Short service highlights explain the main benefits without decorative effects. -->
     <section class="trust-row" aria-label="Gather highlights">
-      <div><strong>Curated experiences</strong><span>Find something worth going out for</span></div>
-      <div><strong>Simple booking</strong><span>Choose your ticket in a few clicks</span></div>
-      <div><strong>Made for Ghana</strong><span>Events near you, from Accra and beyond</span></div>
+      <div><strong>Events in one place</strong><span>Browse different experiences across Ghana</span></div>
+      <div><strong>Clear ticket prices</strong><span>Compare prices before choosing tickets</span></div>
+      <div><strong>Easy discovery</strong><span>Search by event, category or location</span></div>
     </section>
 
     <!-- Category buttons act as filters for the event cards below. -->
     <section class="events-section" id="events" aria-labelledby="eventsTitle">
       <div class="section-heading">
-        <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>From big nights out to the people and ideas that move us.</p></div>
+        <div><span class="eyebrow">EXPLORE EVENTS</span><h2 id="eventsTitle">Upcoming <span>events.</span></h2><p>Find an event, review the details and choose your tickets.</p></div>
         <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
       </div>
       <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
@@ -90,12 +88,16 @@
 
     <!-- A call-to-action invites event organizers to express interest in listing events. -->
     <section class="organizer-banner">
-      <div class="organizer-icon"><i class="fa-solid fa-sparkles"></i></div>
-      <div><span class="eyebrow">FOR THE PEOPLE WHO MAKE IT HAPPEN</span><h2>Have an event in mind?</h2><p>Bring your people together. Organizer tools are coming soon.</p></div>
+      <div class="organizer-icon"><i class="fa-regular fa-calendar" aria-hidden="true"></i></div>
+      <div><span class="eyebrow">FOR EVENT ORGANIZERS</span><h2>Have an event in mind?</h2><p>List your event and help people discover it.</p></div>
       <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
     </section>
-    <!-- The footer contains the brand, a demo notice, and helpful navigation links. -->
-    <footer class="footer"><a class="brand footer-brand" href="#"><span class="brand-mark"><i class="fa-solid fa-ticket"></i></span><span>gather<span class="brand-dot">.</span></span></a><p>Good plans. Great people. Better stories.</p><span class="demo-note">DEMO VERSION · SAMPLE EVENTS ONLY</span></footer>
+    <!-- A restrained footer keeps the page grounded and avoids introducing an unapproved brand name. -->
+    <footer class="footer">
+      <span class="footer-mark" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
+      <p>Discover events. Choose your tickets. Make plans.</p>
+      <span class="footer-note">Event discovery and ticketing</span>
+    </footer>
   </main>
 
   <!-- A fixed bottom navigation makes the main actions easy to reach on mobile. -->
