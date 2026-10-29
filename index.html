@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Defines the page character set so Ghanaian names and symbols display correctly. -->
+  <meta charset="utf-8">
+  <!-- Makes the layout adapt to mobile phones, tablets, and desktop screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Brief description used by browsers and search engines. -->
+  <meta name="description" content="Discover events and reserve tickets with Gather.">
+  <!-- Sets the browser tab color on supported mobile browsers. -->
+  <meta name="theme-color" content="#08785c">
+  <!-- Loads the stylesheet that controls the complete visual design. -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Loads Font Awesome icons for the navigation and event actions. -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Gives the browser the title shown in the tab. -->
+  <title>Gather — Find your next experience</title>
+  <!-- Loads the JavaScript after HTML parsing so page elements are available. -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- The top navigation contains the brand, search field, and account actions. -->
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Gather home">
+      <span class="brand-mark"><i class="fa-solid fa-ticket"></i></span>
+      <span>gather<span class="brand-dot">.</span></span>
+    </a>
+    <!-- This search form lets visitors filter the sample events by name or location. -->
+    <form class="search-box" id="searchForm" role="search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input id="eventSearch" type="search" placeholder="Search events, artists, or venues" aria-label="Search events">
+      <kbd>/</kbd>
+    </form>
+    <!-- These controls open the saved-event view and the simple account panel. -->
+    <div class="top-actions">
+      <button class="icon-button" id="savedShortcut" aria-label="Show saved events" title="Saved events">
+        <i class="fa-regular fa-heart"></i><span class="saved-count" id="savedCount">0</span>
+      </button>
+      <button class="avatar-button" id="accountButton" aria-label="Open account menu"><i class="fa-regular fa-user"></i></button>
+    </div>
+  </header>
+
+  <!-- The page content is grouped in a main landmark for accessibility. -->
+  <main class="page-shell">
+    <!-- The hero introduces the service and highlights a featured event. -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR MOMENT</span>
+        <h1 id="heroTitle">Make room for<br><span>something memorable.</span></h1>
+        <p>Discover the music, people, and experiences bringing Ghana together.</p>
+        <a class="primary-button hero-button" href="#events">Explore events <i class="fa-solid fa-arrow-down"></i></a>
+      </div>
+      <!-- The featured event uses a background image with a gradient for readable text. -->
+      <article class="featured-event">
+        <div class="featured-top"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
+        <div class="featured-bottom">
+          <div><p class="featured-location"><i class="fa-solid fa-location-dot"></i> Accra, Ghana</p><h2>Golden Hour Festival</h2><p>Music, art, food & good energy.</p></div>
+          <button class="round-arrow" id="featuredBook" aria-label="Book Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Quick statistics build confidence while clearly describing the demo content. -->
+    <section class="trust-row" aria-label="Gather highlights">
+      <div><strong>Curated experiences</strong><span>Find something worth going out for</span></div>
+      <div><strong>Simple booking</strong><span>Choose your ticket in a few clicks</span></div>
+      <div><strong>Made for Ghana</strong><span>Events near you, from Accra and beyond</span></div>
+    </section>
+
+    <!-- Category buttons act as filters for the event cards below. -->
+    <section class="events-section" id="events" aria-labelledby="eventsTitle">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>From big nights out to the people and ideas that move us.</p></div>
+        <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
+      </div>
+      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
+        <button class="filter-chip active" data-category="All">All events</button>
+        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
+        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap"></i> Campus</button>
+        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass"></i> Nightlife</button>
+        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette"></i> Arts & culture</button>
+        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb"></i> Business</button>
+      </div>
+      <!-- JavaScript creates the event cards here from the temporary event data. -->
+      <div class="event-grid" id="eventGrid" aria-live="polite"></div>
+      <!-- This message appears when the selected search or category has no matches. -->
+      <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
+    </section>
+
+    <!-- A call-to-action invites event organizers to express interest in listing events. -->
+    <section class="organizer-banner">
+      <div class="organizer-icon"><i class="fa-solid fa-sparkles"></i></div>
+      <div><span class="eyebrow">FOR THE PEOPLE WHO MAKE IT HAPPEN</span><h2>Have an event in mind?</h2><p>Bring your people together. Organizer tools are coming soon.</p></div>
+      <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
+    </section>
+    <!-- The footer contains the brand, a demo notice, and helpful navigation links. -->
+    <footer class="footer"><a class="brand footer-brand" href="#"><span class="brand-mark"><i class="fa-solid fa-ticket"></i></span><span>gather<span class="brand-dot">.</span></span></a><p>Good plans. Great people. Better stories.</p><span class="demo-note">DEMO VERSION · SAMPLE EVENTS ONLY</span></footer>
+  </main>
+
+  <!-- A fixed bottom navigation makes the main actions easy to reach on mobile. -->
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a class="mobile-nav-link active" href="#"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a class="mobile-nav-link" href="#events"><i class="fa-solid fa-compass"></i><span>Discover</span></a>
+    <button class="mobile-add" id="mobileAdd" aria-label="View featured event"><i class="fa-solid fa-plus"></i></button>
+    <button class="mobile-nav-link" id="mobileSaved"><i class="fa-regular fa-heart"></i><span>Saved</span></button>
+    <button class="mobile-nav-link" id="mobileAccount"><i class="fa-regular fa-user"></i><span>Account</span></button>
+  </nav>
+
+  <!-- The ticket modal shows event details, ticket quantity, and a demo checkout summary. -->
+  <dialog class="ticket-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
+    <form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close booking dialog"><i class="fa-solid fa-xmark"></i></button></form>
+    <div class="dialog-image" id="dialogImage"></div>
+    <div class="dialog-content">
+      <span class="eyebrow" id="dialogCategory">EVENT TICKETS</span><h2 id="ticketTitle">Event title</h2>
+      <p class="dialog-meta" id="dialogMeta"></p><p class="dialog-description" id="dialogDescription"></p>
+      <div class="ticket-type"><div><strong>General admission</strong><span>Standard entry ticket</span></div><strong id="ticketPrice">GH₵ 0</strong></div>
+      <div class="quantity-row"><div><strong>Tickets</strong><span>Maximum 8 per booking</span></div><div class="quantity-control"><button type="button" id="quantityMinus" aria-label="Remove one ticket">−</button><output id="ticketQuantity">1</output><button type="button" id="quantityPlus" aria-label="Add one ticket">+</button></div></div>
+      <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">GH₵ 0</strong></div>
+      <button class="primary-button checkout-button" id="checkoutButton" type="button">Continue to checkout <i class="fa-solid fa-arrow-right"></i></button>
+      <p class="secure-note"><i class="fa-solid fa-shield-halved"></i> Demo only — no payment will be collected.</p>
+    </div>
+  </dialog>
+
+  <!-- This reusable dialog provides feedback for account and organizer buttons. -->
+  <dialog class="message-dialog" id="messageDialog"><form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close message"><i class="fa-solid fa-xmark"></i></button></form><div class="message-dialog-inner"><span class="message-icon"><i class="fa-solid fa-sparkles"></i></span><h2 id="messageTitle">Coming soon</h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div></dialog>
+  <!-- A live region announces save actions and booking feedback to assistive technology. -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
