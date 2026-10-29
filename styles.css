@@ -396,3 +396,16 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
 .notification-panel-content small{max-width:240px;color:#77837d;font-size:11px;line-height:1.6}
 @media(max-width:620px){.notification-panel{top:78px;right:12px;width:min(320px,calc(100vw - 24px))}}
 @media(prefers-reduced-motion:reduce){.notification-panel{transition:none}}
+
+
+/* Match the footer's upper edge to the curved header style. */
+.footer{
+  border-top:0;
+  border-radius:28px 28px 0 0;
+  background:#fff;
+  box-shadow:0 -1px 0 #e1e7e3;
+  padding-top:26px;
+}
+@media(max-width:620px){
+  .footer{border-radius:22px 22px 0 0;}
+}
