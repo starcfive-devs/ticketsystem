@@ -68,7 +68,7 @@ function renderEvents(savedOnly = false) {
   const visibleEvents = getVisibleEvents(savedOnly);
   eventGrid.replaceChildren(...visibleEvents.map(createEventCard));
   emptyState.classList.toggle("hidden", visibleEvents.length !== 0);
-  document.querySelector("#eventsTitle").innerHTML = savedOnly ? 'Your <span>saved events.</span>' : 'Find your next <span>thing.</span>';
+  document.querySelector("#eventsTitle").textContent = savedOnly ? "Saved events" : "Events";
   if (savedCount) savedCount.textContent = savedEvents.size;
 }
 
@@ -153,7 +153,7 @@ document.querySelector("#checkoutButton").addEventListener("click", () => {
 });
 
 /* Open the featured event from either the hero button or the mobile plus button. */
-document.querySelector("#featuredBook").addEventListener("click", () => openTicketDialog(1));
+document.querySelector("#featuredBook")?.addEventListener("click", () => openTicketDialog(1));
 document.querySelector("#mobileAdd").addEventListener("click", () => openTicketDialog(1));
 
 /* Show only saved events when the visitor selects a heart shortcut. */
@@ -185,7 +185,7 @@ function showMessage(title, body) {
 }
 // Account access is available from the header menu on this layout.
 document.querySelector("#mobileAccount").addEventListener("click", () => showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
-document.querySelector("#organizerButton").addEventListener("click", () => showMessage("Host an event", "Organizer profiles, event creation, ticket inventory, and sales reports are planned for the next stage."));
+document.querySelector("#organizerButton")?.addEventListener("click", () => showMessage("Host an event", "Organizer profiles, event creation, ticket inventory, and sales reports are planned for the next stage."));
 document.querySelector("#messageOk").addEventListener("click", () => messageDialog.close());
 
 /* Support the slash keyboard shortcut to focus event search without a mouse. */
