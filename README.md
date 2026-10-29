@@ -1,4 +1,4 @@
-# Gather — Event Discovery & Ticketing Demo
+# Event Discovery & Ticketing Prototype
 
 A responsive event-discovery website prototype for Ghana. The original idea is an event feed with social actions, improved here with a modern discovery page, category filters, saved events, and a ticket-selection dialog.
 
