@@ -207,6 +207,7 @@ const menuScrim = document.querySelector("#menuScrim");
 const closeMenuButton = document.querySelector("#closeMenu");
 
 function setMenuOpen(isOpen) {
+  setNotificationsOpen(false);
   sideMenu.classList.toggle("open", isOpen);
   menuScrim.classList.toggle("visible", isOpen);
   sideMenu.setAttribute("aria-hidden", String(!isOpen));
@@ -239,10 +240,29 @@ sideMenu.addEventListener("click", event => {
 });
 
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape") setMenuOpen(false);
+  if (event.key === "Escape") { setMenuOpen(false); setNotificationsOpen(false); }
 });
 
-/* Keep the notification action useful until a notification service is connected. */
-document.querySelector("#notificationsButton").addEventListener("click", () => {
-  showMessage("Notifications", "Event updates and booking notifications will appear here when notifications are connected.");
+/* Open notifications as a small floating panel, matching the menu interaction. */
+const notificationsButton = document.querySelector("#notificationsButton");
+const notificationPanel = document.querySelector("#notificationPanel");
+const closeNotificationsButton = document.querySelector("#closeNotifications");
+
+function setNotificationsOpen(isOpen) {
+  notificationPanel.classList.toggle("open", isOpen);
+  notificationPanel.setAttribute("aria-hidden", String(!isOpen));
+  notificationsButton.setAttribute("aria-expanded", String(isOpen));
+}
+
+notificationsButton.setAttribute("aria-expanded", "false");
+notificationsButton.addEventListener("click", () => {
+  const shouldOpen = !notificationPanel.classList.contains("open");
+  setMenuOpen(false);
+  setNotificationsOpen(shouldOpen);
+});
+closeNotificationsButton.addEventListener("click", () => setNotificationsOpen(false));
+document.addEventListener("click", event => {
+  if (!notificationPanel.contains(event.target) && !notificationsButton.contains(event.target)) {
+    setNotificationsOpen(false);
+  }
 });
