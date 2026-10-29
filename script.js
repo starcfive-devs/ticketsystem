@@ -69,7 +69,7 @@ function renderEvents(savedOnly = false) {
   eventGrid.replaceChildren(...visibleEvents.map(createEventCard));
   emptyState.classList.toggle("hidden", visibleEvents.length !== 0);
   document.querySelector("#eventsTitle").innerHTML = savedOnly ? 'Your <span>saved events.</span>' : 'Find your next <span>thing.</span>';
-  savedCount.textContent = savedEvents.size;
+  if (savedCount) savedCount.textContent = savedEvents.size;
 }
 
 /* Display a short message without interrupting the visitor's current task. */
@@ -165,7 +165,7 @@ function showSavedEvents() {
   renderEvents(true);
   document.querySelector("#events").scrollIntoView({behavior:"smooth"});
 }
-document.querySelector("#savedShortcut").addEventListener("click", showSavedEvents);
+document.querySelector("#savedShortcut")?.addEventListener("click", showSavedEvents);
 document.querySelector("#mobileSaved").addEventListener("click", showSavedEvents);
 
 /* Reset search and category filters so the full event catalogue is visible again. */
@@ -183,7 +183,7 @@ function showMessage(title, body) {
   document.querySelector("#messageBody").textContent = body;
   messageDialog.showModal();
 }
-document.querySelector("#accountButton").addEventListener("click", () => showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
+// Account access is available from the header menu on this layout.
 document.querySelector("#mobileAccount").addEventListener("click", () => showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
 document.querySelector("#organizerButton").addEventListener("click", () => showMessage("Host an event", "Organizer profiles, event creation, ticket inventory, and sales reports are planned for the next stage."));
 document.querySelector("#messageOk").addEventListener("click", () => messageDialog.close());
