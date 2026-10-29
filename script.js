@@ -199,3 +199,50 @@ document.addEventListener("keydown", event => {
 
 /* Draw the sample event catalogue when the page first loads. */
 renderEvents();
+
+/* Open and close the navigation drawer from the three-bar menu button. */
+const menuButton = document.querySelector("#menuButton");
+const sideMenu = document.querySelector("#sideMenu");
+const menuScrim = document.querySelector("#menuScrim");
+const closeMenuButton = document.querySelector("#closeMenu");
+
+function setMenuOpen(isOpen) {
+  sideMenu.classList.toggle("open", isOpen);
+  menuScrim.classList.toggle("visible", isOpen);
+  sideMenu.setAttribute("aria-hidden", String(!isOpen));
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  document.body.classList.toggle("menu-open", isOpen);
+}
+
+menuButton.addEventListener("click", () => setMenuOpen(true));
+closeMenuButton.addEventListener("click", () => setMenuOpen(false));
+menuScrim.addEventListener("click", () => setMenuOpen(false));
+
+/* Route drawer actions to existing page controls rather than duplicating event logic. */
+sideMenu.addEventListener("click", event => {
+  const button = event.target.closest("[data-menu-view]");
+  if (!button) return;
+  const view = button.dataset.menuView;
+  setMenuOpen(false);
+
+  if (view === "home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else if (view === "categories") {
+    document.querySelector("#events").scrollIntoView({ behavior: "smooth" });
+  } else if (view === "saved") {
+    showSavedEvents();
+  } else if (view === "account") {
+    showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected.");
+  } else if (view === "about") {
+    showMessage("About this website", "Discover events, review ticket options, and find something worth showing up for.");
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") setMenuOpen(false);
+});
+
+/* Keep the notification action useful until a notification service is connected. */
+document.querySelector("#notificationsButton").addEventListener("click", () => {
+  showMessage("Notifications", "Event updates and booking notifications will appear here when notifications are connected.");
+});
