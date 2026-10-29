@@ -183,8 +183,8 @@ function showMessage(title, body) {
   document.querySelector("#messageBody").textContent = body;
   messageDialog.showModal();
 }
-document.querySelector("#accountButton").addEventListener("click", () => showMessage("Your Gather account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
-document.querySelector("#mobileAccount").addEventListener("click", () => showMessage("Your Gather account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
+document.querySelector("#accountButton").addEventListener("click", () => showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
+document.querySelector("#mobileAccount").addEventListener("click", () => showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected."));
 document.querySelector("#organizerButton").addEventListener("click", () => showMessage("Host an event", "Organizer profiles, event creation, ticket inventory, and sales reports are planned for the next stage."));
 document.querySelector("#messageOk").addEventListener("click", () => messageDialog.close());
 
