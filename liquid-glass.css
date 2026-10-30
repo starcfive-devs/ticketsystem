@@ -91,9 +91,3 @@
   .category-strip .filter-chip { transition: none; }
 }
 
-
-/* The appearance switch changes only the page background. */
-:root[data-theme="light"] body {
-  background: #fff !important;
-  background-image: none !important;
-}
