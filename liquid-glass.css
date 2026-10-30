@@ -19,9 +19,6 @@
 .menu-close,
 .notification-close,
 .theme-switch-track {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   background-color: var(--clear-glass-fill) !important;
   background-image: linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.012) 48%,rgba(255,255,255,.035)) !important;
   border-color: var(--clear-glass-edge) !important;
@@ -31,26 +28,7 @@
   -webkit-backdrop-filter: blur(30px) saturate(175%) contrast(105%) !important;
   backdrop-filter: blur(30px) saturate(175%) contrast(105%) !important;
 }
-/* A fine reflective rim gives the surface a glass edge rather than a flat fill. */
-.topbar::before,
-.mobile-nav::before,
-.side-menu::before,
-.notification-panel::before,
-.search-box::before,
-.category-strip .filter-chip::before,
-.menu-button::before,
-.icon-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(118deg,rgba(255,255,255,.16),transparent 24%,transparent 72%,rgba(255,255,255,.055)),
-    linear-gradient(180deg,rgba(255,255,255,.11),transparent 32%);
-  opacity: .8;
-}
+/* Layered gradients and inset highlights create a subtle glass rim. */
 .topbar {
   background-color: rgba(255,255,255,.025) !important;
   border-color: rgba(255,255,255,.20) !important;
