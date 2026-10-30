@@ -63,7 +63,7 @@
   </section>
 
   <!-- The ticket modal shows event details, ticket quantity, and a demo checkout summary. -->
-  <dialog class="ticket-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
+  <dialog class="ticket-dialog glass-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
     <form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close booking dialog"><i class="fa-solid fa-xmark"></i></button></form>
     <div class="dialog-image" id="dialogImage"></div>
     <div class="dialog-content">
@@ -96,7 +96,7 @@
       </div>
       <!-- The featured event uses a background image with a gradient for readable text. -->
       <article class="featured-event">
-        <div class="featured-top"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
+        <div class="featured-glass"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
         <div class="featured-bottom">
           <div><p class="featured-location"><i class="fa-solid fa-location-dot"></i> Accra, Ghana</p><h2>Golden Hour Festival</h2><p>Music, art, food & good energy.</p></div>
           <button class="round-arrow" id="featuredBook" aria-label="Book Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
@@ -105,10 +105,10 @@
     </section>
 
     <!-- Quick statistics build confidence while clearly describing the demo content. -->
-    <section class="trust-row" aria-label="Gather highlights">
-      <div><strong>Curated experiences</strong><span>Find something worth going out for</span></div>
-      <div><strong>Simple booking</strong><span>Choose your ticket in a few clicks</span></div>
-      <div><strong>Made for Ghana</strong><span>Events near you, from Accra and beyond</span></div>
+    <section class="trust-row" aria-label="Platform highlights">
+      <div class="trust-item"><span class="trust-icon"><i class="fa-regular fa-compass" aria-hidden="true"></i></span><span><strong>Curated experiences</strong><small>Find something worth going out for</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span><span><strong>Simple ticket selection</strong><small>Choose your tickets in a few clicks</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span><span><strong>Made for Ghana</strong><small>Discover events in Accra, Winneba and beyond</small></span></div>
     </section>
 
     <!-- Category buttons act as filters for the event cards below. -->
@@ -133,7 +133,7 @@
 
     <!-- A call-to-action invites event organizers to express interest in listing events. -->
     <section class="organizer-banner">
-      <div class="organizer-icon"><i class="fa-solid fa-sparkles"></i></div>
+      <div class="organizer-art"><i class="fa-solid fa-sparkles"></i></div>
       <div><span class="eyebrow">FOR THE PEOPLE WHO MAKE IT HAPPEN</span><h2>Have an event in mind?</h2><p>Bring your people together. Organizer tools are coming soon.</p></div>
       <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
     </section>
