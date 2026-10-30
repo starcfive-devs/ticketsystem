@@ -295,3 +295,7 @@ body::before{display:none!important}
   .category-strip .filter-chip i{font-size:9px}
   .category-strip .chip-count{padding:2px 3px;font-size:7px}
 }
+
+
+/* Keep the landing area clear while retaining its structure for existing scripts. */
+.page-shell{display:none!important}
