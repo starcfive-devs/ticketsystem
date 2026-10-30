@@ -398,47 +398,7 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
 @media(prefers-reduced-motion:reduce){.notification-panel{transition:none}}
 
 
-/* Match the footer's upper edge to the curved header style. */
-.footer{
-  border-top:0;
-  border-radius:28px 28px 0 0;
-  background:#fff;
-  box-shadow:0 -1px 0 #e1e7e3;
-  padding-top:26px;
-}
-@media(max-width:620px){
-  .footer{border-radius:22px 22px 0 0;}
-}
-
-
-/* Footer arc only: keep the footer layout intact and draw a full-width curved background behind it. */
-.footer{
-  position:relative;
-  isolation:isolate;
-  border-top:0;
-  background:transparent;
-  box-shadow:none;
-}
-.footer::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  top:0;
-  bottom:0;
-  left:50%;
-  width:100vw;
-  transform:translateX(-50%);
-  border-radius:28px 28px 0 0;
-  background:#fff;
-  box-shadow:0 -1px 0 #e1e7e3;
-  pointer-events:none;
-}
-@media(max-width:620px){
-  .footer::before{border-radius:22px 22px 0 0;}
-}
-
-
-/* Keep the curved footer fixed and visible without changing the page layout above it. */
+/* Fixed footer: green like the header, with matching curved upper corners. */
 .page-shell{padding-bottom:110px;box-sizing:border-box}
 .footer{
   position:fixed;
@@ -447,26 +407,16 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
   bottom:0;
   z-index:19;
   box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   min-height:76px;
   margin:0;
   padding:16px 24px 18px;
-  justify-content:center;
   border:0;
   border-radius:28px 28px 0 0;
-  background:transparent;
-}
-.footer::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  inset:0;
-  left:50%;
-  width:100vw;
-  transform:translateX(-50%);
-  border-radius:28px 28px 0 0;
-  background:#fff;
-  box-shadow:0 -1px 0 #e1e7e3;
-  pointer-events:none;
+  background:var(--header-green);
+  box-shadow:none;
 }
 @media(max-width:620px){
   .page-shell{padding-bottom:190px}
@@ -476,5 +426,4 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
     padding:12px 16px;
     border-radius:22px 22px 0 0;
   }
-  .footer::before{border-radius:22px 22px 0 0}
 }
