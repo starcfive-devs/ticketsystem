@@ -112,7 +112,7 @@
 .notification-close,
 .glass-dialog {
   background-image:
-    linear-gradient( from top, rgba(255,255,255,.18), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%),
     linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.018) 42%, rgba(255,255,255,.065) 78%, rgba(255,255,255,.025)) !important;
   border-color: rgba(255,255,255,.34) !important;
   box-shadow:
