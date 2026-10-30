@@ -544,10 +544,10 @@ button:disabled{
 .mobile-nav-link:hover{transform:translateY(-2px)}
 .mobile-nav-link:active{transform:scale(.94)}
 .mobile-add:hover{
-  transform:translateY(-16px) scale(1.04);
+  transform:scale(1.04);
   box-shadow:0 8px 18px rgba(8,120,92,.18);
 }
-.mobile-add:active{transform:translateY(-13px) scale(.96)}
+.mobile-add:active{transform:scale(.96)}
 
 /* Keep the existing toast placement while making its appearance smoother. */
 .toast{
