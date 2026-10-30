@@ -259,3 +259,21 @@ body::before{display:none!important}
 @media(hover:none){
   .event-card:hover{transform:none}
 }
+
+
+/* Category strip: directly below the header, in normal document flow (not sticky). */
+.category-strip{
+  width:min(1180px,calc(100% - 48px));
+  margin:0 auto;
+  padding:15px 0 0;
+}
+.category-strip .filter-row{
+  margin:0;
+  padding:0 0 5px;
+}
+@media(max-width:680px){
+  .category-strip{width:calc(100% - 30px);padding-top:11px}
+  .category-strip .filter-row{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:0 0 8px}
+  .category-strip .filter-row::-webkit-scrollbar{display:none}
+  .category-strip .filter-chip{flex:0 0 auto}
+}
