@@ -411,3 +411,181 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
     overflow:hidden;
   }
 }
+
+
+/* ---------------------------------------------------------
+   UI polish: subtle motion, clearer feedback, and smoother
+   interactions. These enhancements preserve the current layout.
+---------------------------------------------------------- */
+:root{
+  --motion-fast:160ms;
+  --motion-base:240ms;
+  --motion-smooth:cubic-bezier(.2,.75,.25,1);
+}
+
+/* Make common controls respond consistently to hover, press, and focus. */
+button,a,.filter-chip,.event-card,.save-event,.round-arrow{
+  -webkit-tap-highlight-color:transparent;
+}
+button:not(:disabled),a,.filter-chip{
+  transition:
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--motion-smooth),
+    transform var(--motion-base) var(--motion-smooth),
+    opacity var(--motion-fast) ease;
+}
+button:active:not(:disabled),.filter-chip:active{
+  transform:scale(.97);
+}
+button:disabled{
+  cursor:not-allowed;
+  opacity:.55;
+}
+
+/* Give the header actions a restrained, tactile hover response. */
+.menu-button:hover,.notification-button:hover,.icon-button:hover,.avatar-button:hover{
+  transform:translateY(-2px);
+}
+.menu-button:active,.notification-button:active{
+  transform:scale(.94);
+}
+
+/* Smooth event-card entry and a subtle lift on pointer devices. */
+.event-card{
+  transform:translateY(0);
+  transition:
+    transform 280ms var(--motion-smooth),
+    box-shadow 280ms var(--motion-smooth),
+    border-color 220ms ease;
+  backface-visibility:hidden;
+}
+.event-card:hover{
+  transform:translateY(-5px);
+  border-color:#d5e4da;
+  box-shadow:0 18px 38px rgba(12,48,35,.12);
+}
+.event-image{
+  transition:transform 650ms var(--motion-smooth),filter 350ms ease;
+}
+.event-card:hover .event-image{
+  transform:scale(1.055);
+  filter:saturate(1.06);
+}
+.event-card-content{
+  transition:background-color 220ms ease;
+}
+
+/* Improve feedback on save and ticket actions without changing their size. */
+.save-event{
+  transition:transform 200ms var(--motion-smooth),background-color 180ms ease,color 180ms ease,box-shadow 180ms ease;
+}
+.save-event:hover{
+  transform:scale(1.09);
+  box-shadow:0 5px 14px rgba(20,35,28,.14);
+}
+.save-event:active{transform:scale(.92)}
+.save-event.saved i{animation:heart-pop 320ms var(--motion-smooth)}
+.card-book:hover,.secondary-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(8,120,92,.12);
+}
+.primary-button:hover,.round-arrow:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(8,120,92,.18);
+}
+
+/* Make category selection feel immediate and polished. */
+.filter-chip{
+  transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease,transform 180ms var(--motion-smooth),box-shadow 180ms ease;
+}
+.filter-chip:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 12px rgba(8,120,92,.10);
+}
+.filter-chip.active{
+  box-shadow:0 4px 12px rgba(8,120,92,.16);
+}
+
+/* Refine the floating menu and notification panel opening motion. */
+.side-menu,.notification-panel{
+  transition:
+    transform 260ms var(--motion-smooth),
+    opacity 220ms ease,
+    visibility 220ms ease,
+    box-shadow 260ms ease;
+}
+.menu-scrim{
+  transition:opacity 240ms ease,visibility 240ms ease,backdrop-filter 240ms ease;
+}
+.side-menu>button:not(.menu-close){
+  transition:background-color 180ms ease,transform 180ms var(--motion-smooth),color 180ms ease;
+}
+.notification-close:hover,.menu-close:hover{
+  transform:rotate(90deg);
+}
+
+/* Add a soft entrance to dialogs while keeping their existing dimensions. */
+.ticket-dialog[open],.message-dialog[open]{
+  animation:dialog-enter 260ms var(--motion-smooth) both;
+}
+.ticket-dialog::backdrop,.message-dialog::backdrop{
+  animation:backdrop-enter 220ms ease both;
+}
+.dialog-image{
+  transition:filter 300ms ease;
+}
+
+/* A small lift gives the bottom navigation clearer touch feedback. */
+.mobile-nav-link,.mobile-add{
+  transition:color 180ms ease,background-color 180ms ease,transform 200ms var(--motion-smooth),box-shadow 200ms ease;
+}
+.mobile-nav-link:hover{transform:translateY(-2px)}
+.mobile-nav-link:active{transform:scale(.94)}
+.mobile-add:hover{
+  transform:translateY(-16px) scale(1.04);
+  box-shadow:0 8px 18px rgba(8,120,92,.18);
+}
+.mobile-add:active{transform:translateY(-13px) scale(.96)}
+
+/* Keep the existing toast placement while making its appearance smoother. */
+.toast{
+  transition:opacity 220ms ease,transform 220ms var(--motion-smooth),visibility 220ms ease;
+}
+.toast.visible{animation:toast-enter 240ms var(--motion-smooth) both}
+
+/* Short, restrained keyframes used by the interactions above. */
+@keyframes heart-pop{
+  0%{transform:scale(.65)}
+  65%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+@keyframes dialog-enter{
+  from{opacity:0;transform:translateY(12px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes backdrop-enter{from{opacity:0}to{opacity:1}}
+@keyframes toast-enter{
+  from{opacity:0;transform:translate(-50%,10px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+
+/* Respect visitors who prefer reduced motion. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* Avoid hover-only movement on touch devices. */
+@media(hover:none){
+  .event-card:hover,.filter-chip:hover,.mobile-nav-link:hover,.mobile-add:hover{
+    transform:none;
+    box-shadow:initial;
+  }
+  .event-card:hover .event-image{transform:none;filter:none}
+}
