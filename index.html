@@ -1,110 +1,185 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Defines the page character set so Ghanaian names and symbols display correctly. -->
+  <!-- Keep text encoding consistent for event names, currency, and symbols. -->
   <meta charset="utf-8">
-  <!-- Makes the layout adapt to mobile phones, tablets, and desktop screens. -->
+  <!-- Make the liquid-glass layout responsive on phones, tablets, and desktops. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Brief description used by browsers and search engines. -->
-  <meta name="description" content="Browse upcoming events and book tickets with ease.">
-  <!-- Sets the browser tab color on supported mobile browsers. -->
-  <meta name="theme-color" content="#006b50">
-  <!-- Loads the stylesheet that controls the complete visual design. -->
+  <!-- Describe the event discovery and ticket booking experience for search engines. -->
+  <meta name="description" content="Discover memorable events across Ghana and find your next experience.">
+  <!-- Coordinate the browser chrome with the site's deep emerald glass theme. -->
+  <meta name="theme-color" content="#071a16">
+  <!-- Load the main stylesheet that defines the shared liquid-glass design system. -->
   <link rel="stylesheet" href="styles.css">
-  <!-- Loads Font Awesome icons for the navigation and event actions. -->
+  <!-- Load the icon library used by navigation, event cards, and actions. -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <!-- Gives the browser the title shown in the tab. -->
-  <title>Events &amp; Tickets</title>
-  <!-- Loads the JavaScript after HTML parsing so page elements are available. -->
+  <!-- Load the interaction layer after the document has been parsed. -->
   <script src="script.js" defer></script>
+  <title>Events &amp; Tickets — Discover What's Next</title>
 </head>
 <body>
-  <!-- Header follows the reference layout: menu button, neutral mark, wide search, and notification action. -->
+  <!-- Decorative light sources create depth behind the translucent interface. -->
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
+
+  <!-- The header keeps navigation, search, and alerts available while scrolling. -->
   <header class="topbar">
-    <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
-      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    <button class="menu-button glass-control" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
+      <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
-    <!-- Search remains centered between the menu and account actions. -->
-    <form class="search-box" id="searchForm" role="search">
-      <input id="eventSearch" type="search" placeholder="Search for event" aria-label="Search for event">
-      <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+    <a class="brand" href="#" aria-label="Events and Tickets home">
+      <span class="brand-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span>
+      <span class="brand-word">gather<span>.</span></span>
+    </a>
+    <form class="search-box glass-surface" id="searchForm" role="search">
+      <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+      <input id="eventSearch" type="search" placeholder="Search events, places, experiences..." aria-label="Search events">
+      <kbd>/</kbd>
+      <button type="submit" aria-label="Search"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </form>
-    <button class="notification-button" id="notificationsButton" type="button" aria-label="Notifications" title="Notifications">
-      <i class="fa-regular fa-bell" aria-hidden="true"></i>
-    </button>
+    <div class="top-actions">
+      <button class="icon-button glass-control" id="savedShortcut" type="button" aria-label="Saved events" title="Saved events">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i><span class="saved-count" id="savedCount">0</span>
+      </button>
+      <button class="icon-button glass-control" id="notificationsButton" type="button" aria-label="Notifications" title="Notifications" aria-expanded="false">
+        <i class="fa-regular fa-bell" aria-hidden="true"></i><span class="notification-dot" aria-hidden="true"></span>
+      </button>
+      <button class="avatar-button glass-control" id="headerAccount" type="button" aria-label="Your account"><i class="fa-regular fa-user" aria-hidden="true"></i></button>
+    </div>
   </header>
 
-  <section class="notification-panel" id="notificationPanel" aria-hidden="true" aria-labelledby="notificationTitle">
-    <div class="notification-panel-heading"><strong id="notificationTitle">Notifications</strong><button class="notification-close" id="closeNotifications" type="button" aria-label="Close notifications"><i class="fa-solid fa-xmark"></i></button></div>
-    <div class="notification-panel-content"><span class="notification-panel-icon"><i class="fa-regular fa-bell"></i></span><p>You’re all caught up.</p><small>Event updates and booking notifications will appear here.</small></div>
-  </section>
-
-  <!-- The menu drawer provides the same simple navigation pattern as the reference UI. -->
-  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+  <!-- The menu floats above the page as a translucent navigation surface. -->
+  <aside class="side-menu glass-panel" id="sideMenu" aria-hidden="true">
     <div class="side-menu-heading">
       <span class="menu-heading-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span>
-      <button class="menu-close" id="closeMenu" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      <div><strong>Explore Gather</strong><small>Your next story starts here.</small></div>
+      <button class="menu-close glass-control" id="closeMenu" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </div>
-    <button type="button" data-menu-view="home"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</button>
-    <button type="button" data-menu-view="categories"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Categories</button>
+    <span class="menu-label">DISCOVER</span>
+    <button type="button" data-menu-view="home"><i class="fa-solid fa-house" aria-hidden="true"></i> Home <i class="fa-solid fa-arrow-up-right-from-square menu-trailing" aria-hidden="true"></i></button>
+    <button type="button" data-menu-view="categories"><i class="fa-solid fa-compass" aria-hidden="true"></i> Explore events</button>
     <button type="button" data-menu-view="saved"><i class="fa-regular fa-heart" aria-hidden="true"></i> Saved events</button>
+    <span class="menu-label menu-label-spaced">YOUR SPACE</span>
     <button type="button" data-menu-view="account"><i class="fa-regular fa-user" aria-hidden="true"></i> Account</button>
-    <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About</button>
+    <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About Gather</button>
+    <div class="menu-bottom-note"><span class="status-pulse"></span> Made for moments that matter</div>
   </aside>
   <button class="menu-scrim" id="menuScrim" type="button" aria-label="Close menu" tabindex="-1"></button>
 
-  <!-- The page content is grouped in a main landmark for accessibility. -->
+  <!-- The notification popover is visually consistent with the menu surface. -->
+  <section class="notification-panel glass-panel" id="notificationPanel" aria-hidden="true" aria-labelledby="notificationTitle">
+    <div class="notification-panel-heading"><div><span class="eyebrow">YOUR UPDATES</span><strong id="notificationTitle">Notifications</strong></div><button class="notification-close glass-control" id="closeNotifications" type="button" aria-label="Close notifications"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+    <div class="notification-panel-content"><span class="notification-panel-icon"><i class="fa-regular fa-bell" aria-hidden="true"></i></span><p>You’re all caught up.</p><small>Event announcements and booking updates will appear here.</small></div>
+  </section>
+
+  <!-- Main content uses a consistent maximum width and accessible landmarks. -->
   <main class="page-shell">
-    <!-- Category buttons act as filters for the event cards below. -->
-    <section class="events-section" id="events" aria-labelledby="eventsTitle">
-      <div class="section-heading">
-        <div><h2 id="eventsTitle">Events</h2></div>
-        <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
+    <!-- Hero content introduces the service and gives the visitor a clear next action. -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> GOOD THINGS ARE HAPPENING</span>
+        <h1 id="heroTitle">Make room for<br> <span>something</span> <em>memorable.</em></h1>
+        <p>From nights out to ideas worth sharing, find the experiences bringing people together across Ghana.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#events">Explore events <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+          <span class="hero-caption"><span class="caption-avatars" aria-hidden="true"><i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i></span><span><strong>Find your people.</strong><small>Make the moment count.</small></span></span>
+        </div>
+        <div class="hero-proof"><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Accra to Winneba</span><span class="proof-divider"></span><span><i class="fa-regular fa-calendar" aria-hidden="true"></i> Experiences worth showing up for</span></div>
       </div>
-      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
-        <button class="filter-chip active" data-category="All">All events</button>
-        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
-        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap"></i> Campus</button>
-        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass"></i> Nightlife</button>
-        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette"></i> Arts & culture</button>
-        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb"></i> Business</button>
-      </div>
-      <!-- JavaScript creates the event cards here from the temporary event data. -->
-      <div class="event-grid" id="eventGrid" aria-live="polite"></div>
-      <!-- This message appears when the selected search or category has no matches. -->
-      <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
+
+      <!-- Featured content gives the event catalogue a strong visual focal point. -->
+      <article class="featured-event" aria-label="Featured event">
+        <div class="featured-image" aria-hidden="true"></div>
+        <div class="featured-glass featured-top">
+          <span class="featured-label"><span class="live-dot"></span> EDITOR'S PICK</span>
+          <span class="featured-date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> NOV 14, 2026</span>
+        </div>
+        <div class="featured-bottom">
+          <div>
+            <p class="featured-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Laboma Beach, Accra</p>
+            <h2>Golden Hour Festival</h2>
+            <p>Good music. Open skies. Better company.</p>
+            <span class="featured-price">Tickets from <strong>GH₵ 120</strong></span>
+          </div>
+          <button class="round-arrow glass-control" id="featuredBook" type="button" aria-label="View Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+        </div>
+      </article>
     </section>
 
+    <!-- Small trust cues explain the service without competing with the events. -->
+    <section class="trust-row" aria-label="What makes Gather useful">
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></span><span><strong>Find your next thing</strong><small>Discover events that fit your interests.</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span><span><strong>Know before you go</strong><small>Clear event details and ticket prices.</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><span><strong>Bring your people</strong><small>Save experiences for another day.</small></span></div>
+    </section>
+
+    <!-- Category filters and event cards are rendered by the existing JavaScript. -->
+    <section class="events-section" id="events" aria-labelledby="eventsTitle">
+      <div class="section-heading">
+        <div><span class="eyebrow section-kicker">THE GOOD STUFF</span><h2 id="eventsTitle">Find your <span>next experience.</span></h2><p>A few good reasons to get out there.</p></div>
+        <button class="text-button" id="clearFilters">Reset filters <i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>
+      </div>
+      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
+        <button class="filter-chip active" data-category="All">All events <span class="chip-count">06</span></button>
+        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music" aria-hidden="true"></i> Music</button>
+        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Campus</button>
+        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass" aria-hidden="true"></i> Nightlife</button>
+        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette" aria-hidden="true"></i> Arts &amp; culture</button>
+        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Business</button>
+      </div>
+      <div class="event-grid" id="eventGrid" aria-live="polite"></div>
+      <div class="empty-state glass-surface hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark" aria-hidden="true"></i><h3>No events found</h3><p>Try another search or choose a different category.</p><button class="secondary-button" id="emptyReset" type="button">Show all events</button></div>
+    </section>
+
+    <!-- Organizers get a dedicated path, designed as part of the same glass system. -->
+    <section class="organizer-banner glass-surface" aria-labelledby="organizerTitle">
+      <div class="organizer-art" aria-hidden="true"><span class="organizer-orbit orbit-one"></span><span class="organizer-orbit orbit-two"></span><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <div class="organizer-copy"><span class="eyebrow">FOR EVENT ORGANIZERS</span><h2 id="organizerTitle">Your event deserves a full house.</h2><p>Bring your community together. Tools for event publishing, ticketing, and sales are on the way.</p></div>
+      <button class="secondary-button" id="organizerButton" type="button">Host an event <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+    </section>
+
+    <!-- Footer provides a calm ending and keeps the demo status transparent. -->
+    <footer class="footer">
+      <a class="brand footer-brand" href="#" aria-label="Gather home"><span class="brand-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span><span class="brand-word">gather<span>.</span></span></a>
+      <p>Find your people. Make the moment count.</p>
+      <div class="footer-links"><a href="#events">Discover</a><button type="button" id="footerAbout">About</button><a href="#organizerTitle">For organizers</a></div>
+      <span class="demo-note"><span class="status-pulse"></span> PREVIEW EXPERIENCE</span>
+      <small class="copyright">© 2026 Gather. Made for moments that matter.</small>
+    </footer>
   </main>
 
-  <!-- A fixed bottom navigation makes the main actions easy to reach on mobile. -->
-  <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a class="mobile-nav-link active" href="#"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a class="mobile-nav-link" href="#events"><i class="fa-solid fa-compass"></i><span>Discover</span></a>
-    <button class="mobile-add" id="mobileAdd" aria-label="View featured event"><i class="fa-solid fa-plus"></i></button>
-    <button class="mobile-nav-link" id="mobileSaved"><i class="fa-regular fa-heart"></i><span>Saved</span></button>
-    <button class="mobile-nav-link" id="mobileAccount"><i class="fa-regular fa-user"></i><span>Account</span></button>
+  <!-- Mobile navigation keeps the most-used actions within thumb reach. -->
+  <nav class="mobile-nav glass-panel" aria-label="Mobile navigation">
+    <a class="mobile-nav-link active" href="#"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Home</span></a>
+    <a class="mobile-nav-link" href="#events"><i class="fa-solid fa-compass" aria-hidden="true"></i><span>Discover</span></a>
+    <button class="mobile-add" id="mobileAdd" type="button" aria-label="View featured event"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+    <button class="mobile-nav-link" id="mobileSaved" type="button"><i class="fa-regular fa-heart" aria-hidden="true"></i><span>Saved</span></button>
+    <button class="mobile-nav-link" id="mobileAccount" type="button"><i class="fa-regular fa-user" aria-hidden="true"></i><span>Account</span></button>
   </nav>
 
-  <!-- The ticket modal shows event details, ticket quantity, and a demo checkout summary. -->
-  <dialog class="ticket-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
-    <form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close booking dialog"><i class="fa-solid fa-xmark"></i></button></form>
+  <!-- Ticket selection stays clearly marked as a demo until payment is integrated. -->
+  <dialog class="ticket-dialog glass-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
+    <form method="dialog" class="dialog-close-form"><button class="icon-button glass-control dialog-close" aria-label="Close booking dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></form>
     <div class="dialog-image" id="dialogImage"></div>
     <div class="dialog-content">
       <span class="eyebrow" id="dialogCategory">EVENT TICKETS</span><h2 id="ticketTitle">Event title</h2>
       <p class="dialog-meta" id="dialogMeta"></p><p class="dialog-description" id="dialogDescription"></p>
-      <div class="ticket-type"><div><strong>General admission</strong><span>Standard entry ticket</span></div><strong id="ticketPrice">GH₵ 0</strong></div>
+      <div class="ticket-type glass-surface"><div><strong>General admission</strong><span>Standard entry ticket</span></div><strong id="ticketPrice">GH₵ 0</strong></div>
       <div class="quantity-row"><div><strong>Tickets</strong><span>Maximum 8 per booking</span></div><div class="quantity-control"><button type="button" id="quantityMinus" aria-label="Remove one ticket">−</button><output id="ticketQuantity">1</output><button type="button" id="quantityPlus" aria-label="Add one ticket">+</button></div></div>
       <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">GH₵ 0</strong></div>
-      <button class="primary-button checkout-button" id="checkoutButton" type="button">Continue to checkout <i class="fa-solid fa-arrow-right"></i></button>
-      <p class="secure-note"><i class="fa-solid fa-shield-halved"></i> Demo only — no payment will be collected.</p>
+      <button class="primary-button checkout-button" id="checkoutButton" type="button">Continue to checkout <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <p class="secure-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Preview only — no payment will be collected.</p>
     </div>
   </dialog>
 
-  <!-- This reusable dialog provides feedback for account and organizer buttons. -->
-  <dialog class="message-dialog" id="messageDialog"><form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close message"><i class="fa-solid fa-xmark"></i></button></form><div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><h2 id="messageTitle">Coming soon</h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div></dialog>
-  <!-- A live region announces save actions and booking feedback to assistive technology. -->
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- A reusable dialog communicates account and organizer features that are not live yet. -->
+  <dialog class="message-dialog glass-dialog" id="messageDialog">
+    <form method="dialog" class="dialog-close-form"><button class="icon-button glass-control dialog-close" aria-label="Close message"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></form>
+    <div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><span class="eyebrow">GATHER, TOGETHER</span><h2 id="messageTitle">Coming soon</h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div>
+  </dialog>
+  <!-- This live region announces save actions and booking feedback accessibly. -->
+  <div class="toast glass-panel" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
