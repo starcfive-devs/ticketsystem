@@ -247,7 +247,7 @@ document.querySelectorAll("[data-nav-action]").forEach(button => {
     }
     if (action === "home") window.scrollTo({top:0,behavior:"smooth"});
     if (action === "explore") document.querySelector("#events").scrollIntoView({behavior:"smooth"});
-    if (action === "create") openTicketDialog(1);
+    if (action === "create") showMessage("Create an event", "Event publishing, organizer verification, and ticket management will be available when organizer tools are connected.");
     if (action === "tickets") showMessage("My tickets", "Your purchased tickets will appear here once accounts and real checkout are connected.");
     if (action === "profile") showMessage("Your profile", "Profile details and account settings will be available when sign-in is added.");
   });
