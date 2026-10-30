@@ -402,12 +402,12 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
 @media(max-width:620px){.page-shell{padding-bottom:90px}}
 
 
-/* Match the single icon footer's arc and height to the mobile header. */
+/* Match the footer height and arc size to the header while keeping the arc at the top. */
 @media(max-width:620px){
   .mobile-nav{
     height:68px;
     box-sizing:border-box;
-    border-radius:0 0 28px 28px;
+    border-radius:28px 28px 0 0;
     overflow:hidden;
   }
 }
