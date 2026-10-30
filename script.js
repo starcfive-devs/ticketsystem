@@ -222,35 +222,78 @@ document.addEventListener("click", event => {
   if (!notificationPanel.contains(event.target) && !notificationsButton.contains(event.target)) setNotificationsOpen(false);
 });
 
+function navigateToPage(page) {
+  const validPages = ["home","explore","create","tickets","profile"];
+  if (!validPages.includes(page)) return;
+  document.querySelectorAll(".app-page").forEach(view => {
+    const active = view.dataset.page === page;
+    view.hidden = !active;
+    view.classList.toggle("is-active", active);
+  });
+  document.querySelectorAll("[data-nav-action]").forEach(button => {
+    const active = button.dataset.navAction === page;
+    button.classList.toggle("active", active);
+    if (active) {
+      button.setAttribute("aria-current","page");
+      button.setAttribute("aria-label", page === "create" ? "Create page, current page" : button.querySelector("span")?.textContent + ", current page");
+    } else {
+      button.removeAttribute("aria-current");
+      if (button.dataset.navAction === "create") button.setAttribute("aria-label","Create page");
+    }
+  });
+  document.querySelector("#categoryStrip").classList.toggle("is-hidden", page !== "explore");
+  if (page !== "explore") searchInput.value = "";
+  window.scrollTo({top:0,behavior:"smooth"});
+  document.body.dataset.currentPage = page;
+}
+
 sideMenu.addEventListener("click", event => {
   const button = event.target.closest("[data-menu-view]");
   if (!button) return;
   const action = button.dataset.menuView;
   setMenuOpen(false);
-  if (action === "home") window.scrollTo({top:0,behavior:"smooth"});
-  if (action === "categories") document.querySelector("#events").scrollIntoView({behavior:"smooth"});
-  if (action === "saved") showSavedEvents();
-  if (action === "account") showMessage("Your account", "Sign-in, profiles, and booking history will be connected when authentication is added.");
-  if (action === "about") showMessage("About this site", "Discover temporary sample events around Ghana and preview the ticket-selection experience.");
+  if (["home","categories","saved"].includes(action)) {
+    navigateToPage(action === "categories" || action === "saved" ? "explore" : "home");
+    if (action === "saved") showSavedEvents();
+  }
+  if (action === "account") navigateToPage("profile");
+  if (action === "about") showMessage("About this site", "A considered space to discover events, manage bookings, and bring people together.");
 });
 
 document.querySelectorAll("[data-nav-action]").forEach(button => {
-  button.addEventListener("click", () => {
-    const action = button.dataset.navAction;
-    if (action !== "create") {
-      document.querySelectorAll(".mobile-nav-link").forEach(link => {
-        const active = link === button;
-        link.classList.toggle("active", active);
-        if (active) link.setAttribute("aria-current", "page");
-        else link.removeAttribute("aria-current");
-      });
-    }
-    if (action === "home") window.scrollTo({top:0,behavior:"smooth"});
-    if (action === "explore") document.querySelector("#events").scrollIntoView({behavior:"smooth"});
-    if (action === "create") showMessage("Create an event", "Event publishing, organizer verification, and ticket management will be available when organizer tools are connected.");
-    if (action === "tickets") showMessage("My tickets", "Your purchased tickets will appear here once accounts and real checkout are connected.");
-    if (action === "profile") showMessage("Your profile", "Profile details and account settings will be available when sign-in is added.");
-  });
+  button.addEventListener("click", () => navigateToPage(button.dataset.navAction));
+});
+document.querySelectorAll("[data-go-page]").forEach(button => {
+  button.addEventListener("click", () => navigateToPage(button.dataset.goPage));
+});
+
+document.querySelector("#createEventForm").addEventListener("submit", event => {
+  event.preventDefault();
+  showMessage("Event details saved", "The event form is ready for the next stage. Publishing and ticket sales will be connected when the backend is added.");
+});
+
+document.querySelector("#profileAppearance").addEventListener("click", () => {
+  setMenuOpen(true);
+  document.querySelector("#themeToggle").focus();
+});
+
+function applyTheme(theme) {
+  const light = theme === "light";
+  document.documentElement.dataset.theme = light ? "light" : "dark";
+  document.body.dataset.theme = light ? "light" : "dark";
+  const toggle = document.querySelector("#themeToggle");
+  toggle.checked = light;
+  toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+  document.querySelector("#themeSwitchLabel").textContent = light ? "Light" : "Dark";
+  document.querySelector('meta[name="theme-color"]').content = light ? "#f4f5f7" : "#050505";
+}
+const savedTheme = (() => { try { return localStorage.getItem("ticketsystem-theme"); } catch { return null; } })();
+applyTheme(savedTheme === "light" ? "light" : "dark");
+document.querySelector("#themeToggle").addEventListener("change", event => {
+  const theme = event.target.checked ? "light" : "dark";
+  applyTheme(theme);
+  try { localStorage.setItem("ticketsystem-theme", theme); } catch {}
 });
 
 renderEvents();
+navigateToPage("home");
