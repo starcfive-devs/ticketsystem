@@ -62,14 +62,81 @@
     <div class="notification-panel-content"><span class="notification-panel-icon"><i class="fa-regular fa-bell" aria-hidden="true"></i></span><p>You’re all caught up.</p><small>Event announcements and booking updates will appear here.</small></div>
   </section>
 
-  <!-- Informational dialog used by the footer About link and menu actions. -->
+  <!-- The ticket modal shows event details, ticket quantity, and a demo checkout summary. -->
+  <dialog class="ticket-dialog" id="ticketDialog" aria-labelledby="ticketTitle">
+    <form method="dialog" class="dialog-close-form"><button class="icon-button dialog-close" aria-label="Close booking dialog"><i class="fa-solid fa-xmark"></i></button></form>
+    <div class="dialog-image" id="dialogImage"></div>
+    <div class="dialog-content">
+      <span class="eyebrow" id="dialogCategory">EVENT TICKETS</span><h2 id="ticketTitle">Event title</h2>
+      <p class="dialog-meta" id="dialogMeta"></p><p class="dialog-description" id="dialogDescription"></p>
+      <div class="ticket-type"><div><strong>General admission</strong><span>Standard entry ticket</span></div><strong id="ticketPrice">GH₵ 0</strong></div>
+      <div class="quantity-row"><div><strong>Tickets</strong><span>Maximum 8 per booking</span></div><div class="quantity-control"><button type="button" id="quantityMinus" aria-label="Remove one ticket">−</button><output id="ticketQuantity">1</output><button type="button" id="quantityPlus" aria-label="Add one ticket">+</button></div></div>
+      <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">GH₵ 0</strong></div>
+      <button class="primary-button checkout-button" id="checkoutButton" type="button">Continue to checkout <i class="fa-solid fa-arrow-right"></i></button>
+      <p class="secure-note"><i class="fa-solid fa-shield-halved"></i> Demo only — no payment will be collected.</p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Informational dialog used by menu and navigation actions. -->
   <dialog class="message-dialog glass-dialog" id="messageDialog">
     <form method="dialog" class="dialog-close-form"><button class="icon-button glass-control dialog-close" aria-label="Close message"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></form>
     <div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><span class="eyebrow">EVENT INFORMATION</span><h2 id="messageTitle">About </h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div>
   </dialog>
 
   <main class="page-shell">
+    <!-- The hero introduces the service and highlights a featured event. -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR MOMENT</span>
+        <h1 id="heroTitle">Make room for<br><span>something memorable.</span></h1>
+        <p>Discover the music, people, and experiences bringing Ghana together.</p>
+        <a class="primary-button hero-button" href="#events">Explore events <i class="fa-solid fa-arrow-down"></i></a>
+      </div>
+      <!-- The featured event uses a background image with a gradient for readable text. -->
+      <article class="featured-event">
+        <div class="featured-top"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
+        <div class="featured-bottom">
+          <div><p class="featured-location"><i class="fa-solid fa-location-dot"></i> Accra, Ghana</p><h2>Golden Hour Festival</h2><p>Music, art, food & good energy.</p></div>
+          <button class="round-arrow" id="featuredBook" aria-label="Book Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+        </div>
+      </article>
+    </section>
 
+    <!-- Quick statistics build confidence while clearly describing the demo content. -->
+    <section class="trust-row" aria-label="Gather highlights">
+      <div><strong>Curated experiences</strong><span>Find something worth going out for</span></div>
+      <div><strong>Simple booking</strong><span>Choose your ticket in a few clicks</span></div>
+      <div><strong>Made for Ghana</strong><span>Events near you, from Accra and beyond</span></div>
+    </section>
+
+    <!-- Category buttons act as filters for the event cards below. -->
+    <section class="events-section" id="events" aria-labelledby="eventsTitle">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>From big nights out to the people and ideas that move us.</p></div>
+        <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
+      </div>
+      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
+        <button class="filter-chip active" data-category="All">All events</button>
+        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
+        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap"></i> Campus</button>
+        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass"></i> Nightlife</button>
+        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette"></i> Arts & culture</button>
+        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb"></i> Business</button>
+      </div>
+      <!-- JavaScript creates the event cards here from the temporary event data. -->
+      <div class="event-grid" id="eventGrid" aria-live="polite"></div>
+      <!-- This message appears when the selected search or category has no matches. -->
+      <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
+    </section>
+
+    <!-- A call-to-action invites event organizers to express interest in listing events. -->
+    <section class="organizer-banner">
+      <div class="organizer-icon"><i class="fa-solid fa-sparkles"></i></div>
+      <div><span class="eyebrow">FOR THE PEOPLE WHO MAKE IT HAPPEN</span><h2>Have an event in mind?</h2><p>Bring your people together. Organizer tools are coming soon.</p></div>
+      <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
+    </section>
   </main>
 
   <!-- Persistent bottom navigation for the main app actions. -->
