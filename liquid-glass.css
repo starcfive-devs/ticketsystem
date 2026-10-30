@@ -86,3 +86,62 @@
 @media (prefers-reduced-motion: reduce) {
   .category-strip .filter-chip { transition: none; }
 }
+
+
+/* Smooth, consistent feedback when moving between and pressing controls. */
+button,
+a,
+.menu-button,
+.icon-button,
+.category-strip .filter-chip,
+.mobile-nav-link,
+.mobile-add,
+.side-menu>button,
+.notification-panel button {
+  transition:
+    color .24s ease,
+    background-color .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease,
+    opacity .24s ease,
+    transform .28s cubic-bezier(.2,.75,.25,1) !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:hover,
+a:hover,
+.menu-button:hover,
+.icon-button:hover,
+.category-strip .filter-chip:hover,
+.mobile-nav-link:hover,
+.side-menu>button:hover,
+.notification-panel button:hover {
+  transform: translateY(-1px);
+}
+
+button:active,
+a:active,
+.menu-button:active,
+.icon-button:active,
+.category-strip .filter-chip:active,
+.mobile-nav-link:active,
+.mobile-add:active,
+.side-menu>button:active,
+.notification-panel button:active {
+  transform: scale(.97);
+  transition-duration: .12s !important;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid rgba(255,255,255,.72);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,a,.menu-button,.icon-button,.category-strip .filter-chip,
+  .mobile-nav-link,.mobile-add,.side-menu>button,.notification-panel button {
+    transition: none !important;
+    transform: none !important;
+  }
+}
