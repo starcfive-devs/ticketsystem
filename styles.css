@@ -402,10 +402,12 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
 @media(max-width:620px){.page-shell{padding-bottom:90px}}
 
 
-/* Give the single icon navigation footer the same curved arc as the header. */
+/* Match the single icon footer's arc and height to the mobile header. */
 @media(max-width:620px){
   .mobile-nav{
-    border-radius:28px 28px 0 0;
+    height:68px;
+    box-sizing:border-box;
+    border-radius:0 0 28px 28px;
     overflow:hidden;
   }
 }
