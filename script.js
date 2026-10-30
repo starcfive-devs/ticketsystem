@@ -254,25 +254,4 @@ document.querySelectorAll("[data-nav-action]").forEach(button => {
 });
 
 
-/* Keep the requested appearance switch without changing the page content. */
-function applyTheme(theme) {
-  const light = theme === "light";
-  document.documentElement.dataset.theme = light ? "light" : "dark";
-  document.body.dataset.theme = light ? "light" : "dark";
-  const toggle = document.querySelector("#themeToggle");
-  if (!toggle) return;
-  toggle.checked = light;
-  toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
-  document.querySelector("#themeSwitchLabel").textContent = light ? "Light" : "Dark";
-  document.querySelector('meta[name="theme-color"]').content = light ? "#f4f5f7" : "#000000";
-}
-let savedTheme = null;
-try { savedTheme = localStorage.getItem("ticketsystem-theme"); } catch {}
-applyTheme(savedTheme === "light" ? "light" : "dark");
-document.querySelector("#themeToggle").addEventListener("change", event => {
-  const theme = event.target.checked ? "light" : "dark";
-  applyTheme(theme);
-  try { localStorage.setItem("ticketsystem-theme", theme); } catch {}
-});
-
 renderEvents();
