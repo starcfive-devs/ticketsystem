@@ -1,0 +1,80 @@
+/* Neutral, colourless liquid-glass treatment.
+   The surfaces stay transparent and take their visible tone from the page behind them. */
+.glass-surface,
+.glass-panel,
+.glass-control,
+.topbar,
+.event-card,
+.organizer-banner,
+.trust-item,
+.mobile-nav,
+.glass-dialog,
+.toast,
+.side-menu,
+.notification-panel {
+  -webkit-backdrop-filter: blur(26px) saturate(110%);
+  backdrop-filter: blur(26px) saturate(110%);
+  background-color: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.19);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.035),
+    0 16px 44px rgba(0, 0, 0, 0.18);
+}
+
+.glass-surface,
+.glass-panel,
+.glass-control {
+  background-image: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(255, 255, 255, 0.018) 48%,
+    rgba(255, 255, 255, 0.035) 100%
+  );
+}
+
+.glass-control {
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.glass-control:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 10px 28px rgba(0, 0, 0, 0.20);
+}
+
+.side-menu,
+.notification-panel {
+  background-color: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(32px) saturate(110%);
+  backdrop-filter: blur(32px) saturate(110%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.055),
+    0 24px 64px rgba(0, 0, 0, 0.34);
+}
+
+.glass-dialog {
+  -webkit-backdrop-filter: blur(30px) saturate(110%);
+  backdrop-filter: blur(30px) saturate(110%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface,
+  .glass-panel,
+  .glass-control,
+  .topbar,
+  .event-card,
+  .organizer-banner,
+  .trust-item,
+  .mobile-nav,
+  .glass-dialog,
+  .toast,
+  .side-menu,
+  .notification-panel {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: rgba(30, 30, 30, 0.94);
+  }
+}
