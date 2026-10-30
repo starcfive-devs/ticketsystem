@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- Load the interaction layer after the document has been parsed. -->
   <script src="script.js" defer></script>
-  <title>Events &amp; Tickets — Discover What's Next</title>
+  <title>Events &amp; Tickets</title>
 </head>
 <body>
   <header class="topbar">
@@ -42,7 +42,7 @@
   <aside class="side-menu glass-panel" id="sideMenu" aria-hidden="true">
     <div class="side-menu-heading">
       <span class="menu-heading-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span>
-      <div><strong>Explore Gather</strong><small>Your next story starts here.</small></div>
+      <div><strong>Navigation</strong><small>Choose where you want to go.</small></div>
       <button class="menu-close glass-control" id="closeMenu" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </div>
     <span class="menu-label">DISCOVER</span>
@@ -51,7 +51,7 @@
     <button type="button" data-menu-view="saved"><i class="fa-regular fa-heart" aria-hidden="true"></i> Saved events</button>
     <span class="menu-label menu-label-spaced">YOUR SPACE</span>
     <button type="button" data-menu-view="account"><i class="fa-regular fa-user" aria-hidden="true"></i> Account</button>
-    <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About Gather</button>
+    <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About this site</button>
     <div class="menu-bottom-note"><span class="status-pulse"></span> Made for moments that matter</div>
   </aside>
   <button class="menu-scrim" id="menuScrim" type="button" aria-label="Close menu" tabindex="-1"></button>
@@ -65,17 +65,20 @@
   <!-- Informational dialog used by the footer About link and menu actions. -->
   <dialog class="message-dialog glass-dialog" id="messageDialog">
     <form method="dialog" class="dialog-close-form"><button class="icon-button glass-control dialog-close" aria-label="Close message"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></form>
-    <div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><span class="eyebrow">GATHER, TOGETHER</span><h2 id="messageTitle">About Gather</h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div>
+    <div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><span class="eyebrow">EVENT INFORMATION</span><h2 id="messageTitle">About Gather</h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div>
   </dialog>
 
   <main class="page-shell">
-    <footer class="footer">
-      <a class="brand footer-brand" href="#" aria-label="Gather home"><span class="brand-mark"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span><span class="brand-word">gather<span>.</span></span></a>
-      <p>Find your people. Make the moment count.</p>
-      <div class="footer-links"><a href="#">Discover</a><button type="button" id="footerAbout">About</button><a href="#">For organizers</a></div>
-      <span class="demo-note"><span class="status-pulse"></span> PREVIEW EXPERIENCE</span>
-      <small class="copyright">© 2026 Gather. Made for moments that matter.</small>
-    </footer>
+
   </main>
+
+  <!-- Persistent bottom navigation for the main app actions. -->
+  <nav class="mobile-nav" aria-label="Main navigation">
+    <button class="mobile-nav-link active" type="button" data-nav-action="home" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Home</span></button>
+    <button class="mobile-nav-link" type="button" data-nav-action="explore"><i class="fa-regular fa-compass" aria-hidden="true"></i><span>Explore</span></button>
+    <button class="mobile-add" type="button" data-nav-action="create" aria-label="Create an event"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+    <button class="mobile-nav-link" type="button" data-nav-action="tickets"><i class="fa-solid fa-ticket" aria-hidden="true"></i><span>Tickets</span></button>
+    <button class="mobile-nav-link" type="button" data-nav-action="profile"><i class="fa-regular fa-user" aria-hidden="true"></i><span>Profile</span></button>
+  </nav>
 </body>
 </html>
