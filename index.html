@@ -39,7 +39,7 @@
   </header>
 
   <!-- Category filters sit directly below the header and scroll naturally with the page. -->
-  <div class="category-strip is-hidden" id="categoryStrip">
+  <div class="category-strip" id="categoryStrip">
       <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
         <button class="filter-chip active" data-category="All">All events</button>
         <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
@@ -105,97 +105,58 @@
     <div class="message-dialog-inner"><span class="message-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span><span class="eyebrow">EVENT INFORMATION</span><h2 id="messageTitle">About </h2><p id="messageBody"></p><button class="primary-button" type="button" id="messageOk">Got it</button></div>
   </dialog>
 
-  <main class="page-shell" id="pageShell">
-    <section class="app-page is-active" data-page="home" aria-labelledby="homeTitle">
-      <div class="page-intro home-intro">
-        <span class="eyebrow"><span class="live-dot"></span> YOUR SPACE FOR EXPERIENCES</span>
-        <h1 id="homeTitle">Good things<br><span>start here.</span></h1>
-        <p>Find something worth looking forward to, or create an experience of your own.</p>
-        <button class="primary-button" type="button" data-go-page="explore">Explore events <i class="fa-solid fa-arrow-right"></i></button>
+  <main class="page-shell">
+    <!-- The hero introduces the service and highlights a featured event. -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR MOMENT</span>
+        <h1 id="heroTitle">Make room for<br><span>something memorable.</span></h1>
+        <p>Discover the music, people, and experiences bringing Ghana together.</p>
+        <a class="primary-button hero-button" href="#events">Explore events <i class="fa-solid fa-arrow-down"></i></a>
       </div>
-      <div class="home-feature glass-surface">
-        <span class="home-feature-icon"><i class="fa-solid fa-compass"></i></span>
-        <div><strong>Your next experience is one tap away.</strong><p>Explore events and discover what is happening around you.</p></div>
-        <i class="fa-solid fa-arrow-up-right-from-square home-feature-arrow"></i>
-      </div>
-    </section>
-
-    <section class="app-page" data-page="explore" aria-labelledby="exploreTitle" hidden>
-      <div class="page-heading">
-        <span class="eyebrow">DISCOVER SOMETHING NEW</span>
-        <h1 id="exploreTitle">Explore <span>events.</span></h1>
-        <p>Browse experiences and find your next reason to go out.</p>
-      </div>
-      <section class="events-section" id="events" aria-label="Available events">
-        <div class="section-heading">
-          <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>Choose a category above or search for an event.</p></div>
-          <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
+      <!-- The featured event uses a background image with a gradient for readable text. -->
+      <article class="featured-event">
+        <div class="featured-glass"><span class="featured-label">FEATURED THIS WEEK</span><span class="featured-date">SAT, NOV 14</span></div>
+        <div class="featured-bottom">
+          <div><p class="featured-location"><i class="fa-solid fa-location-dot"></i> Accra, Ghana</p><h2>Golden Hour Festival</h2><p>Music, art, food & good energy.</p></div>
+          <button class="round-arrow" id="featuredBook" aria-label="Book Golden Hour Festival tickets"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
         </div>
-        <div class="event-grid" id="eventGrid" aria-live="polite"></div>
-        <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
-      </section>
+      </article>
     </section>
 
-    <section class="app-page" data-page="create" aria-labelledby="createTitle" hidden>
-      <div class="page-heading">
-        <span class="eyebrow">BRING PEOPLE TOGETHER</span>
-        <h1 id="createTitle">Create an <span>event.</span></h1>
-        <p>Start with the details. You can review everything before publishing.</p>
-      </div>
-      <form class="page-form glass-panel" id="createEventForm">
-        <div class="form-grid">
-          <label>Event name<input name="eventName" type="text" placeholder="e.g. Saturday Live" required maxlength="80"></label>
-          <label>Category<select name="eventCategory" required><option value="">Choose a category</option><option>Music</option><option>Campus</option><option>Nightlife</option><option>Arts & culture</option><option>Business</option></select></label>
-          <label>Date<input name="eventDate" type="date" required></label>
-          <label>Venue<input name="eventVenue" type="text" placeholder="Venue and city" required maxlength="100"></label>
-          <label>Ticket price (GH₵)<input name="eventPrice" type="number" min="0" step="0.01" placeholder="0.00" required></label>
-          <label>Expected capacity<input name="eventCapacity" type="number" min="1" placeholder="e.g. 150"></label>
-        </div>
-        <label>About the event<textarea name="eventDescription" rows="4" placeholder="Tell people what makes this event special." maxlength="600"></textarea></label>
-        <button class="primary-button" type="submit">Continue <i class="fa-solid fa-arrow-right"></i></button>
-        <p class="form-note">Event publishing and payments will be connected in a later stage.</p>
-      </form>
+    <!-- Quick statistics build confidence while clearly describing the demo content. -->
+    <section class="trust-row" aria-label="Platform highlights">
+      <div class="trust-item"><span class="trust-icon"><i class="fa-regular fa-compass" aria-hidden="true"></i></span><span><strong>Curated experiences</strong><small>Find something worth going out for</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></span><span><strong>Simple ticket selection</strong><small>Choose your tickets in a few clicks</small></span></div>
+      <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span><span><strong>Made for Ghana</strong><small>Discover events in Accra, Winneba and beyond</small></span></div>
     </section>
 
-    <section class="app-page" data-page="tickets" aria-labelledby="ticketsTitle" hidden>
-      <div class="page-heading">
-        <span class="eyebrow">YOUR BOOKINGS</span>
-        <h1 id="ticketsTitle">My <span>tickets.</span></h1>
-        <p>Keep your event bookings together in one place.</p>
+    <!-- Category buttons act as filters for the event cards below. -->
+    <section class="events-section" id="events" aria-labelledby="eventsTitle">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>From big nights out to the people and ideas that move us.</p></div>
+        <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
       </div>
-      <div class="empty-page glass-panel">
-        <span class="empty-page-icon"><i class="fa-solid fa-ticket"></i></span>
-        <h2>No tickets yet</h2>
-        <p>When you book an event, your tickets and booking details will appear here.</p>
-        <button class="secondary-button" type="button" data-go-page="explore">Find an event <i class="fa-solid fa-arrow-right"></i></button>
-      </div>
+
+      <!-- JavaScript creates the event cards here from the temporary event data. -->
+      <div class="event-grid" id="eventGrid" aria-live="polite"></div>
+      <!-- This message appears when the selected search or category has no matches. -->
+      <div class="empty-state hidden" id="emptyState"><i class="fa-regular fa-calendar-xmark"></i><h3>No events found</h3><p>Try a different search or category.</p></div>
     </section>
 
-    <section class="app-page" data-page="profile" aria-labelledby="profileTitle" hidden>
-      <div class="page-heading">
-        <span class="eyebrow">YOUR ACCOUNT</span>
-        <h1 id="profileTitle">Your <span>profile.</span></h1>
-        <p>Manage your personal details and app preferences.</p>
-      </div>
-      <div class="profile-card glass-panel">
-        <div class="profile-avatar"><i class="fa-regular fa-user"></i></div>
-        <div class="profile-copy"><strong>Guest account</strong><span>Sign in to keep your bookings and preferences in sync.</span></div>
-        <span class="guest-badge">GUEST</span>
-      </div>
-      <button class="profile-setting glass-surface" type="button" id="profileAppearance">
-        <span class="profile-setting-icon"><i class="fa-solid fa-circle-half-stroke"></i></span>
-        <span><strong>Appearance</strong><small>Switch between light and dark mode</small></span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-      <div class="profile-footnote">Account sign-in and profile management will be added in a later stage.</div>
+    <!-- A call-to-action invites event organizers to express interest in listing events. -->
+    <section class="organizer-banner">
+      <div class="organizer-art"><i class="fa-solid fa-sparkles"></i></div>
+      <div><span class="eyebrow">FOR THE PEOPLE WHO MAKE IT HAPPEN</span><h2>Have an event in mind?</h2><p>Bring your people together. Organizer tools are coming soon.</p></div>
+      <button class="secondary-button" id="organizerButton">I'm an organizer <i class="fa-solid fa-arrow-right"></i></button>
     </section>
   </main>
 
-  <!-- Persistent navigation switches between the app's page views. -->
+  <!-- Persistent bottom navigation for the main app actions. -->
   <nav class="mobile-nav" aria-label="Main navigation">
     <button class="mobile-nav-link active" type="button" data-nav-action="home" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Home</span></button>
     <button class="mobile-nav-link" type="button" data-nav-action="explore"><i class="fa-regular fa-compass" aria-hidden="true"></i><span>Explore</span></button>
-    <button class="mobile-add" type="button" data-nav-action="create" aria-label="Create page"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>Create</span></button>
+    <button class="mobile-add" type="button" data-nav-action="create" aria-label="Create an event"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
     <button class="mobile-nav-link" type="button" data-nav-action="tickets"><i class="fa-solid fa-ticket" aria-hidden="true"></i><span>Tickets</span></button>
     <button class="mobile-nav-link" type="button" data-nav-action="profile"><i class="fa-regular fa-user" aria-hidden="true"></i><span>Profile</span></button>
   </nav>
