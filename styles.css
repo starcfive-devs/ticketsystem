@@ -274,7 +274,7 @@ button,a,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoratio
 
 /* Requested refinements only: neutralize pale-green surfaces while keeping the original green design. */
 .filter-chip.active,.filter-chip:hover{background:#006b50}
-.mobile-add{position:relative;top:-8px}
+.mobile-add{position:relative;top:-13px}
 a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.side-menu,.menu-scrim,.organizer-banner,.featured-event{
   transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .22s ease,transform .22s ease,opacity .22s ease;
 }
