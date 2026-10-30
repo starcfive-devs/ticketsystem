@@ -266,3 +266,20 @@ document.addEventListener("click", event => {
     setNotificationsOpen(false);
   }
 });
+
+// Keep the empty-state recovery action connected to the same reset behavior as the main filter button.
+document.querySelector("#emptyReset")?.addEventListener("click", () => {
+  activeCategory = "All";
+  searchTerm = "";
+  document.querySelector("#eventSearch").value = "";
+  document.querySelectorAll(".filter-chip").forEach(chip => chip.classList.toggle("active", chip.dataset.category === "All"));
+  renderEvents();
+});
+
+// Route account and footer actions to clear, consistent informational dialogs.
+document.querySelector("#headerAccount")?.addEventListener("click", () => {
+  showMessage("Your account", "Account creation, sign-in, and booking history will be added when authentication and the backend are connected.");
+});
+document.querySelector("#footerAbout")?.addEventListener("click", () => {
+  showMessage("About Gather", "Gather helps people discover experiences, compare ticket options, and find reasons to come together. This preview uses sample event data and does not process payments.");
+});
