@@ -1,11 +1,10 @@
-/* Clear, neutral Liquid Glass for the functional/navigation layer only.
-   Keep the page background and original content untouched. */
+/* Crystal-clear Liquid Glass: transparent surfaces, crisp reflections, no grey wash. */
 :root {
-  --clear-glass-fill: rgba(255,255,255,.035);
-  --clear-glass-edge: rgba(255,255,255,.22);
-  --clear-glass-highlight: rgba(255,255,255,.46);
-  --clear-glass-shadow: 0 18px 48px rgba(0,0,0,.20);
+  --crystal-edge: rgba(255,255,255,.32);
+  --crystal-glint: rgba(255,255,255,.72);
+  --crystal-shadow: 0 18px 52px rgba(0,0,0,.24);
 }
+
 .topbar,
 .search-box,
 .menu-button,
@@ -18,130 +17,72 @@
 .notification-panel,
 .menu-close,
 .notification-close,
-.theme-switch-track {
-  background-color: var(--clear-glass-fill) !important;
-  background-image: linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.012) 48%,rgba(255,255,255,.035)) !important;
-  border-color: var(--clear-glass-edge) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25),
-              inset 0 -1px 0 rgba(255,255,255,.045),
-              var(--clear-glass-shadow) !important;
-  -webkit-backdrop-filter: blur(30px) saturate(175%) contrast(105%) !important;
-  backdrop-filter: blur(30px) saturate(175%) contrast(105%) !important;
+.theme-switch-track,
+.glass-dialog {
+  background-color: rgba(255,255,255,.012) !important;
+  background-image:
+    linear-gradient(135deg, rgba(255,255,255,.075), transparent 24%, transparent 76%, rgba(255,255,255,.025)),
+    linear-gradient(180deg, rgba(255,255,255,.055), transparent 18%) !important;
+  border: 1px solid var(--crystal-edge) !important;
+  box-shadow:
+    inset 0 1px 0 var(--crystal-glint),
+    inset 1px 0 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(255,255,255,.10),
+    var(--crystal-shadow) !important;
+  -webkit-backdrop-filter: blur(34px) saturate(180%) !important;
+  backdrop-filter: blur(34px) saturate(180%) !important;
 }
-/* Layered gradients and inset highlights create a subtle glass rim. */
-.topbar {
-  background-color: rgba(255,255,255,.025) !important;
-  border-color: rgba(255,255,255,.20) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.26),
-              inset 0 -1px 0 rgba(255,255,255,.035),
-              0 14px 42px rgba(0,0,0,.16) !important;
-}
-.search-box { background-color: rgba(255,255,255,.025) !important; }
+
 .side-menu,
 .notification-panel {
-  background-color: rgba(255,255,255,.035) !important;
-  border-color: rgba(255,255,255,.24) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.28),
-              inset 1px 0 0 rgba(255,255,255,.07),
-              0 24px 64px rgba(0,0,0,.22) !important;
-  -webkit-backdrop-filter: blur(38px) saturate(180%) !important;
-  backdrop-filter: blur(38px) saturate(180%) !important;
+  background-color: rgba(255,255,255,.008) !important;
+  border-color: rgba(255,255,255,.38) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.78),
+    inset 1px 0 0 rgba(255,255,255,.18),
+    0 24px 64px rgba(0,0,0,.28) !important;
+  -webkit-backdrop-filter: blur(42px) saturate(190%) !important;
+  backdrop-filter: blur(42px) saturate(190%) !important;
 }
+
+.search-box { background-color: rgba(255,255,255,.006) !important; }
 .category-strip .filter-chip {
-  background-color: rgba(255,255,255,.025) !important;
-  color: rgba(255,255,255,.88) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18),0 8px 22px rgba(0,0,0,.12) !important;
-  transition: background-color .22s ease,border-color .22s ease,transform .22s ease,box-shadow .22s ease;
+  color: rgba(255,255,255,.9) !important;
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
 }
 .category-strip .filter-chip:hover,
-.category-strip .filter-chip.active {
-  background-color: rgba(255,255,255,.10) !important;
-  border-color: rgba(255,255,255,.38) !important;
-  transform: translateY(-1px);
+.category-strip .filter-chip.active,
+.search-box:focus-within,
+.menu-button:hover,
+.icon-button:hover,
+.mobile-nav-link.active {
+  background-color: rgba(255,255,255,.035) !important;
+  border-color: rgba(255,255,255,.58) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82), 0 0 18px rgba(255,255,255,.045) !important;
 }
-.mobile-nav { background-color: rgba(255,255,255,.035) !important; }
-.mobile-nav-link.active { background-color: rgba(255,255,255,.085) !important; }
 .mobile-add {
-  background-color: rgba(255,255,255,.12) !important;
+  background-color: rgba(255,255,255,.035) !important;
   color: #fff !important;
-  border-color: rgba(255,255,255,.38) !important;
+  border-color: rgba(255,255,255,.5) !important;
 }
 .side-menu>button:not(.menu-close) { background: transparent; }
-.side-menu>button:not(.menu-close):hover { background: rgba(255,255,255,.075); }
-.menu-appearance { background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.13); }
-.theme-switch-track { background-color: rgba(255,255,255,.10) !important; }
-.glass-dialog {
-  background: rgba(255,255,255,.035) !important;
-  border-color: rgba(255,255,255,.22) !important;
-  -webkit-backdrop-filter: blur(34px) saturate(170%) !important;
-  backdrop-filter: blur(34px) saturate(170%) !important;
-}
-/* Preserve the deliberately cleared page area; do not insert sample page content. */
+.side-menu>button:not(.menu-close):hover { background: rgba(255,255,255,.035); }
+.menu-appearance { background: rgba(255,255,255,.012); border-color: rgba(255,255,255,.18); }
+.theme-switch-track { background-color: rgba(255,255,255,.025) !important; }
+.glass-dialog { background-color: rgba(255,255,255,.012) !important; }
+
+/* Keep the deliberately cleared page area untouched. */
 .page-shell { display: none !important; }
+
 @media (prefers-reduced-transparency: reduce) {
   .topbar,.search-box,.menu-button,.icon-button,.category-strip .filter-chip,
   .mobile-nav,.mobile-nav-link.active,.mobile-add,.side-menu,.notification-panel,
   .menu-close,.notification-close,.theme-switch-track,.glass-dialog {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
-    background-color: rgba(255,255,255,.12) !important;
+    background-color: rgba(255,255,255,.07) !important;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .category-strip .filter-chip { transition: none; }
-}
-
-/* Crystal finish: clearer surfaces, sharper specular rims and brighter refraction. */
-:root {
-  --clear-glass-fill: rgba(255,255,255,.045);
-  --clear-glass-edge: rgba(255,255,255,.34);
-  --clear-glass-highlight: rgba(255,255,255,.78);
-  --clear-glass-shadow: 0 20px 56px rgba(0,0,0,.24);
-}
-.topbar,
-.search-box,
-.menu-button,
-.icon-button,
-.category-strip .filter-chip,
-.mobile-nav,
-.mobile-nav-link.active,
-.mobile-add,
-.side-menu,
-.notification-panel,
-.menu-close,
-.notification-close,
-.glass-dialog {
-  background-image:
-    linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.018) 42%, rgba(255,255,255,.065) 78%, rgba(255,255,255,.025)) !important;
-  border-color: rgba(255,255,255,.34) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.62),
-    inset 1px 0 0 rgba(255,255,255,.18),
-    inset 0 -1px 0 rgba(255,255,255,.12),
-    0 18px 52px rgba(0,0,0,.22) !important;
-  -webkit-backdrop-filter: blur(42px) saturate(220%) contrast(112%) !important;
-  backdrop-filter: blur(42px) saturate(220%) contrast(112%) !important;
-}
-.topbar {
-  background-color: rgba(255,255,255,.035) !important;
-  border-color: rgba(255,255,255,.38) !important;
-}
-.side-menu,
-.notification-panel {
-  background-color: rgba(255,255,255,.05) !important;
-  border-color: rgba(255,255,255,.4) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.68),
-    inset 1px 0 0 rgba(255,255,255,.22),
-    0 26px 70px rgba(0,0,0,.28) !important;
-  -webkit-backdrop-filter: blur(48px) saturate(225%) contrast(112%) !important;
-  backdrop-filter: blur(48px) saturate(225%) contrast(112%) !important;
-}
-.search-box:focus-within,
-.menu-button:hover,
-.icon-button:hover,
-.mobile-nav-link.active {
-  border-color: rgba(255,255,255,.52) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 0 22px rgba(255,255,255,.075) !important;
 }
