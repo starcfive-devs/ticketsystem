@@ -436,3 +436,45 @@ a,button,.event-card,.event-image,.filter-chip,.search-box,.search-box input,.si
 @media(max-width:620px){
   .footer::before{border-radius:22px 22px 0 0;}
 }
+
+
+/* Keep the curved footer fixed and visible without changing the page layout above it. */
+.page-shell{padding-bottom:110px;box-sizing:border-box}
+.footer{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:19;
+  box-sizing:border-box;
+  min-height:76px;
+  margin:0;
+  padding:16px 24px 18px;
+  justify-content:center;
+  border:0;
+  border-radius:28px 28px 0 0;
+  background:transparent;
+}
+.footer::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  left:50%;
+  width:100vw;
+  transform:translateX(-50%);
+  border-radius:28px 28px 0 0;
+  background:#fff;
+  box-shadow:0 -1px 0 #e1e7e3;
+  pointer-events:none;
+}
+@media(max-width:620px){
+  .page-shell{padding-bottom:190px}
+  .footer{
+    bottom:76px;
+    min-height:62px;
+    padding:12px 16px;
+    border-radius:22px 22px 0 0;
+  }
+  .footer::before{border-radius:22px 22px 0 0}
+}
