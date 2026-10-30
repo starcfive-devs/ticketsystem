@@ -38,6 +38,18 @@
     </div>
   </header>
 
+  <!-- Category filters sit directly below the header and scroll naturally with the page. -->
+  <div class="category-strip" id="categoryStrip">
+      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
+        <button class="filter-chip active" data-category="All">All events</button>
+        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
+        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap"></i> Campus</button>
+        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass"></i> Nightlife</button>
+        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette"></i> Arts & culture</button>
+        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb"></i> Business</button>
+      </div>
+  </div>
+
   <!-- Functional menu opened by the header button. -->
   <aside class="side-menu glass-panel" id="sideMenu" aria-hidden="true">
     <div class="side-menu-heading">
@@ -117,14 +129,7 @@
         <div><span class="eyebrow">THE GOOD STUFF</span><h2 id="eventsTitle">Find your next <span>thing.</span></h2><p>From big nights out to the people and ideas that move us.</p></div>
         <button class="text-button" id="clearFilters">Clear filters <i class="fa-solid fa-rotate-left"></i></button>
       </div>
-      <div class="filter-row" id="categoryFilters" aria-label="Filter events by category">
-        <button class="filter-chip active" data-category="All">All events</button>
-        <button class="filter-chip" data-category="Music"><i class="fa-solid fa-music"></i> Music</button>
-        <button class="filter-chip" data-category="Campus"><i class="fa-solid fa-graduation-cap"></i> Campus</button>
-        <button class="filter-chip" data-category="Nightlife"><i class="fa-solid fa-martini-glass"></i> Nightlife</button>
-        <button class="filter-chip" data-category="Arts"><i class="fa-solid fa-palette"></i> Arts & culture</button>
-        <button class="filter-chip" data-category="Business"><i class="fa-solid fa-lightbulb"></i> Business</button>
-      </div>
+
       <!-- JavaScript creates the event cards here from the temporary event data. -->
       <div class="event-grid" id="eventGrid" aria-live="polite"></div>
       <!-- This message appears when the selected search or category has no matches. -->
