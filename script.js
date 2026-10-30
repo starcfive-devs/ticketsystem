@@ -133,7 +133,7 @@ searchInput.addEventListener("input", () => {
 
 document.querySelector("#searchForm").addEventListener("submit", event => {
   event.preventDefault();
-  document.querySelector("#events").scrollIntoView({behavior:"smooth",block:"start"});
+  navigateToPage("explore");
   if (!searchTerm) showToast("Type an event, category, or location to search.");
   else showToast(`Showing results for “${searchTerm}”`);
 });
@@ -169,7 +169,6 @@ eventGrid.addEventListener("click", event => {
 });
 
 document.querySelector("#clearFilters").addEventListener("click", resetFilters);
-document.querySelector("#featuredBook").addEventListener("click", () => openTicketDialog(1));
 document.querySelector("#quantityMinus").addEventListener("click", () => {
   ticketQuantity = Math.max(1, ticketQuantity - 1);
   updateTicketTotal();
@@ -184,9 +183,6 @@ document.querySelector("#checkoutButton").addEventListener("click", () => {
   const title = selectedEvent.title;
   ticketDialog.close();
   showMessage("Checkout preview", `You selected ${ticketQuantity} ticket(s) for ${title}. Total: ${total}. This is a demo only; no order, ticket, or payment has been created.`);
-});
-document.querySelector("#organizerButton").addEventListener("click", () => {
-  showMessage("For event organizers", "Organizer registration, event publishing, ticket inventory, and sales management will be added in a later stage.");
 });
 document.querySelector("#messageOk").addEventListener("click", () => messageDialog.close());
 
