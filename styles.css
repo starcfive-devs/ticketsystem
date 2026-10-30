@@ -261,11 +261,11 @@ body::before{display:none!important}
 }
 
 
-/* Floating category strip: overlays the page beneath the sticky header. */
+/* Floating category strip: centered just below the sticky header. */
 .category-strip{
   position:fixed;
   z-index:39;
-  top:100px;
+  top:91px;
   left:50%;
   transform:translateX(-50%);
   width:min(1180px,calc(100% - 48px));
@@ -274,15 +274,24 @@ body::before{display:none!important}
   pointer-events:none;
 }
 .category-strip .filter-row{
-  width:max-content;
+  display:flex;
+  width:100%;
   max-width:100%;
+  flex-wrap:nowrap;
+  justify-content:center;
+  gap:8px;
   margin:0;
   padding:0 0 5px;
   pointer-events:auto;
 }
+.category-strip .filter-chip{
+  flex:0 1 auto;
+  justify-content:center;
+}
 @media(max-width:680px){
-  .category-strip{top:96px;width:calc(100% - 30px)}
-  .category-strip .filter-row{width:100%;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:0 0 8px}
-  .category-strip .filter-row::-webkit-scrollbar{display:none}
-  .category-strip .filter-chip{flex:0 0 auto}
+  .category-strip{top:73px;width:calc(100% - 20px)}
+  .category-strip .filter-row{gap:4px;padding:0}
+  .category-strip .filter-chip{flex:1 1 0;min-width:0;gap:4px;padding:0 5px;font-size:9px}
+  .category-strip .filter-chip i{font-size:9px}
+  .category-strip .chip-count{padding:2px 3px;font-size:7px}
 }
