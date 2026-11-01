@@ -170,3 +170,55 @@ a:focus-visible {
   box-shadow: 0 2px 10px rgba(0,0,0,.35);
   pointer-events: none;
 }
+
+
+/* Improve legibility without changing the existing layout or glass treatment. */
+.side-menu-heading strong,
+.side-menu>button:not(.menu-close),
+.notification-panel-heading strong,
+.notification-panel-content p {
+  color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0,0,0,.38);
+}
+.side-menu-heading small,
+.menu-bottom-note,
+.notification-panel-content small {
+  color: #d0d0d0 !important;
+  line-height: 1.55;
+}
+.menu-label,
+.notification-panel .eyebrow {
+  color: #c2c2c2 !important;
+}
+.side-menu>button:not(.menu-close)>i:first-child {
+  color: #e8e8e8 !important;
+}
+.category-strip .filter-chip {
+  color: #f0f0f0 !important;
+  text-shadow: 0 1px 5px rgba(0,0,0,.35);
+  font-weight: 700;
+}
+.search-box input {
+  color: #fff !important;
+  font-size: 13px;
+}
+.search-box input::placeholder {
+  color: #c4c4c4 !important;
+  opacity: 1;
+}
+.search-box kbd {
+  color: #ededed;
+  border-color: rgba(255,255,255,.28);
+}
+
+/* A short horizontal glide makes the active bottom-navigation choice feel connected. */
+.mobile-nav-link.active {
+  animation: navSelectionGlide .28s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes navSelectionGlide {
+  from { opacity: .72; transform: translateY(3px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav-link.active { animation: none !important; }
+}
