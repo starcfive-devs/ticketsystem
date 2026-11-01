@@ -196,6 +196,17 @@ const sideMenu = document.querySelector("#sideMenu");
 const menuScrim = document.querySelector("#menuScrim");
 const notificationsButton = document.querySelector("#notificationsButton");
 const notificationPanel = document.querySelector("#notificationPanel");
+const notificationCount = document.querySelector("#notificationCount");
+
+// Keep the header badge numeric; the count starts at zero until notifications are connected.
+function updateNotificationCount(count) {
+  const safeCount = Math.max(0, Number(count) || 0);
+  notificationCount.textContent = safeCount > 99 ? "99+" : String(safeCount);
+  notificationsButton.setAttribute("aria-label", `Notifications, ${safeCount} total`);
+  notificationsButton.title = `Notifications (${safeCount})`;
+}
+
+updateNotificationCount(0);
 
 function setMenuOpen(open) {
   if (open) setNotificationsOpen(false);
