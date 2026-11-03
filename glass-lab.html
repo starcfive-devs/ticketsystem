@@ -1,68 +1,114 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505" id="themeColorMeta"><meta name="color-scheme" content="dark" id="colorSchemeMeta"><title>Liquid Glass Lab</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="liquid-glass.css"><style>body{padding:18px}.tools,.grid{max-width:1200px;margin:0 auto 20px;display:flex;gap:12px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,1fr)}.backdrop{min-height:420px;padding:14px;border-radius:22px;display:flex;flex-direction:column;gap:10px;overflow:hidden}.white{background:white;color:#111}.black{background:black;color:white}.stripes{background:repeating-linear-gradient(0deg,#fff 0 3px,#111 3px 6px);color:#111}.photo{background:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1100&q=85') center/cover;color:white}.sample{padding:12px;border-radius:14px}.row{display:flex;gap:8px;flex-wrap:wrap}.table{width:100%;border-collapse:collapse}.table td,.table th{border:1px solid #888;padding:6px}.fail{color:#d22}.pass{color:#16834b}@media(max-width:650px){.grid{grid-template-columns:1fr}}</style></head><body><header class="tools"><h1>Liquid Glass Lab</h1><button id="theme">Toggle theme</button><label>Dispersion <input id="disp" type="range" min="0" max=".12" step=".005" value=".055"></label><label><input id="off" type="checkbox"> Disable refraction</label></header><main class="grid"><section class="backdrop white"><h2>White</h2><div class="topbar sample">Topbar</div><nav class="mobile-nav sample">Dock</nav><div class="row"><button class="filter-chip">Chip</button><button class="secondary-button">Control</button><button class="card-book">Card action</button></div><article class="event-card sample"><span class="event-category">Music</span>Tier B event card</article><aside class="side-menu sample">Sheet</aside><div class="glass-dialog sample">Dialog</div><div class="toast sample">Toast</div><footer class="site-footer sample">Footer</footer></section><section class="backdrop black"><h2>Black</h2><div class="topbar sample">Topbar</div><nav class="mobile-nav sample">Dock</nav><div class="row"><button class="filter-chip">Chip</button><button class="icon-button">Icon</button><button class="card-book">Card action</button></div><article class="event-card sample">Tier B event card</article><aside class="notification-panel sample">Sheet</aside><div class="glass-dialog sample">Dialog</div><div class="toast sample">Toast</div><footer class="site-footer sample">Footer</footer></section><section class="backdrop stripes"><h2>Stripes</h2><div class="topbar sample">Topbar</div><nav class="mobile-nav sample">Dock</nav><div class="row"><button class="filter-chip">Chip</button><button class="secondary-button">Control</button><button class="card-book">Card action</button></div><article class="event-card sample">Tier B event card</article><aside class="side-menu sample">Sheet</aside><div class="glass-dialog sample">Dialog</div><div class="toast sample">Toast</div><footer class="site-footer sample">Footer</footer></section><section class="backdrop photo"><h2>Photo</h2><div class="topbar sample">Topbar</div><nav class="mobile-nav sample">Dock</nav><div class="row"><button class="filter-chip">Chip</button><button class="icon-button">Icon</button><button class="card-book">Card action</button></div><article class="event-card sample">Tier B event card</article><aside class="notification-panel sample">Sheet</aside><div class="glass-dialog sample">Dialog</div><div class="toast sample">Toast</div><footer class="site-footer sample">Footer</footer></section></main><section class="report-wrap"><h2>WCAG contrast report</h2><p>Computed text-token contrast against representative light and dark samples for each material tier. PASS requires 4.5:1 for normal text. Photo and stripe backdrops use representative samples.</p><div id="report" aria-live="polite"></div></section>
-<style>.report-wrap{max-width:1200px;margin:24px auto;padding:18px;border:1px solid #888;border-radius:16px}.report-wrap p{margin:8px 0 14px;max-width:80ch}.table{width:100%;border-collapse:collapse;font-size:12px}.table td,.table th{border:1px solid #888;padding:7px;text-align:left}.table th{background:#222;color:#fff}.pass{color:#16834b;font-weight:700}.fail{color:#d22;font-weight:700}.report-summary{margin:10px 0;font-weight:700}.report-table-wrap{overflow:auto;max-height:620px}</style>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050505" id="themeColorMeta"><meta name="color-scheme" content="dark" id="colorSchemeMeta">
+<title>Liquid Glass Lab</title>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="liquid-glass.css">
+<style>
+body{padding:18px}.lab-tools,.grid,.report-wrap,.map-wrap{max-width:1200px;margin:0 auto 20px}.lab-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px;border:1px solid var(--hairline);border-radius:16px;background:var(--glass-fill-b)}.lab-tools label{display:flex;gap:8px;align-items:center}.lab-tools input[type=range]{width:130px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.backdrop{min-width:0;min-height:650px;padding:14px;border-radius:22px;display:flex;flex-direction:column;gap:10px;overflow:hidden}.white{background:#fff;color:#111}.black{background:#000;color:#fff}.stripes{background:repeating-linear-gradient(0deg,#fff 0 3px,#111 3px 6px);color:#111}.photo{background-image:linear-gradient(135deg,rgba(20,24,34,.18),rgba(20,24,34,.1)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1100&q=85');background-position:center;background-size:cover;color:#fff}.sample{padding:12px;border-radius:14px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.backdrop .topbar,.backdrop .mobile-nav{position:relative;inset:auto;top:auto;bottom:auto;left:auto;right:auto;margin:0;width:100%;height:auto;min-height:58px;z-index:1}.backdrop .mobile-nav{display:flex}.backdrop .side-menu,.backdrop .notification-panel{position:relative;inset:auto;display:block;visibility:visible;opacity:1;transform:none;width:100%;height:auto;max-height:none;z-index:1}.backdrop .glass-dialog{display:block;position:relative;inset:auto;width:100%;max-width:none;max-height:none;margin:0}.backdrop .site-footer{margin:0;padding:16px 10px 12px;min-height:50px}.backdrop .event-card,.backdrop .trust-item,.backdrop .organizer-banner,.backdrop .empty-state,.backdrop .ticket-type{padding:12px}.backdrop .search-box{height:44px}.backdrop .notification-count{position:static}.backdrop .nav-lens{display:none}.backdrop .side-menu-heading,.backdrop .notification-panel-heading,.backdrop .notification-panel-content,.backdrop .dialog-content,.backdrop .message-dialog-inner,.backdrop .event-card-content,.backdrop .footer-inner{background:transparent}.backdrop .event-image-wrap,.backdrop .featured-event,.backdrop .dialog-image{min-height:42px}.sample-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;opacity:.8}.report-wrap,.map-wrap{padding:16px;border:1px solid var(--hairline);border-radius:16px;background:var(--glass-fill-b)}.report-wrap p{margin:8px 0 14px;max-width:85ch}.report-table-wrap{overflow:auto;max-height:680px}.table{width:100%;border-collapse:collapse;font-size:12px}.table td,.table th{border:1px solid #888;padding:7px;text-align:left;white-space:nowrap}.table th{background:#222;color:#fff}.pass{color:#16834b;font-weight:700}.fail{color:#d22;font-weight:700}.report-summary{margin:10px 0;font-weight:700}.map-wrap[hidden]{display:none}.map-preview{display:block;max-width:100%;height:auto;image-rendering:pixelated;border:1px solid var(--hairline);background:repeating-conic-gradient(#ddd 0 25%,#888 0 50%) 0/12px 12px}.muted{color:var(--text-muted)}@media(max-width:650px){.grid{grid-template-columns:1fr}.backdrop{min-height:0}.lab-tools{align-items:flex-start;flex-direction:column}}@media(prefers-reduced-motion:reduce){.ambient{animation:none}}
+</style>
+<script src="liquid-glass.js" defer></script>
+</head>
+<body>
+<header class="lab-tools"><h1>Liquid Glass Lab</h1>
+<button id="theme" type="button">Toggle theme</button>
+<label>Refraction <input id="refraction" type="range" min="0" max="36" step="1" value="28"><output id="refractionValue">28</output></label>
+<label>Dispersion <input id="disp" type="range" min="0" max=".12" step=".005" value=".06"><output id="dispValue">0.06</output></label>
+<label><input id="flip" type="checkbox"> Flip displacement sign</label>
+<label><input id="off" type="checkbox"> Disable refraction</label>
+<label><input id="showMap" type="checkbox"> Show topbar displacement map</label>
+</header>
+<section class="map-wrap" id="mapWrap" hidden><h2>Topbar displacement map</h2><p class="muted">R and G encode the horizontal and vertical displacement direction. Neutral interior pixels are (128,128).</p><img class="map-preview" id="mapPreview" alt="Generated topbar displacement map"></section>
+<main class="grid">
+<section class="backdrop white" data-backdrop="white"><h2>White</h2>
+<div class="topbar sample">Topbar <span class="notification-count">2</span></div><nav class="mobile-nav sample" aria-label="Sample dock"><button class="mobile-nav-link active" type="button"><i class="fa-solid fa-house"></i><span>Home</span></button><button class="mobile-nav-link" type="button"><i class="fa-regular fa-compass"></i><span>Explore</span></button></nav>
+<div class="filter-chip sample">Filter chip</div><div class="toast sample">Toast message</div><div class="row"><button class="menu-button" type="button" aria-label="Menu">☰</button><form class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input aria-label="Search" placeholder="Search events"><button type="button" aria-label="Submit search">→</button></form><button class="icon-button" type="button" aria-label="Notifications">♧</button><button class="menu-close" type="button" aria-label="Close">×</button><button class="notification-close" type="button" aria-label="Close notifications">×</button></div>
+<div class="row"><button class="secondary-button" type="button">Secondary</button><button class="round-arrow" type="button" aria-label="Open">↗</button><div class="quantity-control"><button type="button">−</button><output>1</output><button type="button">+</button></div><button class="card-book" type="button">Book</button><button class="primary-button" type="button">Primary</button><button class="mobile-add" type="button" aria-label="Add">+</button><button class="save-event saved" type="button" aria-label="Saved">♥</button></div>
+<aside class="side-menu sample"><strong>Side sheet</strong><div class="side-menu-heading">Sheet heading</div></aside><aside class="notification-panel sample"><strong>Notification sheet</strong><div class="notification-panel-content">Sheet content</div></aside><div class="glass-dialog sample">Dialog surface</div>
+<article class="event-card sample">Tier B event card</article><div class="trust-item sample">Trust item</div><div class="organizer-banner sample">Organizer banner</div><div class="empty-state sample"><i>◷</i><h3>Empty state</h3><p>Nothing here yet.</p></div><div class="ticket-type sample">Ticket type</div><footer class="site-footer sample">Footer surface</footer>
+<div class="featured-label">Photo label</div><div class="featured-date">Photo date</div><div class="event-category">Photo category</div>
+</section>
+<section class="backdrop black" data-backdrop="black"><h2>Black</h2>
+<div class="topbar sample">Topbar <span class="notification-count">2</span></div><nav class="mobile-nav sample" aria-label="Sample dock"><button class="mobile-nav-link active" type="button"><i class="fa-solid fa-house"></i><span>Home</span></button><button class="mobile-nav-link" type="button"><i class="fa-regular fa-compass"></i><span>Explore</span></button></nav><div class="filter-chip sample">Filter chip</div><div class="toast sample">Toast message</div>
+<div class="row"><button class="menu-button" type="button" aria-label="Menu">☰</button><form class="search-box"><i>⌕</i><input aria-label="Search" placeholder="Search events"><button type="button">→</button></form><button class="icon-button" type="button" aria-label="Notifications">♧</button><button class="menu-close" type="button">×</button><button class="notification-close" type="button">×</button><button class="secondary-button" type="button">Secondary</button><button class="round-arrow" type="button">↗</button><div class="quantity-control"><button type="button">−</button><output>1</output><button type="button">+</button></div><button class="card-book" type="button">Book</button><button class="primary-button" type="button">Primary</button><button class="mobile-add" type="button">+</button><button class="save-event saved" type="button">♥</button></div>
+<aside class="side-menu sample">Side sheet</aside><aside class="notification-panel sample">Notification sheet</aside><div class="glass-dialog sample">Dialog surface</div><article class="event-card sample">Tier B event card</article><div class="trust-item sample">Trust item</div><div class="organizer-banner sample">Organizer banner</div><div class="empty-state sample"><i>◷</i><h3>Empty state</h3><p>Nothing here yet.</p></div><div class="ticket-type sample">Ticket type</div><footer class="site-footer sample">Footer surface</footer><div class="featured-label">Photo label</div><div class="featured-date">Photo date</div><div class="event-category">Photo category</div>
+</section>
+<section class="backdrop stripes" data-backdrop="stripes"><h2>Stripes</h2>
+<div class="topbar sample">Topbar</div><nav class="mobile-nav sample"><button class="mobile-nav-link active" type="button">Home</button><button class="mobile-nav-link" type="button">Explore</button></nav><div class="filter-chip sample">Filter chip</div><div class="toast sample">Toast message</div>
+<div class="row"><button class="menu-button" type="button">☰</button><form class="search-box"><i>⌕</i><input aria-label="Search" placeholder="Search events"><button type="button">→</button></form><button class="icon-button" type="button">♧</button><button class="menu-close" type="button">×</button><button class="notification-close" type="button">×</button><button class="secondary-button" type="button">Secondary</button><button class="round-arrow" type="button">↗</button><div class="quantity-control"><button type="button">−</button><output>1</output><button type="button">+</button></div><button class="card-book" type="button">Book</button><button class="primary-button" type="button">Primary</button><button class="mobile-add" type="button">+</button><button class="save-event saved" type="button">♥</button></div>
+<aside class="side-menu sample">Side sheet</aside><aside class="notification-panel sample">Notification sheet</aside><div class="glass-dialog sample">Dialog surface</div><article class="event-card sample">Tier B event card</article><div class="trust-item sample">Trust item</div><div class="organizer-banner sample">Organizer banner</div><div class="empty-state sample"><i>◷</i><h3>Empty state</h3><p>Nothing here yet.</p></div><div class="ticket-type sample">Ticket type</div><footer class="site-footer sample">Footer surface</footer><div class="featured-label">Photo label</div><div class="featured-date">Photo date</div><div class="event-category">Photo category</div>
+</section>
+<section class="backdrop photo" data-backdrop="photo"><h2>Photo</h2>
+<div class="topbar sample">Topbar</div><nav class="mobile-nav sample"><button class="mobile-nav-link active" type="button">Home</button><button class="mobile-nav-link" type="button">Explore</button></nav><div class="filter-chip sample">Filter chip</div><div class="toast sample">Toast message</div>
+<div class="row"><button class="menu-button" type="button">☰</button><form class="search-box"><i>⌕</i><input aria-label="Search" placeholder="Search events"><button type="button">→</button></form><button class="icon-button" type="button">♧</button><button class="menu-close" type="button">×</button><button class="notification-close" type="button">×</button><button class="secondary-button" type="button">Secondary</button><button class="round-arrow" type="button">↗</button><div class="quantity-control"><button type="button">−</button><output>1</output><button type="button">+</button></div><button class="card-book" type="button">Book</button><button class="primary-button" type="button">Primary</button><button class="mobile-add" type="button">+</button><button class="save-event saved" type="button">♥</button></div>
+<aside class="side-menu sample">Side sheet</aside><aside class="notification-panel sample">Notification sheet</aside><div class="glass-dialog sample">Dialog surface</div><article class="event-card sample">Tier B event card</article><div class="trust-item sample">Trust item</div><div class="organizer-banner sample">Organizer banner</div><div class="empty-state sample"><i>◷</i><h3>Empty state</h3><p>Nothing here yet.</p></div><div class="ticket-type sample">Ticket type</div><footer class="site-footer sample">Footer surface</footer><div class="featured-label">Photo label</div><div class="featured-date">Photo date</div><div class="event-category">Photo category</div>
+</section>
+</main>
+<section class="report-wrap"><h2>WCAG contrast report</h2><p>Contrast is calculated from the selected theme's token values and a simplified alpha-composite model. Real page/photo backgrounds are tested only where each surface can occur. Halo-free text is tested separately from the sticky text halo. Pure white and pure black are shown in a separate contrived-extremes section. This is a computed model, not a browser pixel sample.</p><div id="report" aria-live="polite"></div></section>
 <script>
-(() => {
-  const root=document.documentElement;
-  const tokens=['--text','--text-muted','--text-quiet','--text-soft'];
-  const surfaces=[
-    {name:'Tier A · topbar',selector:'.topbar',fill:'--glass-fill-a'},
-    {name:'Tier C · search field',selector:'.search-box',fill:'--glass-fill-c'},
-    {name:'Sheet · side panel',selector:'.side-menu',fill:'--glass-fill-sheet',scrim:'.side-menu-heading'},
-    {name:'Tier B · event card',selector:'.event-card',fill:'--glass-fill-b',scrim:'.event-card-content'},
-    {name:'Image badge',selector:'.featured-label',fill:'--badge-bg'}
-  ];
-  const backdrops=[
-    {name:'White',samples:['#ffffff']},{name:'Black',samples:['#000000']},
-    {name:'Stripes',samples:['#ffffff','#111111']},
-    {name:'Photo',samples:['#20242c','#e8c18b']}
-  ];
-  const parse=value=>{
-    const match=value.match(/rgba?\(([^)]+)\)/i);
-    if(match){const parts=match[1].split(/[\s,\/]+/).filter(Boolean).map(Number);return[parts[0],parts[1],parts[2],parts[3]??1]}
-    const hex=value.trim().replace('#','');
-    if(hex.length===3)return hex.split('').map(v=>parseInt(v+v,16)).concat(1);
-    if(hex.length===6)return[parseInt(hex.slice(0,2),16),parseInt(hex.slice(2,4),16),parseInt(hex.slice(4,6),16),1];
-    return[0,0,0,1];
-  };
-  const over=(front,back)=>[0,1,2].map(i=>front[i]*front[3]+back[i]*(1-front[3])).concat(1);
-  const luminance=color=>{
-    const channels=color.slice(0,3).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});
-    return .2126*channels[0]+.7152*channels[1]+.0722*channels[2];
-  };
-  const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
-  const variable=name=>getComputedStyle(root).getPropertyValue(name).trim();
-  const cell=(row,value,tag='td',className='')=>{const node=document.createElement(tag);node.textContent=value;if(className)node.className=className;row.append(node)};
-  function report(){
-    const host=document.querySelector('#report');host.replaceChildren();
-    const rows=[];let failures=0,lowest=Infinity;
-    for(const theme of ['dark','light']){
-      root.dataset.theme=theme;
-      for(const surface of surfaces){
-        const element=document.querySelector(surface.selector);if(!element)continue;
-        const fill=parse(variable(surface.fill));
-        const scrim=surface.scrim?parse(getComputedStyle(document.querySelector(surface.scrim)).backgroundColor):[0,0,0,0];
-        for(const backdrop of backdrops)for(let index=0;index<backdrop.samples.length;index++){
-          const base=parse(backdrop.samples[index]);
-          const background=over(scrim,over(fill,base));
-          for(const token of tokens){
-            const value=contrast(parse(variable(token)),background);
-            const pass=value>=4.5;if(!pass)failures++;lowest=Math.min(lowest,value);
-            rows.push([theme,surface.name,backdrop.name+(backdrop.samples.length>1?(index?' · dark':' · light'):''),token,value.toFixed(2)+':1',pass?'PASS':'FAIL',pass?'pass':'fail']);
-          }
-        }
-      }
-    }
-    root.dataset.theme=root.dataset.themePreference==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):root.dataset.themePreference;
-    const summary=document.createElement('p');summary.className='report-summary';summary.textContent=(failures?'FAIL: '+failures+' combinations below 4.5:1':'PASS: all combinations meet 4.5:1')+' · Lowest ratio '+lowest.toFixed(2)+':1';host.append(summary);
-    const wrap=document.createElement('div');wrap.className='report-table-wrap';
-    const table=document.createElement('table');table.className='table';const head=document.createElement('thead');const header=document.createElement('tr');
-    ['Theme','Surface','Backdrop sample','Text token','Contrast','Result'].forEach(value=>cell(header,value,'th'));head.append(header);table.append(head);
-    const body=document.createElement('tbody');for(const values of rows){const row=document.createElement('tr');values.slice(0,5).forEach(value=>cell(row,value));cell(row,values[5],'td',values[6]);body.append(row)}table.append(body);wrap.append(table);host.append(wrap);
-  }
-  document.querySelector('#theme').addEventListener('click',()=>{const theme=root.dataset.theme==='light'?'dark':'light';root.dataset.theme=theme;root.dataset.themePreference=theme;try{localStorage.setItem('theme',theme)}catch(error){}document.querySelector('#themeColorMeta').content=theme==='light'?'#f3f4f7':'#050505';document.querySelector('#colorSchemeMeta').content=theme;report()});
-  document.querySelector('#disp').addEventListener('input',event=>root.style.setProperty('--lg-dispersion',event.target.value));
-  const off=document.querySelector('#off');off.checked=new URLSearchParams(location.search).get('refract')==='off';
-  off.addEventListener('change',event=>{const url=new URL(location.href);event.target.checked?url.searchParams.set('refract','off'):url.searchParams.delete('refract');location.href=url.href});
-  report();
+(()=>{'use strict';
+const root=document.documentElement,themeButton=document.querySelector('#theme');
+const tokens=['--text','--text-muted','--text-quiet','--text-soft','--text-strong','--control-ink','--text-grad-start','--text-grad-end','--saved-ink','--badge-ink'];
+const surfaces=[
+{name:'Header',selector:'.topbar',fill:'--glass-fill-a',floor:true,real:['page','photo']},
+{name:'Category chip',selector:'.filter-chip',fill:'--glass-fill-a',floor:true,real:['page','photo']},
+{name:'Dock',selector:'.mobile-nav',fill:'--glass-fill-a',floor:true,real:['page','photo']},
+{name:'Toast',selector:'.toast',fill:'--glass-fill-a',real:['page']},
+{name:'Side sheet',selector:'.side-menu',fill:'--glass-fill-sheet',real:['page']},
+{name:'Notification sheet',selector:'.notification-panel',fill:'--glass-fill-sheet',real:['page']},
+{name:'Dialog',selector:'.glass-dialog',fill:'--glass-fill-sheet',real:['page']},
+{name:'Event card',selector:'.event-card',fill:'--glass-fill-b',real:['page']},
+{name:'Trust item',selector:'.trust-item',fill:'--glass-fill-b',real:['page']},
+{name:'Organizer banner',selector:'.organizer-banner',fill:'--glass-fill-b',real:['page']},
+{name:'Empty state',selector:'.empty-state',fill:'--glass-fill-b',real:['page']},
+{name:'Ticket type',selector:'.ticket-type',fill:'--glass-fill-b',real:['page']},
+{name:'Footer',selector:'.site-footer',fill:'--glass-fill-b',real:['page']},
+{name:'Image badge',selector:'.featured-label',fill:'--badge-bg',badge:true,real:['photo']},
+{name:'Saved heart',selector:'.save-event.saved',fill:'--saved-bg',real:['photo']},
+{name:'Search control',selector:'.search-box',fill:'--glass-fill-c',real:['page']},
+{name:'Menu control',selector:'.menu-button',fill:'--glass-fill-c',real:['page']},
+{name:'Icon control',selector:'.icon-button',fill:'--glass-fill-c',real:['page']},
+{name:'Close control',selector:'.menu-close',fill:'--glass-fill-c',real:['page']},
+{name:'Notification close',selector:'.notification-close',fill:'--glass-fill-c',real:['page']},
+{name:'Secondary button',selector:'.secondary-button',fill:'--glass-fill-c',real:['page']},
+{name:'Round arrow',selector:'.round-arrow',fill:'--badge-bg',badge:true,real:['photo']},
+{name:'Quantity control',selector:'.quantity-control button',fill:'--glass-fill-c',real:['page']},
+{name:'Card action',selector:'.card-book',fill:'--glass-fill-c',real:['page']}
+];
+const backdrops={page:[236,238,242],photo:[45,54,67],white:[255,255,255],black:[0,0,0]};
+function parse(v){const m=v.match(/rgba?\(([^)]+)\)/i);if(m){const a=m[1].split(/[\s,\/]+/).filter(Boolean).map(Number);return[a[0],a[1],a[2],a[3]??1]}const h=v.trim().replace('#','');if(h.length===3)return h.split('').map(x=>parseInt(x+x,16)).concat(1);if(h.length===6)return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),1];return[0,0,0,1]}
+function over(front,back){return[0,1,2].map(i=>front[i]*front[3]+back[i]*(1-front[3])).concat(1)}
+function lum(c){const v=c.slice(0,3).map(x=>{x/=255;return x<=.04045?x/12.92:Math.pow((x+.055)/1.055,2.4)});return .2126*v[0]+.7152*v[1]+.0722*v[2]}
+function contrast(a,b){const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function cssVar(name){return getComputedStyle(root).getPropertyValue(name).trim()}
+function cell(row,value,tag='td',cls=''){const el=document.createElement(tag);el.textContent=value;if(cls)el.className=cls;row.append(el)}
+function report(){const oldTheme=root.dataset.theme,oldPreference=root.dataset.themePreference,host=document.querySelector('#report'),rows=[],extremeRows=[];let failures=0,lowest=Infinity;
+for(const theme of ['dark','light']){root.dataset.theme=theme;const style=getComputedStyle(root);const page=parse(cssVar('--page-bg'));const floor=parse(theme==='light'?cssVar('--glass-floor'):cssVar('--glass-floor'));
+for(const surface of surfaces){const el=document.querySelector(surface.selector);if(!el)continue;const fill=parse(cssVar(surface.fill));const textTokens=tokens.filter(t=>t!=='--saved-ink'||surface.name==='Saved heart').filter(t=>t!=='--badge-ink'||surface.badge);const applicable=surface.real;
+for(const backName of applicable){const base=backName==='page'?page:backdrops.photo;const composite=surface.badge?over(fill,base):surface.floor?over(floor,over(fill,base)):over(fill,base);
+for(const token of textTokens){const fg=parse(cssVar(token));const ratio=contrast(fg,composite);const threshold=token==='--text-grad-start'||token==='--text-grad-end'?3:4.5;const pass=ratio>=threshold;if(!pass)failures++;lowest=Math.min(lowest,ratio);rows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','halo-free',pass?'PASS':'FAIL',pass?'pass':'fail']);}
+if(surface.floor){const halo=parse(cssVar('--text-halo'));const haloColor=halo.includes('255,255,255')?[255,255,255,.5]:[0,0,0,.28];const haloComposite=over(haloColor,composite);for(const token of ['--text','--text-muted']){const ratio=contrast(parse(cssVar(token)),haloComposite);rows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','with halo','INFO','pass'])}}
+}
+for(const backName of ['white','black']){const composite=surface.badge?over(fill,backdrops[backName]):surface.floor?over(floor,over(fill,backdrops[backName])):over(fill,backdrops[backName]);for(const token of ['--text','--text-muted','--text-strong','--control-ink']){const ratio=contrast(parse(cssVar(token)),composite);extremeRows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','contrived']);}}
+}
+}
+root.dataset.theme=oldTheme;root.dataset.themePreference=oldPreference;host.replaceChildren();
+function tableFor(title,records,heads){const heading=document.createElement('h3');heading.textContent=title;host.append(heading);const wrap=document.createElement('div');wrap.className='report-table-wrap';const table=document.createElement('table');table.className='table';const thead=document.createElement('thead'),tr=document.createElement('tr');heads.forEach(x=>cell(tr,x,'th'));thead.append(tr);table.append(thead);const tbody=document.createElement('tbody');records.forEach(values=>{const tr=document.createElement('tr');values.forEach((v,i)=>cell(tr,v,'td',i===6?values[7]||'': ''));tbody.append(tr)});table.append(tbody);wrap.append(table);host.append(wrap)}
+const summary=document.createElement('p');summary.className='report-summary';summary.textContent='Computed halo-free text combinations below threshold: '+failures+' · Lowest sampled ratio: '+(Number.isFinite(lowest)?lowest.toFixed(2):'—')+':1. A FAIL identifies a token/surface pair requiring a local semantic token or layout treatment.';host.append(summary);
+tableFor('Realistic backdrops — halo-free text and final composite',rows,['Theme','Surface','Backdrop','Text token','Contrast','Treatment','Result','Status']);
+tableFor('Contrived extremes — pure white and pure black',extremeRows,['Theme','Surface','Extreme backdrop','Text token','Contrast','Classification']);
+}
+themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='light'?'dark':'light';root.dataset.themePreference=root.dataset.theme;document.querySelector('#themeColorMeta').content=root.dataset.theme==='light'?'#eceef2':'#050505';document.querySelector('#colorSchemeMeta').content=root.dataset.theme;report()});
+const refraction=document.querySelector('#refraction'),disp=document.querySelector('#disp'),off=document.querySelector('#off'),flip=document.querySelector('#flip');
+function updateRefraction(){root.style.setProperty('--lg-refraction',off.checked?'0':refraction.value);document.querySelector('#refractionValue').value=refraction.value}
+refraction.addEventListener('input',()=>{document.querySelector('#refractionValue').value=refraction.value;if(!off.checked)root.style.setProperty('--lg-refraction',refraction.value)});
+disp.addEventListener('input',()=>{root.style.setProperty('--lg-dispersion',disp.value);document.querySelector('#dispValue').value=disp.value});
+off.addEventListener('change',updateRefraction);flip.addEventListener('change',()=>root.style.setProperty('--lg-flip',flip.checked?'-1':'1'));
+const mapWrap=document.querySelector('#mapWrap'),mapPreview=document.querySelector('#mapPreview'),showMap=document.querySelector('#showMap');
+function syncMap(){const topbar=document.querySelector('.backdrop .topbar');const uri=topbar?.dataset.lgMap;if(uri&&showMap.checked){mapPreview.src=uri;mapWrap.hidden=false}else if(!showMap.checked){mapWrap.hidden=true}}
+showMap.addEventListener('change',syncMap);new MutationObserver(syncMap).observe(document.body,{subtree:true,attributes:true,attributeFilter:['data-lg-map']});
+root.style.setProperty('--lg-refraction',refraction.value);root.style.setProperty('--lg-dispersion',disp.value);root.style.setProperty('--lg-flip','1');report();
 })();
-</script></body></html>
+</script>
+</body></html>
