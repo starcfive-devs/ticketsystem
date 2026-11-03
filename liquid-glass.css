@@ -70,3 +70,6 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 @supports not ((mask-composite:exclude) or (-webkit-mask-composite:xor)){
 :where(.topbar,.mobile-nav,.filter-chip,.toast,.side-menu,.notification-panel,.glass-dialog,.event-card,.trust-item,.organizer-banner,.empty-state,.ticket-type,.search-box,.menu-button,.icon-button,.menu-close,.notification-close,.secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens,.featured-label,.featured-date,.event-category,.save-event)::before{background:none;border:1px solid var(--rim-mid);padding:0}
 }
+
+/* Sticky text uses one theme-safe ink so the floor can protect it over both bright and dark photos. */
+.topbar,.category-strip .filter-chip,.mobile-nav{--text:var(--text-strong);--text-muted:var(--text-strong);--text-quiet:var(--text-strong);--text-soft:var(--text-strong);--muted:var(--text-strong);--quiet:var(--text-strong);--ink:var(--text-strong)}
