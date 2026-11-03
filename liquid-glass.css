@@ -9,7 +9,7 @@
 --backdrop:rgba(0,0,0,.58);--scrim:rgba(0,0,0,.54);--blur-a:8px;--blur-sheet:18px;--blur-clear:2px;--saturate:138%;--brightness:1.01;
 --btn-primary-bg:linear-gradient(#fff,#dedede);--btn-primary-ink:#101012;--badge-bg:rgba(12,12,12,.76);--badge-bg-hover:rgba(8,8,8,.88);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
 --page-bg:#050505;--amb-1:rgba(185,196,215,.22);--amb-2:rgba(115,130,160,.17);--amb-3:rgba(255,255,255,.11);--amb-4:rgba(65,74,92,.26);--amb-5:rgba(205,215,230,.13);--pattern-opacity:.045;
---spring:cubic-bezier(.34,1.56,.64,1);color-scheme:dark
+--spring:cubic-bezier(.34,1.56,.64,1);--lg-refraction:28;--lg-dispersion:.06;--lg-flip:1;color-scheme:dark
 }
 :root[data-theme=light]{
 --text:#1d1d22;--text-muted:#45454d;--text-quiet:#62626b;--text-soft:#33333a;--text-strong:#17171b;--control-ink:#17171b;--focus-ring:#303030;
