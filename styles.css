@@ -110,7 +110,7 @@ to{transform:translate3d(5%,6%,0) scale(1.08)}}
 .hero-copy>p{max-width:30em;color:var(--muted);font-size:clamp(1rem,2.4vw,1.125rem);line-height:1.7}
 
 .primary-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:0 24px;border:0;border-radius:999px;background:var(--btn-primary-bg);color:var(--btn-primary-ink);font-size:.9375rem;font-weight:700;box-shadow:inset 0 1px 0 var(--bevel-hi),inset 0 -2px 6px var(--glow-inner),0 10px 28px var(--shadow-ambient);transition:transform .45s var(--spring),box-shadow .3s}
-.primary-button:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #fff,inset 0 -2px 6px var(--glow-inner),0 16px 36px var(--shadow-ambient)}
+.primary-button:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 var(--bevel-hi),inset 0 -2px 6px var(--glow-inner),0 16px 36px var(--shadow-ambient)}
 .primary-button:active{transform:scale(.97)}
 .primary-button i{font-size:.75rem}
 .hero-button{margin-top:30px}
@@ -183,7 +183,7 @@ to{transform:translate3d(5%,6%,0) scale(1.08)}}
 .mobile-nav-link i{font-size:1.125rem}
 .mobile-nav-link.active{color:var(--text-strong)}
 .mobile-nav-link:active{transform:scale(.92)}
-.mobile-add{position:relative;z-index:1;flex:0 0 52px;width:52px;height:52px;display:grid;place-items:center;margin:0 4px;padding:0;border:0;border-radius:50%;background:var(--btn-primary-bg);color:var(--btn-primary-ink);font-size:1.125rem;box-shadow:inset 0 1px 0 #fff,inset 0 -2px 5px var(--glow-inner),0 6px 18px var(--shadow-contact);transition:transform .45s var(--spring)}
+.mobile-add{position:relative;z-index:1;flex:0 0 52px;width:52px;height:52px;display:grid;place-items:center;margin:0 4px;padding:0;border:0;border-radius:50%;background:var(--btn-primary-bg);color:var(--btn-primary-ink);font-size:1.125rem;box-shadow:inset 0 1px 0 var(--bevel-hi),inset 0 -2px 5px var(--glow-inner),0 6px 18px var(--shadow-contact);transition:transform .45s var(--spring)}
 .mobile-add:hover{transform:translateY(-2px) scale(1.04)}
 .mobile-add:active{transform:scale(.9)}
 
