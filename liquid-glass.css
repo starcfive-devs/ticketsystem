@@ -17,8 +17,8 @@
 --glass-fill-a:rgba(255,255,255,.22);--glass-fill-b:rgba(255,255,255,.32);--glass-fill-c:rgba(255,255,255,.36);--glass-fill-sheet:rgba(255,255,255,.48);
 --glass-fill-a-hover:rgba(255,255,255,.30);--glass-fill-b-hover:rgba(255,255,255,.40);--glass-fill-c-hover:rgba(255,255,255,.44);
 --glass-floor:rgba(255,255,255,.28);--glass-floor-scrolled:rgba(255,255,255,.42);
---rim-hi:rgba(255,255,255,.96);--rim-mid:rgba(20,24,34,.22);--rim-lo:rgba(20,24,34,.08);--bevel-hi:rgba(255,255,255,.96);--bevel-lo:rgba(0,0,0,.14);--glow-inner:rgba(0,0,0,.05);--facet-1:rgba(255,255,255,.20);--facet-2:rgba(20,24,34,.035);--shadow-contact:rgba(0,0,0,.12);--shadow-ambient:rgba(0,0,0,.14);--hairline:rgba(20,24,34,.12);
---backdrop:rgba(20,24,34,.20);--blur-a:9px;--blur-sheet:19px;--blur-clear:2px;--saturate:140%;--brightness:1.01;
+--rim-hi:rgba(255,255,255,.96);--rim-mid:rgba(24,24,24,.22);--rim-lo:rgba(24,24,24,.08);--bevel-hi:rgba(255,255,255,.96);--bevel-lo:rgba(0,0,0,.14);--glow-inner:rgba(0,0,0,.05);--facet-1:rgba(255,255,255,.20);--facet-2:rgba(24,24,24,.035);--shadow-contact:rgba(0,0,0,.12);--shadow-ambient:rgba(0,0,0,.14);--hairline:rgba(24,24,24,.12);
+--backdrop:rgba(24,24,24,.20);--blur-a:9px;--blur-sheet:19px;--blur-clear:2px;--saturate:140%;--brightness:1.01;
 --btn-primary-bg:linear-gradient(#29292e,#111114);--btn-primary-ink:#fff;--badge-bg:rgba(20,20,22,.78);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
 --page-bg:#eceef2;--amb-1:rgba(150,170,205,.35);--amb-2:rgba(235,215,190,.35);--amb-3:rgba(120,128,142,.18);--amb-4:rgba(60,70,90,.10);--amb-5:rgba(180,190,205,.20);--pattern-opacity:.05;color-scheme:light
 }
