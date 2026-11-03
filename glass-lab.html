@@ -6,8 +6,9 @@
   const tokens=['--text','--text-muted','--text-quiet','--text-soft'];
   const surfaces=[
     {name:'Tier A · topbar',selector:'.topbar',fill:'--glass-fill-a'},
-    {name:'Sheet · side panel',selector:'.side-menu',fill:'--glass-fill-sheet'},
-    {name:'Tier B · event card',selector:'.event-card',fill:'--glass-fill-b'},
+    {name:'Tier C · search field',selector:'.search-box',fill:'--glass-fill-c'},
+    {name:'Sheet · side panel',selector:'.side-menu',fill:'--glass-fill-sheet',scrim:'.side-menu-heading'},
+    {name:'Tier B · event card',selector:'.event-card',fill:'--glass-fill-b',scrim:'.event-card-content'},
     {name:'Image badge',selector:'.featured-label',fill:'--badge-bg'}
   ];
   const backdrops=[
@@ -39,9 +40,10 @@
       for(const surface of surfaces){
         const element=document.querySelector(surface.selector);if(!element)continue;
         const fill=parse(variable(surface.fill));
+        const scrim=surface.scrim?parse(getComputedStyle(document.querySelector(surface.scrim)).backgroundColor):[0,0,0,0];
         for(const backdrop of backdrops)for(let index=0;index<backdrop.samples.length;index++){
           const base=parse(backdrop.samples[index]);
-          const background=over(fill,base);
+          const background=over(scrim,over(fill,base));
           for(const token of tokens){
             const value=contrast(parse(variable(token)),background);
             const pass=value>=4.5;if(!pass)failures++;lowest=Math.min(lowest,value);
