@@ -22,7 +22,7 @@
 --btn-primary-bg:linear-gradient(#292929,#111111);--btn-primary-ink:#fff;--badge-bg:rgba(20,20,20,.78);--badge-bg-hover:rgba(8,8,8,.88);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
 --page-bg:#eceef2;--amb-1:rgba(150,170,205,.35);--amb-2:rgba(235,215,190,.35);--amb-3:rgba(120,128,142,.18);--amb-4:rgba(60,70,90,.10);--amb-5:rgba(180,190,205,.20);--pattern-opacity:.05;color-scheme:light
 }
-body{background:var(--page-bg);color:var(--text)}
+body{background:var(--page-bg);color:var(--text);isolation:isolate}
 .ambient{position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 14% 16%,var(--amb-1),transparent 35%),radial-gradient(ellipse at 82% 25%,var(--amb-2),transparent 32%),radial-gradient(ellipse at 48% 88%,var(--amb-3),transparent 38%),radial-gradient(ellipse at 5% 78%,var(--amb-4),transparent 30%),radial-gradient(ellipse at 94% 86%,var(--amb-5),transparent 28%),repeating-linear-gradient(0deg,rgba(60,70,90,var(--pattern-opacity)) 0 1px,transparent 1px 5px);animation:ambient-drift 32s ease-in-out infinite alternate}
 @keyframes ambient-drift{from{transform:translateX(-1%)}to{transform:translate(1%,1%) scale(1.04)}}
 :where(.topbar,.mobile-nav,.filter-chip,.toast,.side-menu,.notification-panel,.glass-dialog,.event-card,.trust-item,.organizer-banner,.empty-state,.ticket-type,.site-footer,.search-box,.menu-button,.icon-button,.menu-close,.notification-close,.secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens,.featured-label,.featured-date,.event-category,.save-event){position:relative}
