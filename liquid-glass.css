@@ -145,3 +145,40 @@ body{background:var(--page-bg);color:var(--text);isolation:isolate}\n:root[data-
 .side-menu>button:not(.menu-close){background:var(--menu-item-scrim)}
 .side-menu>button:not(.menu-close):hover,
 .side-menu>button:not(.menu-close):focus-visible{background:var(--glass-fill-c-hover)}
+
+/* Lightweight entrance and menu choreography inspired by the motion references. */
+@keyframes glass-rise-in{
+  from{opacity:0;transform:translate3d(0,14px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+.hero-copy>*{animation:glass-rise-in .62s cubic-bezier(.22,1,.36,1) both}
+.hero-copy>*:nth-child(1){animation-delay:.04s}
+.hero-copy>*:nth-child(2){animation-delay:.10s}
+.hero-copy>*:nth-child(3){animation-delay:.16s}
+.hero-copy>*:nth-child(4){animation-delay:.22s}
+.featured-event{animation:glass-rise-in .78s cubic-bezier(.22,1,.36,1) .12s both}
+.event-card{animation:glass-rise-in .48s cubic-bezier(.22,1,.36,1) both}
+.side-menu>button[data-menu-view]{
+  opacity:0;transform:translate3d(0,6px,0);
+  transition:opacity .24s ease,transform .42s cubic-bezier(.22,1,.36,1),background-color .22s ease;
+}
+.side-menu.open>button[data-menu-view]{opacity:1;transform:none}
+.side-menu.open>button[data-menu-view]:nth-of-type(1){transition-delay:.025s}
+.side-menu.open>button[data-menu-view]:nth-of-type(2){transition-delay:.05s}
+.side-menu.open>button[data-menu-view]:nth-of-type(3){transition-delay:.075s}
+.side-menu.open>button[data-menu-view]:nth-of-type(4){transition-delay:.10s}
+.side-menu.open>button[data-menu-view]:nth-of-type(5){transition-delay:.125s}
+:root.theme-switching body,
+:root.theme-switching .topbar,
+:root.theme-switching .mobile-nav,
+:root.theme-switching .side-menu,
+:root.theme-switching .notification-panel,
+:root.theme-switching .event-card,
+:root.theme-switching .filter-chip,
+:root.theme-switching .theme-segment{
+  transition:background-color .28s ease,color .28s ease,border-color .28s ease,box-shadow .28s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-copy>*,.featured-event,.event-card{animation:none}
+  .side-menu>button[data-menu-view]{opacity:1;transform:none;transition:none}
+}
