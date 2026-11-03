@@ -1,6 +1,6 @@
 /* Liquid Glass: neutral material tokens and three fixed tiers. */
 :root{
---text:#f5f5f7;--text-muted:#c8c8cf;--text-quiet:#a0a0a8;--text-soft:#e2e2e7;--text-strong:#fff;--control-ink:#101012;--focus-ring:#fff;
+--text:#f5f5f7;--text-muted:#c8c8cf;--text-quiet:#a0a0a8;--text-soft:#e2e2e7;--text-strong:#fff;--control-ink:#f5f5f7;--focus-ring:#fff;
 --text-grad-start:#f5f5f7;--text-grad-end:#a8a8b2;--text-halo:0 1px 8px rgba(0,0,0,.28);
 --glass-fill-a:rgba(255,255,255,.035);--glass-fill-b:rgba(255,255,255,.055);--glass-fill-c:rgba(255,255,255,.065);--glass-fill-sheet:rgba(255,255,255,.16);
 --glass-fill-a-hover:rgba(255,255,255,.085);--glass-fill-b-hover:rgba(255,255,255,.10);--glass-fill-c-hover:rgba(255,255,255,.12);
@@ -61,3 +61,6 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 .theme-segment:has([data-theme-choice=light][aria-checked=true]){--theme-index:1}.theme-segment:has([data-theme-choice=dark][aria-checked=true]){--theme-index:2}
 .theme-segment button{position:relative;z-index:1;background:transparent;color:var(--text-muted)}.theme-segment button[aria-checked=true]{background:transparent;color:var(--text)}
 .menu-scrim{background:var(--backdrop)}
+
+/* Sticky labels use a local halo; primary actions and tinted badges are deliberately excluded. */
+.topbar .menu-button,.topbar .search-box input,.topbar .search-box kbd,.filter-chip,.mobile-nav-link{ text-shadow:var(--text-halo) }
