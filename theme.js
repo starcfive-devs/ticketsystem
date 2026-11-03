@@ -30,6 +30,8 @@
     }
     root.dataset.theme = theme;
     root.dataset.themePreference = preference;
+    const appearanceIcon = document.querySelector('.theme-menu-label i');
+    if (appearanceIcon) appearanceIcon.className = theme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     updateMeta(theme);
     controls().forEach(button => {
       const selected = button.dataset.themeChoice === preference;
