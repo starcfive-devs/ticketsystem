@@ -100,7 +100,7 @@ function pageBase(){return parse(variable('--page-bg'))}
 function pageBackdropSamples(theme){return pageSamples[theme].map(([name,color])=>({name,color:parse(color)}))}
 function fillFor(surface,theme){if(surface.button){return(theme==='light'?['#29292e','#111114']:['#ffffff','#dedee2']).map(parse)}if(surface.gradient)return[parse(variable(surface.gradient))];return[parse(variable(surface.fill))]}
 function report(){
-const oldTheme=root.dataset.theme,oldPreference=root.dataset.themePreference,host=document.querySelector('#report'),rows=[],extremes=[];let failures=0,lowest=Infinity;
+const hadTheme=root.hasAttribute('data-theme'),oldTheme=root.getAttribute('data-theme'),hadPreference=root.hasAttribute('data-theme-preference'),oldPreference=root.getAttribute('data-theme-preference'),host=document.querySelector('#report'),rows=[],extremes=[];let failures=0,lowest=Infinity;
 for(const theme of ['dark','light']){
 root.dataset.theme=theme;
 for(const surface of surfaces){
@@ -112,8 +112,8 @@ for(let fi=0;fi<fills.length;fi++){
 const fill=fills[fi],floor=surface.floor?parse(variable('--glass-floor')):[0,0,0,0];
 const composite=surface.gradient?base.color:surface.badge?over(fill,base.color):surface.floor?over(floor,over(fill,base.color)):over(fill,base.color);
 for(const token of surface.tokens){
-const fg=parse(variable(token)),ratio=contrast(fg,composite),threshold=token==='--text-grad-start'||token==='--text-grad-end'?3:4.5,pass=ratio>=threshold;
-if(!surface.gradient&&token!=='--control-ink'&&token!=='--btn-primary-ink'&&token!=='--badge-ink'&&token!=='--saved-ink'){if(!pass)failures++;lowest=Math.min(lowest,ratio)}
+const fg=parse(variable(token)),ratio=contrast(fg,composite),threshold=token==='--text-grad-start'||token==='--text-grad-end'||token==='--saved-ink'?3:4.5,pass=ratio>=threshold;
+if(!pass)failures++;lowest=Math.min(lowest,ratio)
 rows.push([theme,surface.name,base.name,token,ratio.toFixed(2)+':1',rgb(composite),surface.floor?variable('--text-halo')+' (decorative; not credited)':'none',pass?'PASS':'FAIL',pass?'pass':'fail']);
 }
 }
@@ -121,7 +121,7 @@ rows.push([theme,surface.name,base.name,token,ratio.toFixed(2)+':1',rgb(composit
 const extBase=[['contrived pure white',[255,255,255,1]],['contrived pure black',[0,0,0,1]]];
 for(const [name,color] of extBase){for(const surface of surfaces){if(!document.querySelector(surface.selector))continue;const fills=fillFor(surface,theme);const fill=fills[0];const composite=surface.badge?over(fill,color):surface.floor?over(parse(variable('--glass-floor')),over(fill,color)):surface.button?over(fill,color):over(fill,color);const token=surface.tokens[0];extremes.push([theme,surface.name,name,token,contrast(parse(variable(token)),composite).toFixed(2)+':1',rgb(composite)])}}
 }
-root.dataset.theme=oldTheme;root.dataset.themePreference=oldPreference;host.replaceChildren();
+if(hadTheme)root.setAttribute('data-theme',oldTheme);else root.removeAttribute('data-theme');if(hadPreference)root.setAttribute('data-theme-preference',oldPreference);else root.removeAttribute('data-theme-preference');host.replaceChildren();
 const summary=document.createElement('p');summary.className='report-summary';summary.textContent='Computed realistic combinations below their target: '+failures+' · Lowest reported halo-free ratio: '+(Number.isFinite(lowest)?lowest.toFixed(2):'—')+':1. Text-shadow halos are listed but never credited toward WCAG contrast. Page samples are modeled ambient regions; photo samples are representative dark and bright values, not measured photo pixels.';host.append(summary);
 function table(title,records,heads){const h=document.createElement('h3');h.textContent=title;host.append(h);const wrap=document.createElement('div');wrap.className='report-table-wrap';const t=document.createElement('table');t.className='table';const thead=document.createElement('thead'),hr=document.createElement('tr');heads.forEach(x=>cell(hr,x,'th'));thead.append(hr);t.append(thead);const body=document.createElement('tbody');records.forEach(values=>{const tr=document.createElement('tr');values.forEach((v,i)=>cell(tr,v,'td',i===7?values[8]||'': ''));body.append(tr)});t.append(body);wrap.append(t);host.append(wrap)}
 table('Realistic backdrops — final composite and halo-free text',rows,['Theme','Surface','Backdrop sample','Text token','Contrast','Final composite RGB','Halo treatment','Result','Status']);
