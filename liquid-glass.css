@@ -4,7 +4,7 @@
 --text-grad-start:#f5f5f7;--text-grad-end:#a8a8b2;--text-halo:0 1px 8px rgba(0,0,0,.28);
 --glass-fill-a:rgba(255,255,255,.035);--glass-fill-b:rgba(255,255,255,.055);--glass-fill-c:rgba(255,255,255,.065);--glass-fill-sheet:rgba(255,255,255,.16);
 --glass-fill-a-hover:rgba(255,255,255,.085);--glass-fill-b-hover:rgba(255,255,255,.10);--glass-fill-c-hover:rgba(255,255,255,.12);
---glass-floor:rgba(0,0,0,.22);--glass-floor-scrolled:rgba(0,0,0,.34);
+--glass-floor:rgba(0,0,0,.56);--glass-floor-scrolled:rgba(0,0,0,.66);
 --rim-hi:rgba(255,255,255,.92);--rim-mid:rgba(255,255,255,.36);--rim-lo:rgba(255,255,255,.045);--bevel-hi:rgba(255,255,255,.4);--bevel-lo:rgba(0,0,0,.3);--glow-inner:rgba(0,0,0,.24);--facet-1:rgba(255,255,255,.085);--facet-2:rgba(255,255,255,.045);--shadow-contact:rgba(0,0,0,.28);--shadow-ambient:rgba(0,0,0,.34);--hairline:rgba(255,255,255,.14);
 --backdrop:rgba(0,0,0,.58);--scrim:rgba(0,0,0,.54);--blur-a:8px;--blur-sheet:19px;--blur-clear:2px;--saturate:138%;--brightness:1.01;
 --btn-primary-bg:linear-gradient(#fff,#dedee2);--btn-primary-ink:#101012;--badge-bg:rgba(12,14,18,.76);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
@@ -13,10 +13,10 @@
 }
 :root[data-theme=light]{
 --text:#1d1d22;--text-muted:#45454d;--text-quiet:#62626b;--text-soft:#33333a;--text-strong:#17171b;--control-ink:#17171b;--focus-ring:#303036;
---text-grad-start:#1d1d22;--text-grad-end:#6a6a74;--text-halo:0 0 8px rgba(255,255,255,.5);
+--text-grad-start:#1d1d22;--text-grad-end:#55555f;--text-halo:0 0 8px rgba(255,255,255,.5);
 --glass-fill-a:rgba(255,255,255,.22);--glass-fill-b:rgba(255,255,255,.32);--glass-fill-c:rgba(255,255,255,.36);--glass-fill-sheet:rgba(255,255,255,.48);
 --glass-fill-a-hover:rgba(255,255,255,.30);--glass-fill-b-hover:rgba(255,255,255,.40);--glass-fill-c-hover:rgba(255,255,255,.44);
---glass-floor:rgba(255,255,255,.28);--glass-floor-scrolled:rgba(255,255,255,.42);
+--glass-floor:rgba(255,255,255,.30);--glass-floor-scrolled:rgba(255,255,255,.42);
 --rim-hi:rgba(255,255,255,.96);--rim-mid:rgba(24,24,24,.22);--rim-lo:rgba(24,24,24,.08);--bevel-hi:rgba(255,255,255,.96);--bevel-lo:rgba(0,0,0,.14);--glow-inner:rgba(0,0,0,.05);--facet-1:rgba(255,255,255,.20);--facet-2:rgba(24,24,24,.035);--shadow-contact:rgba(0,0,0,.12);--shadow-ambient:rgba(0,0,0,.14);--hairline:rgba(24,24,24,.12);
 --backdrop:rgba(24,24,24,.20);--blur-a:9px;--blur-sheet:19px;--blur-clear:2px;--saturate:140%;--brightness:1.01;
 --btn-primary-bg:linear-gradient(#29292e,#111114);--btn-primary-ink:#fff;--badge-bg:rgba(20,20,22,.78);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
