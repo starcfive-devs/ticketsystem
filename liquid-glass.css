@@ -118,7 +118,7 @@
   transition:background-color .3s ease,box-shadow .3s ease,transform .5s var(--spring);
 }
 .search-box{background-color:var(--white-07)}
-.round-arrow,.featured-label,.featured-date{
+.featured-label,.featured-date{
   -webkit-backdrop-filter:blur(16px) saturate(180%);
   backdrop-filter:blur(16px) saturate(180%);
 }
