@@ -99,7 +99,7 @@ function cell(row,value,tag='td',cls=''){const el=document.createElement(tag);el
 function rgb(c){return'('+c.slice(0,3).map(x=>Math.round(x)).join(', ')+')'}
 function pageBase(){return parse(variable('--page-bg'))}
 function pageBackdropSamples(theme){return pageSamples[theme].map(([name,color])=>({name,color:parse(color)}))}
-function fillFor(surface,theme){if(surface.button){return(theme==='light'?['#29292e','#111114']:['#ffffff','#dedee2']).map(parse)}if(surface.gradient)return[parse(variable(surface.gradient))];return[parse(variable(surface.fill))]}
+function fillFor(surface,theme){if(surface.button){return(theme==='light'?['#292929','#111111']:['#ffffff','#dedede']).map(parse)}if(surface.gradient)return[parse(variable(surface.gradient))];return[parse(variable(surface.fill))]}
 function report(){
 const hadTheme=root.hasAttribute('data-theme'),oldTheme=root.getAttribute('data-theme'),hadPreference=root.hasAttribute('data-theme-preference'),oldPreference=root.getAttribute('data-theme-preference'),host=document.querySelector('#report'),rows=[],extremes=[];let failures=0,lowest=Infinity;
 for(const theme of ['dark','light']){
