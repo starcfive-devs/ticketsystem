@@ -45,7 +45,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
 /* ---------- Ambient light (what the glass refracts) ---------- */
 .ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-to{transform:translate3d(5%,6%,0) scale(1.08)}}
+
 
 /* ---------- Header ---------- */
 .topbar{position:sticky;top:var(--bar-top);z-index:40;width:min(var(--content),calc(100% - var(--gutter)*2));height:var(--bar-h);margin:var(--bar-top) auto 0;padding:0 10px;display:flex;align-items:center;gap:10px;border-radius:999px}
