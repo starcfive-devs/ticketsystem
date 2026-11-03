@@ -157,7 +157,7 @@ to{transform:translate3d(5%,6%,0) scale(1.08)}}
 .save-event{position:absolute;z-index:2;right:12px;top:12px;width:42px;height:42px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;color:var(--badge-ink);background:var(--hairline);-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);box-shadow:inset 0 1px 0 var(--rim-mid),inset 0 0 0 1px var(--hairline);transition:transform .45s var(--spring),background .25s}
 .save-event:hover{background:var(--rim-mid)}
 .save-event:active{transform:scale(.88)}
-.save-event.saved{background:var(--focus-ring);color:#e11d48}
+.save-event.saved{background:var(--saved-bg);color:var(--saved-ink)}
 .event-card-content{display:flex;flex-direction:column;flex:1;padding:18px 18px 16px}
 .event-date{color:var(--text-soft);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .event-card h3{margin:8px 0;font:700 1.1875rem/1.3 var(--font-head);letter-spacing:-.02em}
