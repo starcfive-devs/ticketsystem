@@ -32,3 +32,8 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 .ticket-dialog .dialog-close{background:var(--badge-bg);color:var(--badge-ink)}
 .message-dialog .dialog-close{color:var(--text)}
 .mobile-add,.primary-button{background:var(--btn-primary-bg);color:var(--btn-primary-ink)}
+
+/* Dock lens geometry; the lens is a Tier C child and never blurs its backdrop. */
+.mobile-nav{position:fixed;isolation:isolate}
+.mobile-nav .nav-lens{position:absolute;left:var(--lens-x,0);top:var(--lens-y,0);width:var(--lens-w,0);height:var(--lens-h,0);z-index:0;opacity:0;pointer-events:none;transform:scaleX(var(--lens-stretch,1));transform-origin:center;background:var(--glass-fill-c);transition:transform .42s var(--spring),left .42s var(--spring),top .42s var(--spring),width .42s var(--spring),height .42s var(--spring),opacity .2s}
+.mobile-nav .mobile-nav-link,.mobile-nav .mobile-add{position:relative;z-index:1}
