@@ -7,7 +7,7 @@
 --glass-floor:rgba(0,0,0,.56);--glass-floor-scrolled:rgba(0,0,0,.66);
 --rim-hi:rgba(255,255,255,.92);--rim-mid:rgba(255,255,255,.36);--rim-lo:rgba(255,255,255,.045);--bevel-hi:rgba(255,255,255,.4);--bevel-lo:rgba(0,0,0,.3);--glow-inner:rgba(0,0,0,.24);--facet-1:rgba(255,255,255,.085);--facet-2:rgba(255,255,255,.045);--shadow-contact:rgba(0,0,0,.28);--shadow-ambient:rgba(0,0,0,.34);--hairline:rgba(255,255,255,.14);--press-glint:rgba(255,255,255,var(--press-alpha));--glass-sheen-a:rgba(255,255,255,.035);--glass-sheen-b:rgba(0,0,0,.025);--glass-inner-sheen:rgba(255,255,255,.05);--sheet-sheen:rgba(255,255,255,.075);--card-sheen:rgba(255,255,255,.045);--card-shade:rgba(0,0,0,.018);--control-sheen:rgba(255,255,255,.07);--fallback-fill-a:rgba(32,32,32,.96);--fallback-fill-sheet:rgba(32,32,32,.985);--fallback-no-blur-a:rgba(35,35,35,.94);--fallback-no-blur-sheet:rgba(35,35,35,.98);
 --backdrop:rgba(0,0,0,.58);--scrim:rgba(0,0,0,.54);--blur-a:8px;--blur-sheet:19px;--blur-clear:2px;--saturate:138%;--brightness:1.01;
---btn-primary-bg:linear-gradient(#fff,#dedede);--btn-primary-ink:#101012;--badge-bg:rgba(12,14,18,.76);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
+--btn-primary-bg:linear-gradient(#fff,#dedede);--btn-primary-ink:#101012;--badge-bg:rgba(12,14,18,.76);--badge-bg-hover:rgba(8,8,8,.88);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
 --page-bg:#050505;--amb-1:rgba(185,196,215,.22);--amb-2:rgba(115,130,160,.17);--amb-3:rgba(255,255,255,.11);--amb-4:rgba(65,74,92,.26);--amb-5:rgba(205,215,230,.13);--pattern-opacity:.045;
 --lg-refraction:28;--lg-dispersion:.06;--lg-flip:1;--rim-angle:215deg;--mx:50%;--my:50%;--press-alpha:0;--spring:cubic-bezier(.34,1.56,.64,1);color-scheme:dark
 }
@@ -19,7 +19,7 @@
 --glass-floor:rgba(255,255,255,.30);--glass-floor-scrolled:rgba(255,255,255,.42);
 --rim-hi:rgba(255,255,255,.96);--rim-mid:rgba(24,24,24,.22);--rim-lo:rgba(24,24,24,.08);--bevel-hi:rgba(255,255,255,.96);--bevel-lo:rgba(0,0,0,.14);--glow-inner:rgba(0,0,0,.05);--facet-1:rgba(255,255,255,.20);--facet-2:rgba(24,24,24,.035);--shadow-contact:rgba(0,0,0,.12);--shadow-ambient:rgba(0,0,0,.14);--hairline:rgba(24,24,24,.12);
 --fallback-fill-a:rgba(248,248,248,.97);--fallback-fill-sheet:rgba(248,248,248,.99);--fallback-no-blur-a:rgba(248,248,248,.94);--fallback-no-blur-sheet:rgba(248,248,248,.98);--backdrop:rgba(24,24,24,.20);--blur-a:9px;--blur-sheet:19px;--blur-clear:2px;--saturate:140%;--brightness:1.01;
---btn-primary-bg:linear-gradient(#292929,#111111);--btn-primary-ink:#fff;--badge-bg:rgba(20,20,22,.78);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
+--btn-primary-bg:linear-gradient(#292929,#111111);--btn-primary-ink:#fff;--badge-bg:rgba(20,20,22,.78);--badge-bg-hover:rgba(8,8,8,.88);--badge-ink:#fff;--saved-bg:#fff;--saved-ink:#e11d48;
 --page-bg:#eceef2;--amb-1:rgba(150,170,205,.35);--amb-2:rgba(235,215,190,.35);--amb-3:rgba(120,128,142,.18);--amb-4:rgba(60,70,90,.10);--amb-5:rgba(180,190,205,.20);--pattern-opacity:.05;color-scheme:light
 }
 body{background:var(--page-bg);color:var(--text)}
@@ -35,8 +35,10 @@ body{background:var(--page-bg);color:var(--text)}
 .site-footer{background:linear-gradient(180deg,var(--glass-fill-a),transparent);box-shadow:inset 0 1px 0 var(--rim-mid),0 -8px 24px -18px var(--shadow-ambient)}
 :where(.search-box,.menu-button,.icon-button,.menu-close,.notification-close,.secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens){background-color:var(--glass-fill-c);background-image:linear-gradient(180deg,var(--control-sheen),transparent 58%);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 1px 1px var(--shadow-contact),inset 1px 1px .5px var(--bevel-hi),inset -1px -1px .5px var(--bevel-lo),inset 0 0 0 1px var(--hairline)}
 :where(.filter-chip,.menu-button,.icon-button,.secondary-button,.round-arrow,.card-book,.quantity-control button):hover{background-color:var(--glass-fill-c-hover)}
+.round-arrow:hover{background-color:var(--badge-bg-hover)}
+.ticket-dialog .dialog-close{background:var(--badge-bg);color:var(--badge-ink)}
 .filter-chip:hover{background-color:var(--glass-fill-a-hover)}
-:where(.featured-label,.featured-date,.event-category,.save-event,.ticket-dialog .dialog-close){background:var(--badge-bg);color:var(--badge-ink);-webkit-backdrop-filter:none;backdrop-filter:none}
+:where(.featured-label,.featured-date,.event-category,.save-event){background:var(--badge-bg);color:var(--badge-ink);-webkit-backdrop-filter:none;backdrop-filter:none}
 .save-event.saved{background:var(--saved-bg);color:var(--saved-ink)}
 html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webkit-backdrop-filter:var(--lg-filter,) blur(var(--blur-a)) saturate(var(--saturate)) brightness(var(--brightness));backdrop-filter:var(--lg-filter,) blur(var(--blur-a)) saturate(var(--saturate)) brightness(var(--brightness))}
 :where(.side-menu-heading,.notification-panel-heading,.notification-panel-content,.dialog-content,.message-dialog-inner,.event-card-content,.footer-inner){background:transparent}
