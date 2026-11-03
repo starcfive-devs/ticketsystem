@@ -268,7 +268,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 @media (max-height:520px) and (orientation:landscape){
   .dialog-image{display:none}
-  .mobile-nav{--dock-h:58px;height:58px}
+  :root{--dock-h:58px}.mobile-nav{height:58px}
 }
 @media (hover:none){
   .event-card:hover,.featured-event:hover,.primary-button:hover{transform:none}
