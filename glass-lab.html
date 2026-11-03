@@ -118,6 +118,7 @@ rows.push([theme,surface.name,base.name,token,ratio.toFixed(2)+':1',rgb(composit
 }
 }
 }
+}
 const extBase=[['contrived pure white',[255,255,255,1]],['contrived pure black',[0,0,0,1]]];
 for(const [name,color] of extBase){for(const surface of surfaces){if(!document.querySelector(surface.selector))continue;const fills=fillFor(surface,theme);const fill=fills[0];const composite=surface.badge?over(fill,color):surface.floor?over(parse(variable('--glass-floor')),over(fill,color)):surface.button?over(fill,color):over(fill,color);const token=surface.tokens[0];extremes.push([theme,surface.name,name,token,contrast(parse(variable(token)),composite).toFixed(2)+':1',rgb(composite)])}}
 }
