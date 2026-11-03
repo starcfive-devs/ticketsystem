@@ -66,3 +66,7 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 .topbar .menu-button,.topbar .search-box input,.topbar .search-box kbd,.filter-chip,.mobile-nav-link{ text-shadow:var(--text-halo) }
 
 .mobile-nav-link[data-pressed],.mobile-add[data-pressed],.primary-button[data-pressed]{box-shadow:inset 0 0 0 2px var(--hairline)}
+
+@supports not ((mask-composite:exclude) or (-webkit-mask-composite:xor)){
+:where(.topbar,.mobile-nav,.filter-chip,.toast,.side-menu,.notification-panel,.glass-dialog,.event-card,.trust-item,.organizer-banner,.empty-state,.ticket-type,.search-box,.menu-button,.icon-button,.menu-close,.notification-close,.secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens,.featured-label,.featured-date,.event-category,.save-event)::before{background:none;border:1px solid var(--rim-mid);padding:0}
+}
