@@ -72,4 +72,4 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 }
 
 /* Sticky text uses one theme-safe ink so the floor can protect it over both bright and dark photos. */
-.topbar,.category-strip .filter-chip,.mobile-nav{--text:var(--text-strong);--text-muted:var(--text-strong);--text-quiet:var(--text-strong);--text-soft:var(--text-strong);--muted:var(--text-strong);--quiet:var(--text-strong);--ink:var(--text-strong)}
+.topbar,.filter-chip,.mobile-nav{--text:var(--text-strong);--text-muted:var(--text-strong);--text-quiet:var(--text-strong);--text-soft:var(--text-strong);--muted:var(--text-strong);--quiet:var(--text-strong);--ink:var(--text-strong)}
