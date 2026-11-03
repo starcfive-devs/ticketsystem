@@ -2,7 +2,7 @@
 const root=document.documentElement,reduceMotion=matchMedia('(prefers-reduced-motion: reduce)'),reduceTransparency=matchMedia('(prefers-reduced-transparency: reduce)');
 const surfaces=[['topbar','.topbar'],['dock','.mobile-nav'],['menu','.side-menu'],['notifications','.notification-panel']];
 const disabled=new URLSearchParams(location.search).get('refract')==='off';
-const lowPower=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||matchMedia('(pointer: coarse)').matches&&innerWidth<700;
+const lowPower=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||navigator.connection?.saveData===true;
 const cache=new Map(),instances=[];
 let frame=0;
 function roundedRectDistance(x,y,w,h,r){const qx=Math.abs(x-w/2)-(w/2-r),qy=Math.abs(y-h/2)-(h/2-r);return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r}
@@ -33,7 +33,7 @@ function makeFilter(id,w,h,map){
  filter.setAttribute('x','0');filter.setAttribute('y','0');filter.setAttribute('width',String(w));filter.setAttribute('height',String(h));
  filter.replaceChildren();
  const image=document.createElementNS(svg.namespaceURI,'feImage');image.setAttribute('href',map);image.setAttribute('x','0');image.setAttribute('y','0');image.setAttribute('width',String(w));image.setAttribute('height',String(h));image.setAttribute('preserveAspectRatio','none');image.setAttribute('result','bezel');filter.append(image);
- const scale=Number(getComputedStyle(root).getPropertyValue('--lg-refraction'))||28,disp=Number(getComputedStyle(root).getPropertyValue('--lg-dispersion'))||.06,sign=getComputedStyle(root).getPropertyValue('--lg-flip').trim()==='-1'?-1:1;
+ const style=getComputedStyle(root),rawScale=parseFloat(style.getPropertyValue('--lg-refraction')),scale=Number.isFinite(rawScale)?rawScale:28,rawDisp=parseFloat(style.getPropertyValue('--lg-dispersion')),disp=Number.isFinite(rawDisp)?rawDisp:.06,sign=getComputedStyle(root).getPropertyValue('--lg-flip').trim()==='-1'?-1:1;
  const passes=[];
  for(let n=0;n<3;n++){
   const shift=document.createElementNS(svg.namespaceURI,'feDisplacementMap');shift.setAttribute('in','SourceGraphic');shift.setAttribute('in2','bezel');shift.setAttribute('scale',String(scale*sign*(1+n*disp)));shift.setAttribute('xChannelSelector','R');shift.setAttribute('yChannelSelector','G');shift.setAttribute('result','shift'+n);filter.append(shift);
@@ -48,7 +48,7 @@ function apply(el,id){
  if(!el||el.getClientRects().length===0||getComputedStyle(el).visibility==='hidden')return;
  const rect=el.getBoundingClientRect(),w=Math.max(1,Math.ceil(rect.width)),h=Math.max(1,Math.ceil(rect.height));if(w*h>1800000)return;
  const radius=Math.min(36,Math.round(parseFloat(getComputedStyle(el).borderTopLeftRadius)||18));
- const map=mapFor(w,h,radius);if(!map)return;
+ const map=mapFor(w,h,radius);if(!map)return;if(id==='topbar')el.dataset.lgMap=map;
  makeFilter('lg-filter-'+id,w,h,map);
  const blur=id==='menu'||id==='notifications'?18:8;
  el.style.setProperty('--lg-native-backdrop',`url("#lg-filter-${id}") blur(${blur}px) saturate(138%)`);
@@ -62,4 +62,5 @@ function clear(){surfaces.forEach(([,selector])=>{const el=document.querySelecto
 if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower){root.dataset.refraction='off'}else{root.dataset.refraction='on';addEventListener('load',schedule,{once:true});addEventListener('resize',schedule,{passive:true});addEventListener('scroll',schedule,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();else schedule()});const observer=new MutationObserver(schedule);observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','style','aria-hidden']});schedule()}
 window.addEventListener('pageshow',schedule);
 window.addEventListener('lg:refraction-update',()=>{cache.clear();schedule()});
+document.addEventListener('input',e=>{if(e.target.matches('#refraction,#disp,#off,#flip,#blur'))schedule()});
 })();
