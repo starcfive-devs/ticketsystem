@@ -116,6 +116,7 @@ for(const token of surface.tokens){
 const fg=parse(surfaceVariable(surface,token)),ratio=contrast(fg,composite),threshold=token==='--text-grad-start'||token==='--text-grad-end'||token==='--saved-ink'?3:4.5,pass=ratio>=threshold;
 if(!pass)failures++;lowest=Math.min(lowest,ratio)
 rows.push([theme,surface.name,base.name,token,ratio.toFixed(2)+':1',rgb(composite),surface.floor?surfaceVariable(surface,'--text-halo')+' (decorative; not credited)':'none',pass?'PASS':'FAIL',pass?'pass':'fail']);
+if(surface.floor){const scrolled=over(parse(variable('--glass-floor-scrolled')),over(fill,base.color)),scrolledRatio=contrast(fg,scrolled),scrolledPass=scrolledRatio>=threshold;if(!scrolledPass)failures++;lowest=Math.min(lowest,scrolledRatio);rows.push([theme,surface.name,base.name+' · scrolled floor',token,scrolledRatio.toFixed(2)+':1',rgb(scrolled),surfaceVariable(surface,'--text-halo')+' (decorative; not credited)',scrolledPass?'PASS':'FAIL',scrolledPass?'pass':'fail'])}
 }
 }
 }
