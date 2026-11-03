@@ -1,224 +1,175 @@
-/* Crystal-clear Liquid Glass: transparent surfaces, crisp reflections, no grey wash. */
-:root {
-  --crystal-edge: rgba(255,255,255,.32);
-  --crystal-glint: rgba(255,255,255,.72);
-  --crystal-shadow: 0 18px 52px rgba(0,0,0,.24);
+/* =========================================================
+   Liquid Glass material
+   Three tiers, so blur is only used where it can actually show:
+   A  surfaces  - blur + saturation + brightness (header, dock, chips, sheets)
+   B  panels    - tinted fill, no blur (cards sitting on photos / banners)
+   C  controls  - small fills nested inside a surface (a nested backdrop-filter
+                  can only see its parent's background, so it would do nothing)
+   Every tier gets: a specular rim (bright top-left + bottom-right edges),
+   an inner glow, a top sheen, and a pointer-following highlight.
+   ========================================================= */
+
+:root{
+  --lg-rim:.62;               /* rim brightness, 0 to 1 */
+  --lg-fill:rgba(255,255,255,.075);
+  --lg-sheet:rgba(30,30,34,.56);
 }
 
-.topbar,
-.search-box,
-.menu-button,
-.icon-button,
-.category-strip .filter-chip,
-.mobile-nav,
-.mobile-nav-link.active,
-.mobile-add,
-.side-menu,
-.notification-panel,
-.menu-close,
-.notification-close,
-.theme-switch-track,
-.glass-dialog {
-  background-color: rgba(255,255,255,.012) !important;
+/* ---------- Shared: rim, sheen, pointer highlight ---------- */
+:is(.topbar,.mobile-nav,.filter-chip,.side-menu,.notification-panel,.glass-dialog,.toast,
+    .event-card,.trust-item,.organizer-banner,.empty-state,.ticket-type,
+    .search-box,.menu-button,.icon-button,.menu-close,.notification-close,
+    .secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens,
+    .featured-label,.featured-date)::before{
+  content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,var(--lg-rim)) 0%,
+    rgba(255,255,255,.10) 28%,
+    rgba(255,255,255,.03) 55%,
+    rgba(255,255,255,.12) 78%,
+    rgba(255,255,255,calc(var(--lg-rim)*.8)) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+}
+:is(.topbar,.mobile-nav,.filter-chip,.side-menu,.notification-panel,.glass-dialog,
+    .event-card,.trust-item,.organizer-banner,.search-box,.menu-button,.icon-button,
+    .secondary-button,.round-arrow,.card-book)::after{
+  content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.22),transparent 65%);
+  transition:opacity .35s ease;
+}
+@media (hover:hover){
+  :is(.topbar,.mobile-nav,.filter-chip,.side-menu,.notification-panel,.glass-dialog,
+      .event-card,.trust-item,.organizer-banner,.search-box,.menu-button,.icon-button,
+      .secondary-button,.round-arrow,.card-book):hover::after{opacity:1}
+}
+/* Pseudo-elements on the featured pills need a positioned parent. */
+.featured-label,.featured-date{position:relative}
+
+/* ---------- Tier A: blurred surfaces ---------- */
+:is(.topbar,.mobile-nav,.filter-chip,.toast){
+  background-color:var(--lg-fill);
   background-image:
-    linear-gradient(135deg, rgba(255,255,255,.075), transparent 24%, transparent 76%, rgba(255,255,255,.025)),
-    linear-gradient(180deg, rgba(255,255,255,.055), transparent 18%) !important;
-  border: 1px solid var(--crystal-edge) !important;
+    linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,0) 48%),
+    radial-gradient(120% 160% at 0% 0%,rgba(255,255,255,.10),transparent 55%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%) brightness(1.12);
+  backdrop-filter:blur(18px) saturate(180%) brightness(1.12);
   box-shadow:
-    inset 0 1px 0 var(--crystal-glint),
-    inset 1px 0 0 rgba(255,255,255,.13),
-    inset 0 -1px 0 rgba(255,255,255,.10),
-    var(--crystal-shadow) !important;
-  -webkit-backdrop-filter: blur(34px) saturate(180%) !important;
-  backdrop-filter: blur(34px) saturate(180%) !important;
+    0 10px 30px rgba(0,0,0,.30),
+    0 1px 2px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 22px rgba(255,255,255,.05);
 }
+.filter-chip{box-shadow:0 4px 14px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.06),inset 0 0 14px rgba(255,255,255,.05)}
 
-.side-menu,
-.notification-panel {
-  background-color: rgba(255,255,255,.008) !important;
-  border-color: rgba(255,255,255,.38) !important;
+/* Sheets sit over busy content, so they get more tint and blur for legibility. */
+:is(.side-menu,.notification-panel,.glass-dialog){
+  background-color:var(--lg-sheet);
+  background-image:
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0) 40%),
+    radial-gradient(120% 90% at 0% 0%,rgba(255,255,255,.10),transparent 60%);
+  -webkit-backdrop-filter:blur(38px) saturate(190%) brightness(1.08);
+  backdrop-filter:blur(38px) saturate(190%) brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.78),
-    inset 1px 0 0 rgba(255,255,255,.18),
-    0 24px 64px rgba(0,0,0,.28) !important;
-  -webkit-backdrop-filter: blur(42px) saturate(190%) !important;
-  backdrop-filter: blur(42px) saturate(190%) !important;
+    0 24px 60px rgba(0,0,0,.50),
+    0 2px 6px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    inset 0 0 30px rgba(255,255,255,.04);
 }
 
-.search-box { background-color: rgba(255,255,255,.006) !important; }
-.category-strip .filter-chip {
-  color: rgba(255,255,255,.9) !important;
-  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
-}
-.category-strip .filter-chip:hover,
-.category-strip .filter-chip.active,
-.search-box:focus-within,
-.menu-button:hover,
-.icon-button:hover,
-.mobile-nav-link.active {
-  background-color: rgba(255,255,255,.035) !important;
-  border-color: rgba(255,255,255,.58) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.82), 0 0 18px rgba(255,255,255,.045) !important;
-}
-.mobile-add {
-  background-color: rgba(255,255,255,.035) !important;
-  color: #fff !important;
-  border-color: rgba(255,255,255,.5) !important;
-}
-.side-menu>button:not(.menu-close) { background: transparent; }
-.side-menu>button:not(.menu-close):hover { background: rgba(255,255,255,.035); }
-.menu-appearance { background: rgba(255,255,255,.012); border-color: rgba(255,255,255,.18); }
-.theme-switch-track { background-color: rgba(255,255,255,.025) !important; }
-.glass-dialog { background-color: rgba(255,255,255,.012) !important; }
+/* Header gets denser once content scrolls beneath it. */
+.topbar.is-scrolled{background-color:rgba(28,28,32,.46);box-shadow:0 14px 38px rgba(0,0,0,.42),0 1px 2px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(255,255,255,.07),inset 0 0 22px rgba(255,255,255,.05)}
+.topbar{transition:background-color .35s ease,box-shadow .35s ease}
 
-/* Keep the deliberately cleared page area untouched. */
-.page-shell { display: none !important; }
+/* ---------- Tier B: panels ---------- */
+:is(.event-card,.trust-item,.organizer-banner,.empty-state,.ticket-type){
+  background-color:rgba(255,255,255,.055);
+  background-image:
+    linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0) 38%),
+    radial-gradient(110% 80% at 0% 0%,rgba(255,255,255,.07),transparent 60%);
+  box-shadow:
+    0 14px 38px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(255,255,255,.05),
+    inset 0 0 26px rgba(255,255,255,.03);
+}
+.event-card:hover{box-shadow:0 26px 56px rgba(0,0,0,.50),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(255,255,255,.06),inset 0 0 26px rgba(255,255,255,.04)}
+.event-card::before{z-index:3}
 
-@media (prefers-reduced-transparency: reduce) {
-  .topbar,.search-box,.menu-button,.icon-button,.category-strip .filter-chip,
-  .mobile-nav,.mobile-nav-link.active,.mobile-add,.side-menu,.notification-panel,
-  .menu-close,.notification-close,.theme-switch-track,.glass-dialog {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-    background-color: rgba(255,255,255,.07) !important;
+/* ---------- Tier C: controls nested in surfaces ---------- */
+:is(.search-box,.menu-button,.icon-button,.menu-close,.notification-close,
+    .secondary-button,.round-arrow,.quantity-control button,.card-book,.nav-lens){
+  background-color:rgba(255,255,255,.11);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 60%);
+  box-shadow:
+    0 4px 14px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    inset 0 0 12px rgba(255,255,255,.06);
+  transition:background-color .3s ease,box-shadow .3s ease,transform .5s var(--spring);
+}
+.search-box{background-color:rgba(255,255,255,.07)}
+.round-arrow,.featured-label,.featured-date{
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+}
+.featured-label,.featured-date{
+  background-color:rgba(255,255,255,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 14px rgba(0,0,0,.25);
+}
+.nav-lens{
+  background-color:rgba(255,255,255,.18);
+  box-shadow:0 6px 18px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(255,255,255,.10),inset 0 0 16px rgba(255,255,255,.10);
+}
+
+/* ---------- Liquid feel: lift on hover, squish on press ---------- */
+:is(.filter-chip,.menu-button,.icon-button,.menu-close,.notification-close,
+    .secondary-button,.round-arrow,.quantity-control button,.card-book){
+  transition:background-color .3s ease,box-shadow .3s ease,transform .5s var(--spring),color .2s;
+}
+@media (hover:hover){
+  :is(.filter-chip,.menu-button,.icon-button,.secondary-button,.round-arrow,.card-book,.quantity-control button):hover{
+    transform:translateY(-2px) scale(1.03);
+    background-color:rgba(255,255,255,.18);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .category-strip .filter-chip { transition: none; }
+:is(.filter-chip,.menu-button,.icon-button,.menu-close,.notification-close,
+    .secondary-button,.round-arrow,.quantity-control button,.card-book):active{
+  transform:scale(.94);
+  transition-duration:.15s;
+}
+.filter-chip.active{
+  color:#fff;
+  background-color:rgba(255,255,255,.26);
+  box-shadow:0 6px 18px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.12),inset 0 0 18px rgba(255,255,255,.14);
+}
+.filter-chip:not(.active){color:#e4e4ea}
+.filter-chip.active::before{--lg-rim:.95}
+
+/* ---------- Chromium only: real refraction of what's behind the glass ----------
+   liquid-glass.js adds .lg-refract to <html> when the browser supports an SVG
+   filter inside backdrop-filter. Other browsers keep the blur version above. */
+html.lg-refract :is(.topbar,.mobile-nav,.side-menu,.notification-panel){
+  -webkit-backdrop-filter:url(#lg-refract) blur(12px) saturate(180%) brightness(1.1);
+  backdrop-filter:url(#lg-refract) blur(12px) saturate(180%) brightness(1.1);
 }
 
-
-/* Smooth, consistent feedback when moving between and pressing controls. */
-button,
-a,
-.menu-button,
-.icon-button,
-.category-strip .filter-chip,
-.mobile-nav-link,
-.mobile-add,
-.side-menu>button,
-.notification-panel button {
-  transition:
-    color .24s ease,
-    background-color .28s ease,
-    border-color .28s ease,
-    box-shadow .28s ease,
-    opacity .24s ease,
-    transform .28s cubic-bezier(.2,.75,.25,1) !important;
-  -webkit-tap-highlight-color: transparent;
+/* ---------- Fallbacks ---------- */
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  :is(.topbar,.mobile-nav,.filter-chip,.toast){background-color:rgba(40,40,44,.88)}
+  :is(.side-menu,.notification-panel,.glass-dialog){background-color:rgba(28,28,32,.96)}
 }
-
-button:hover,
-a:hover,
-.menu-button:hover,
-.icon-button:hover,
-.category-strip .filter-chip:hover,
-.mobile-nav-link:hover,
-.side-menu>button:hover,
-.notification-panel button:hover {
-  transform: translateY(-1px);
-}
-
-button:active,
-a:active,
-.menu-button:active,
-.icon-button:active,
-.category-strip .filter-chip:active,
-.mobile-nav-link:active,
-.mobile-add:active,
-.side-menu>button:active,
-.notification-panel button:active {
-  transform: scale(.97);
-  transition-duration: .12s !important;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 1px solid rgba(255,255,255,.72);
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  button,a,.menu-button,.icon-button,.category-strip .filter-chip,
-  .mobile-nav-link,.mobile-add,.side-menu>button,.notification-panel button {
-    transition: none !important;
-    transform: none !important;
+@media (prefers-reduced-transparency:reduce){
+  :is(.topbar,.mobile-nav,.filter-chip,.toast,.side-menu,.notification-panel,.glass-dialog,
+      .round-arrow,.featured-label,.featured-date){
+    -webkit-backdrop-filter:none;backdrop-filter:none;background-color:#1d1d20;
   }
+  .menu-scrim,.glass-dialog::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
 }
-
-
-/* Numeric notification badge replaces the decorative status dot. */
-#notificationsButton { position: relative; }
-.notification-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 19px;
-  height: 19px;
-  padding: 0 5px;
-  border: 1px solid rgba(255,255,255,.72);
-  border-radius: 999px;
-  background: #fff;
-  color: #050505;
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  box-shadow: 0 2px 10px rgba(0,0,0,.35);
-  pointer-events: none;
-}
-
-
-/* Improve legibility without changing the existing layout or glass treatment. */
-.side-menu-heading strong,
-.side-menu>button:not(.menu-close),
-.notification-panel-heading strong,
-.notification-panel-content p {
-  color: #fff !important;
-  text-shadow: 0 1px 8px rgba(0,0,0,.38);
-}
-.side-menu-heading small,
-.menu-bottom-note,
-.notification-panel-content small {
-  color: #d0d0d0 !important;
-  line-height: 1.55;
-}
-.menu-label,
-.notification-panel .eyebrow {
-  color: #c2c2c2 !important;
-}
-.side-menu>button:not(.menu-close)>i:first-child {
-  color: #e8e8e8 !important;
-}
-.category-strip .filter-chip {
-  color: #f0f0f0 !important;
-  text-shadow: 0 1px 5px rgba(0,0,0,.35);
-  font-weight: 700;
-}
-.search-box input {
-  color: #fff !important;
-  font-size: 13px;
-}
-.search-box input::placeholder {
-  color: #c4c4c4 !important;
-  opacity: 1;
-}
-.search-box kbd {
-  color: #ededed;
-  border-color: rgba(255,255,255,.28);
-}
-
-/* A short horizontal glide makes the active bottom-navigation choice feel connected. */
-.mobile-nav-link.active {
-  animation: navSelectionGlide .28s cubic-bezier(.2,.75,.25,1) both;
-}
-@keyframes navSelectionGlide {
-  from { opacity: .72; transform: translateY(3px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mobile-nav-link.active { animation: none !important; }
+@media (prefers-contrast:more){
+  :root{--lg-rim:1;--lg-fill:rgba(40,40,44,.85);--lg-sheet:rgba(24,24,28,.95)}
 }
