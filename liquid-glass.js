@@ -44,18 +44,18 @@ function makeFilter(id,w,h,map){
  const blend2=document.createElementNS(svg.namespaceURI,'feBlend');blend2.setAttribute('in','rg');blend2.setAttribute('in2',passes[2]);blend2.setAttribute('mode','screen');blend2.setAttribute('result','rgb');filter.append(blend2);
  const alpha=document.createElementNS(svg.namespaceURI,'feComposite');alpha.setAttribute('in','rgb');alpha.setAttribute('in2','SourceGraphic');alpha.setAttribute('operator','in');filter.append(alpha);
 }
-function apply(el,id){
+function apply(el,id,filterId=id){
  if(!el||el.getClientRects().length===0||getComputedStyle(el).visibility==='hidden')return;
  const rect=el.getBoundingClientRect(),w=Math.max(1,Math.ceil(rect.width)),h=Math.max(1,Math.ceil(rect.height));if(w*h>1800000)return;
  const radius=Math.min(36,Math.round(parseFloat(getComputedStyle(el).borderTopLeftRadius)||18));
  const map=mapFor(w,h,radius);if(!map)return;if(id==='topbar')el.dataset.lgMap=map;
- makeFilter('lg-filter-'+id,w,h,map);
+ makeFilter('lg-filter-'+filterId,w,h,map);
  const blurValue=parseFloat(getComputedStyle(root).getPropertyValue(id==='menu'||id==='notifications'?'--blur-sheet':'--blur-a'));const blur=Number.isFinite(blurValue)?blurValue:(id==='menu'||id==='notifications'?18:8);
- el.style.setProperty('--lg-native-backdrop',`url("#lg-filter-${id}") blur(${blur}px) saturate(138%)`);
+ el.style.setProperty('--lg-native-backdrop',`url("#lg-filter-${filterId}") blur(${blur}px) saturate(138%)`);
  el.style.backdropFilter='var(--lg-native-backdrop)';el.style.webkitBackdropFilter='var(--lg-native-backdrop)';
 }
 function refresh(){frame=0;if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower)return;
- surfaces.forEach(([id,selector])=>{const el=document.querySelector(selector);if(el){apply(el,id);if(!instances.some(x=>x.el===el)){const ro=new ResizeObserver(()=>schedule());ro.observe(el);instances.push({el,ro})}}});
+ surfaces.forEach(([id,selector])=>{const nodes=[...document.querySelectorAll(selector)];nodes.forEach((el,index)=>{apply(el,id,id+'-'+index);if(!instances.some(x=>x.el===el)){const ro=new ResizeObserver(()=>schedule());ro.observe(el);instances.push({el,ro})}})});
 }
 function schedule(){if(!frame)frame=requestAnimationFrame(refresh)}
 function clear(){surfaces.forEach(([,selector])=>{const el=document.querySelector(selector);if(el){el.style.removeProperty('backdrop-filter');el.style.removeProperty('-webkit-backdrop-filter');el.style.removeProperty('--lg-native-backdrop')}})}
