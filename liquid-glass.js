@@ -50,7 +50,7 @@ function apply(el,id){
  const radius=Math.min(36,Math.round(parseFloat(getComputedStyle(el).borderTopLeftRadius)||18));
  const map=mapFor(w,h,radius);if(!map)return;if(id==='topbar')el.dataset.lgMap=map;
  makeFilter('lg-filter-'+id,w,h,map);
- const blur=id==='menu'||id==='notifications'?18:8;
+ const blurValue=parseFloat(getComputedStyle(root).getPropertyValue(id==='menu'||id==='notifications'?'--blur-sheet':'--blur-a'));const blur=Number.isFinite(blurValue)?blurValue:(id==='menu'||id==='notifications'?18:8);
  el.style.setProperty('--lg-native-backdrop',`url("#lg-filter-${id}") blur(${blur}px) saturate(138%)`);
  el.style.backdropFilter='var(--lg-native-backdrop)';el.style.webkitBackdropFilter='var(--lg-native-backdrop)';
 }
@@ -59,7 +59,7 @@ function refresh(){frame=0;if(disabled||reduceMotion.matches||reduceTransparency
 }
 function schedule(){if(!frame)frame=requestAnimationFrame(refresh)}
 function clear(){surfaces.forEach(([,selector])=>{const el=document.querySelector(selector);if(el){el.style.removeProperty('backdrop-filter');el.style.removeProperty('-webkit-backdrop-filter');el.style.removeProperty('--lg-native-backdrop')}})}
-if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower){root.dataset.refraction='off'}else{root.dataset.refraction='on';addEventListener('load',schedule,{once:true});addEventListener('resize',schedule,{passive:true});addEventListener('scroll',schedule,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();else schedule()});const observer=new MutationObserver(schedule);observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','style','aria-hidden']});schedule()}
+if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower){root.dataset.refraction='off'}else{root.dataset.refraction='on';addEventListener('load',schedule,{once:true});addEventListener('resize',schedule,{passive:true});addEventListener('scroll',schedule,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();else schedule()});const observer=new MutationObserver(schedule);observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden']});schedule()}
 window.addEventListener('pageshow',schedule);
 window.addEventListener('lg:refraction-update',()=>{cache.clear();schedule()});
 document.addEventListener('input',e=>{if(e.target.matches('#refraction,#disp,#off,#flip,#blur'))schedule()});
