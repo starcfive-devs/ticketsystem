@@ -5,21 +5,9 @@
   <!-- viewport-fit=cover lets the glass dock and header respect phone notches and home bars. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Discover memorable events across Ghana and find your next experience.">
-  <meta name="theme-color" content="#000000" id="themeColorMeta">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" id="themeColorDark">
-  <meta name="theme-color" content="#f2f2f5" media="(prefers-color-scheme: light)" id="themeColorLight">
+  <meta name="theme-color" content="#050505" id="themeColorMeta">
   <meta name="color-scheme" content="dark" id="colorSchemeMeta">
-  <script>
-    (() => {
-      let choice = 'system';
-      try { choice = localStorage.getItem('theme') || 'system'; } catch (_) {}
-      if (!['system', 'light', 'dark'].includes(choice)) choice = 'system';
-      const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      const resolved = choice === 'system' ? (systemLight ? 'light' : 'dark') : choice;
-      document.documentElement.dataset.theme = resolved;
-      document.documentElement.dataset.themePreference = choice;
-    })();
-  </script>
+  <script>(()=>{let p='system';try{p=localStorage.getItem('theme')||'system'}catch(e){}if(!['system','light','dark'].includes(p))p='system';const t=p==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):p;document.documentElement.dataset.theme=t;document.documentElement.dataset.themePreference=p;document.querySelector('#themeColorMeta').content=t==='light'?'#f3f4f7':'#050505';document.querySelector('#colorSchemeMeta').content=t})();</script>
   <title>Events &amp; Tickets</title>
 
   <!-- Fonts load here (not via CSS @import) so they don't block the stylesheet. -->
@@ -38,15 +26,6 @@
   <script src="liquid-glass.js" defer></script>
 </head>
 <body>
-  <!-- Refraction filter used by liquid-glass.css in Chromium browsers. -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <filter id="lg-refract" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="7" result="noise"/>
-      <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
-      <feDisplacementMap in="SourceGraphic" in2="soft" scale="18" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </svg>
-
   <!-- Soft light behind everything. This is what the glass bends and blurs. -->
   <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
