@@ -13,7 +13,7 @@
   --lg-rim:.62;--lg-fill:rgba(255,255,255,.075);--lg-sheet:var(--fill-sheet);
   --lg-sheen:rgba(255,255,255,.15);--lg-highlight:rgba(255,255,255,.22);
   --lg-panel:rgba(255,255,255,.055);--lg-control:rgba(255,255,255,.11);
-  --lg-blur-a:18px;--lg-blur-sheet:38px;--lg-saturate:180%;--lg-brightness:1.12;
+  --lg-blur-a:18px;--lg-blur-sheet:38px;--lg-saturate:180%;--lg-saturate-sheet:190%;--lg-brightness:1.12;--lg-brightness-sheet:1.08;
 
   --lg-rim:.62;               /* rim brightness, 0 to 1 */
   --lg-fill:var(--white-075);
@@ -59,7 +59,7 @@
   background-image:
     linear-gradient(180deg,var(--white-15),rgba(255,255,255,0) 48%),
     radial-gradient(120% 160% at 0% 0%,var(--white-10),transparent 55%);
-  -webkit-backdrop-filter:blur(18px) saturate(180%) brightness(1.12);
+  -webkit-backdrop-filter:blur(var(--lg-blur-a)) saturate(var(--lg-saturate)) brightness(var(--lg-brightness));
   backdrop-filter:blur(18px) saturate(180%) brightness(1.12);
   box-shadow:
     0 10px 30px var(--black-30),
@@ -76,7 +76,7 @@
   background-image:
     linear-gradient(180deg,var(--white-12),rgba(255,255,255,0) 40%),
     radial-gradient(120% 90% at 0% 0%,var(--white-10),transparent 60%);
-  -webkit-backdrop-filter:blur(38px) saturate(190%) brightness(1.08);
+  -webkit-backdrop-filter:blur(var(--lg-blur-sheet)) saturate(var(--lg-saturate-sheet)) brightness(var(--lg-brightness-sheet));
   backdrop-filter:blur(38px) saturate(190%) brightness(1.08);
   box-shadow:
     0 24px 60px var(--black-50),
@@ -203,6 +203,7 @@ html.lg-refract :is(.topbar,.mobile-nav,.side-menu,.notification-panel){
 :root[data-theme="light"] .mobile-nav-link.active{color:#202027}
 :root[data-theme="light"] .mobile-add,:root[data-theme="light"] .primary-button{background:linear-gradient(180deg,#29292e,#111114);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -2px 6px rgba(0,0,0,.28),0 10px 28px rgba(35,45,65,.18)}
 :root[data-theme="light"] .featured-label,:root[data-theme="light"] .featured-date,:root[data-theme="light"] .event-category,:root[data-theme="light"] .save-event,:root[data-theme="light"] .round-arrow{background-color:rgba(18,20,25,.48);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 4px 14px rgba(0,0,0,.22)}
+:root[data-theme="light"] .dialog-close{color:#ffffff}
 :root[data-theme="light"] .save-event.saved{background:rgba(255,255,255,.94);color:#e11d48}
 :root[data-theme="light"] .glass-dialog::backdrop{background:rgba(20,24,35,.22)}
 :root[data-theme="light"] .menu-scrim{background:rgba(20,24,35,.22)}
