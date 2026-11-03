@@ -1,0 +1,12 @@
+/* Event-card lift and pointer spotlight, adapted from React Bits' SpotlightCard interaction. */
+.event-card{--pointer-x:50%;--pointer-y:50%;--card-tilt-x:0deg;--card-tilt-y:0deg;position:relative;transform:translate3d(0,0,0) perspective(1000px) rotateX(var(--card-tilt-x)) rotateY(var(--card-tilt-y));transform-style:preserve-3d;will-change:transform;transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,border-color .3s ease;border:1px solid rgba(255,255,255,.11)}
+.event-card::before{content:"";position:absolute;z-index:3;inset:0;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(380px circle at var(--pointer-x) var(--pointer-y),rgba(255,255,255,.15),transparent 48%);transition:opacity .35s ease}
+.event-card:hover{transform:translate3d(0,-12px,0) perspective(1000px) rotateX(var(--card-tilt-x)) rotateY(var(--card-tilt-y)) scale(1.012);border-color:rgba(255,255,255,.24);box-shadow:0 28px 64px rgba(0,0,0,.42),0 8px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18)}
+.event-card:hover::before{opacity:1}
+.event-card .event-image{transition:transform .9s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.event-card:hover .event-image{transform:scale(1.075);filter:saturate(1.08)}
+.event-card-content{transform:translateZ(12px)}
+.event-card .card-book,.event-card .save-event{transition:transform .35s cubic-bezier(.34,1.56,.64,1),background-color .25s,box-shadow .25s}
+.event-card:hover .card-book,.event-card:hover .save-event{transform:translateY(-2px)}
+@media(hover:none){.event-card,.event-card:hover{transform:none;will-change:auto}.event-card::before{display:none}}
+@media(prefers-reduced-motion:reduce){.event-card,.event-card:hover,.event-card .event-image,.event-card .card-book,.event-card .save-event{transform:none;transition:none;will-change:auto}.event-card::before{display:none}}
