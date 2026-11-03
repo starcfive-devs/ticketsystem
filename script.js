@@ -11,6 +11,7 @@ const events = [
 let activeCategory = "All";
 let searchTerm = "";
 let savedEvents = new Set();
+let showingSavedOnly = false;
 let selectedEvent = null;
 let ticketQuantity = 1;
 let toastTimer;
@@ -63,7 +64,7 @@ function createEventCard(event) {
   return card;
 }
 
-function renderEvents(savedOnly = false) {
+function renderEvents(savedOnly = showingSavedOnly) {
   const visible = events.filter(event => {
     const matchesCategory = activeCategory === "All" || event.category === activeCategory;
     const searchable = `${event.title} ${event.category} ${event.location} ${event.description}`.toLowerCase();
@@ -85,6 +86,7 @@ function setCategory(category) {
 }
 
 function resetFilters() {
+  showingSavedOnly = false;
   searchTerm = "";
   searchInput.value = "";
   setCategory("All");
@@ -93,6 +95,7 @@ function resetFilters() {
 
 function showSavedEvents() {
   resetFilters();
+  showingSavedOnly = true;
   renderEvents(true);
   document.querySelector("#events").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -189,6 +192,13 @@ document.querySelector("#organizerButton").addEventListener("click", () => {
   showMessage("For event organizers", "Organizer registration, event publishing, ticket inventory, and sales management will be added in a later stage.");
 });
 document.querySelector("#messageOk").addEventListener("click", () => messageDialog.close());
+
+/* Footer shortcuts reuse the existing informational dialog. */
+document.querySelector("#footerAbout")?.addEventListener("click", () => {
+  showMessage("About this site", "Discover temporary sample events around Ghana and preview the ticket-selection experience.");
+});
+const footerYear = document.querySelector("#footerYear");
+if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
 /* Header menu and notification panels. */
 const menuButton = document.querySelector("#menuButton");
