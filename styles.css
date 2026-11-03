@@ -148,7 +148,7 @@ h1,h2,h3,p{margin:0}
 img{max-width:100%}
 button:disabled{opacity:.4;cursor:not-allowed}
 :focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px}
-.hidden{display:none!important}
+.hidden{display:none}
 
 /* Everything that wears the glass material needs to be a positioned box
    (the rim and highlight are pseudo-elements). Specific rules below
@@ -395,7 +395,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  *,*::before,*::after{animation:none;transition-duration:.01ms}
 }
 
 /* Optional: remove the page content entirely (the old "cleared" state):
@@ -448,8 +448,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
   .footer-copy{grid-column:auto}
 }
 @media(prefers-reduced-motion:reduce){
-  .ambient i{animation:none}
-  .event-image,.featured-image{transition:none}
+  :root *:not(svg),:root *:not(svg)::before,:root *:not(svg)::after{animation:none;transition:none;scroll-behavior:auto}
 }
 
 /* Theme surfaces and light-page atmosphere. Layout and breakpoints remain unchanged. */
@@ -481,3 +480,6 @@ body{background:var(--page-bg)}
 
 /* Light theme text aliases used by the original layout rules. */
 :root[data-theme="light"]{--ink:var(--text);--muted:var(--text-muted);--quiet:var(--text-quiet)}
+
+/* Keep the existing hidden state authoritative without !important. */
+.hidden{display:none}
