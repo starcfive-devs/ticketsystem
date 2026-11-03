@@ -19,7 +19,7 @@
   const gsap=window.gsap;
   if(!reduceMotion && gsap){
     if(window.ScrollTrigger)gsap.registerPlugin(window.ScrollTrigger);
-    gsap.from('.trust-item,.organizer-banner,.section-heading',{y:24,opacity:0,duration:.72,ease:'power3.out',stagger:.1,scrollTrigger:window.ScrollTrigger?{trigger:'.trust-row',start:'top 88%',once:true}:undefined});
+    document.querySelectorAll('.trust-item,.organizer-banner,.section-heading').forEach(element=>gsap.from(element,{opacity:0,duration:.72,ease:'power3.out',scrollTrigger:window.ScrollTrigger?{trigger:element,start:'top 90%',once:true}:undefined}));
     gsap.from('.featured-bottom>*',{y:16,opacity:0,duration:.7,ease:'power3.out',stagger:.1,delay:.25});
   }
   // Event cards are rendered dynamically by script.js, so observe the grid for new cards.
@@ -28,8 +28,8 @@
   function enhanceCard(card){
     if(animated.has(card))return;animated.add(card);
     if(!reduceMotion && gsap){
-      if(window.ScrollTrigger)gsap.fromTo(card,{y:30,opacity:0,scale:.985},{y:0,opacity:1,scale:1,duration:.68,ease:'power3.out',scrollTrigger:{trigger:card,start:'top 94%',once:true}});
-      else gsap.fromTo(card,{y:24,opacity:0},{y:0,opacity:1,duration:.6,ease:'power3.out'});
+      if(window.ScrollTrigger)gsap.fromTo(card,{autoAlpha:0},{autoAlpha:1,duration:.68,ease:'power3.out',scrollTrigger:{trigger:card,start:'top 94%',once:true}});
+      else gsap.fromTo(card,{autoAlpha:0},{autoAlpha:1,duration:.6,ease:'power3.out'});
     }
     if(!finePointer||reduceMotion)return;
     // React Bits SpotlightCard-style pointer tracking and subtle 3D response.
