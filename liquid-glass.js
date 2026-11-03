@@ -4,7 +4,7 @@ const surfaces=[['topbar','.topbar'],['dock','.mobile-nav'],['menu','.side-menu'
 const disabled=new URLSearchParams(location.search).get('refract')==='off';
 const lowPower=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||navigator.connection?.saveData===true;
 const cache=new Map(),instances=[];
-let frame=0,menuWasOpen=false;
+let frame=0;
 function roundedRectDistance(x,y,w,h,r){const qx=Math.abs(x-w/2)-(w/2-r),qy=Math.abs(y-h/2)-(h/2-r);return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r}
 function mapFor(w,h,r){
  const key=[w,h,r].join(':');if(cache.has(key))return cache.get(key);
@@ -59,12 +59,7 @@ function refresh(){frame=0;if(disabled||reduceMotion.matches||reduceTransparency
 }
 function schedule(){if(!frame)frame=requestAnimationFrame(refresh)}
 function clear(){surfaces.forEach(([,selector])=>{const el=document.querySelector(selector);if(el){el.style.removeProperty('backdrop-filter');el.style.removeProperty('-webkit-backdrop-filter');el.style.removeProperty('--lg-native-backdrop')}})}
-if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower){root.dataset.refraction='off'}else{root.dataset.refraction='on';addEventListener('load',schedule,{once:true});addEventListener('resize',schedule,{passive:true});addEventListener('scroll',schedule,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();else schedule()});const menu=document.querySelector('#sideMenu'),menuTrigger=document.querySelector('#menuButton');
-const observer=new MutationObserver(()=>{schedule();if(!menu||!menuTrigger)return;const open=menu.classList.contains('open');if(open&&!menuWasOpen)requestAnimationFrame(()=>menu.querySelector('button:not([disabled])')?.focus());if(!open&&menuWasOpen)menuTrigger.focus();menuWasOpen=open});
-observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden']});
-menu?.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const items=[...menu.querySelectorAll('button:not([disabled]),a[href],[tabindex="0"]')].filter(el=>el.getClientRects().length);if(!items.length)return;const first=items[0],last=items[items.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open'))document.querySelector('#closeMenu')?.click()});
-schedule()}
+if(disabled||reduceMotion.matches||reduceTransparency.matches||lowPower){root.dataset.refraction='off'}else{root.dataset.refraction='on';addEventListener('load',schedule,{once:true});addEventListener('resize',schedule,{passive:true});addEventListener('scroll',schedule,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();else schedule()});const observer=new MutationObserver(schedule);observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden']});schedule()}
 window.addEventListener('pageshow',schedule);
 window.addEventListener('lg:refraction-update',()=>{cache.clear();schedule()});
 document.addEventListener('input',e=>{if(e.target.matches('#refraction,#disp,#off,#flip,#blur'))schedule()});
