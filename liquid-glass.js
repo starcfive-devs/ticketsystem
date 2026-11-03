@@ -50,7 +50,7 @@ function apply(el,id,filterId=id){
  const radius=Math.min(36,Math.round(parseFloat(getComputedStyle(el).borderTopLeftRadius)||18));
  const map=mapFor(w,h,radius);if(!map)return;if(id==='topbar')el.dataset.lgMap=map;
  makeFilter('lg-filter-'+filterId,w,h,map);
- const blurValue=parseFloat(getComputedStyle(root).getPropertyValue(id==='menu'||id==='notifications'?'--blur-sheet':'--blur-a'));const blur=Number.isFinite(blurValue)?blurValue:(id==='menu'||id==='notifications'?18:8);
+ const blurValue=parseFloat(getComputedStyle(el).getPropertyValue(id==='menu'||id==='notifications'?'--blur-sheet':'--blur-a'))||parseFloat(getComputedStyle(root).getPropertyValue(id==='menu'||id==='notifications'?'--blur-sheet':'--blur-a'));const blur=Number.isFinite(blurValue)?blurValue:(id==='menu'||id==='notifications'?18:8);
  el.style.setProperty('--lg-native-backdrop',`url("#lg-filter-${filterId}") blur(${blur}px) saturate(138%)`);
  el.style.backdropFilter='var(--lg-native-backdrop)';el.style.webkitBackdropFilter='var(--lg-native-backdrop)';
 }
