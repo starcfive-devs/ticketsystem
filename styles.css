@@ -478,3 +478,6 @@ body{background:var(--page-bg)}
 .theme-segment button:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 :root.theme-switching *, :root.theme-switching *::before, :root.theme-switching *::after{transition:none;animation:none}
 @media(prefers-reduced-motion:reduce){.theme-segment button{transition:none}}
+
+/* Light theme text aliases used by the original layout rules. */
+:root[data-theme="light"]{--ink:var(--text);--muted:var(--text-muted);--quiet:var(--text-quiet)}
