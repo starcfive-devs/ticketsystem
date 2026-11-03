@@ -13,6 +13,7 @@ body{padding:18px}.lab-tools,.grid,.report-wrap,.map-wrap{max-width:1200px;margi
 <body>
 <header class="lab-tools"><h1>Liquid Glass Lab</h1>
 <button id="theme" type="button">Toggle theme</button>
+<label>Blur <input id="blur" type="range" min="0" max="24" step="1" value="8"><output id="blurValue">8px</output></label>
 <label>Refraction <input id="refraction" type="range" min="0" max="36" step="1" value="28"><output id="refractionValue">28</output></label>
 <label>Dispersion <input id="disp" type="range" min="0" max=".12" step=".005" value=".06"><output id="dispValue">0.06</output></label>
 <label><input id="flip" type="checkbox"> Flip displacement sign</label>
@@ -132,10 +133,11 @@ table('Contrived extremes — not realistic page conditions',extremes,['Theme','
 }
 themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='light'?'dark':'light';root.dataset.themePreference=root.dataset.theme;document.querySelector('#themeColorMeta').content=root.dataset.theme==='light'?'#eceef2':'#050505';document.querySelector('#colorSchemeMeta').content=root.dataset.theme;report()});
 const refraction=document.querySelector('#refraction'),disp=document.querySelector('#disp'),off=document.querySelector('#off'),flip=document.querySelector('#flip');
-function updateRefraction(){root.style.setProperty('--lg-refraction',off.checked?'0':refraction.value);document.querySelector('#refractionValue').value=refraction.value}
-refraction.addEventListener('input',()=>{document.querySelector('#refractionValue').value=refraction.value;if(!off.checked)root.style.setProperty('--lg-refraction',refraction.value)});
-disp.addEventListener('input',()=>{root.style.setProperty('--lg-dispersion',disp.value);document.querySelector('#dispValue').value=disp.value});
-off.addEventListener('change',updateRefraction);flip.addEventListener('change',()=>root.style.setProperty('--lg-flip',flip.checked?'-1':'1'));
+function updateRefraction(){root.style.setProperty('--lg-refraction',off.checked?'0':refraction.value);document.querySelector('#refractionValue').value=refraction.value;window.dispatchEvent(new Event('lg:refraction-update'))}
+refraction.addEventListener('input',()=>{document.querySelector('#refractionValue').value=refraction.value;if(!off.checked)root.style.setProperty('--lg-refraction',refraction.value);window.dispatchEvent(new Event('lg:refraction-update'))});
+disp.addEventListener('input',()=>{root.style.setProperty('--lg-dispersion',disp.value);document.querySelector('#dispValue').value=disp.value;window.dispatchEvent(new Event('lg:refraction-update'))});
+const blur=document.querySelector('#blur');blur.addEventListener('input',()=>{root.style.setProperty('--blur-a',blur.value+'px');root.style.setProperty('--blur-sheet',Math.min(24,Math.max(14,Number(blur.value)))+'px');document.querySelector('#blurValue').value=blur.value+'px'});
+off.addEventListener('change',updateRefraction);flip.addEventListener('change',()=>{root.style.setProperty('--lg-flip',flip.checked?'-1':'1');window.dispatchEvent(new Event('lg:refraction-update'))});
 const mapWrap=document.querySelector('#mapWrap'),mapPreview=document.querySelector('#mapPreview'),showMap=document.querySelector('#showMap');
 function syncMap(){const topbar=document.querySelector('.backdrop .topbar'),uri=topbar?.dataset.lgMap;if(uri&&showMap.checked){mapPreview.src=uri;mapWrap.hidden=false}else if(!showMap.checked)mapWrap.hidden=true}
 showMap.addEventListener('change',syncMap);new MutationObserver(syncMap).observe(document.body,{subtree:true,attributes:true,attributeFilter:['data-lg-map']});
