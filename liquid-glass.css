@@ -40,9 +40,11 @@ html.lg-refract :where(.topbar,.mobile-nav,.side-menu,.notification-panel){-webk
 
 .menu-scrim{background:var(--backdrop)}:root[data-theme=light] .menu-scrim{background:var(--backdrop)}
 
+:root[data-theme=light] .ambient{display:none}
+
 /* Text contrast treatment stays local to text-bearing regions. */
 :where(.topbar,.mobile-nav,.side-menu,.notification-panel,.glass-dialog,.event-card,.ticket-type,.site-footer) :is(h1,h2,h3,strong,p,small,span,a,button){text-shadow:0 1px 10px rgba(0,0,0,.35)}
-:root[data-theme=light] :where(.topbar,.mobile-nav,.side-menu,.notification-panel,.glass-dialog,.event-card,.ticket-type,.site-footer) :is(h1,h2,h3,strong,p,small,span,a,button){text-shadow:0 0 12px rgba(255,255,255,.55)}
+:root[data-theme=light] :where(.topbar,.mobile-nav,.side-menu,.notification-panel,.glass-dialog,.event-card,.ticket-type,.site-footer) :is(h1,h2,h3,strong,p,small,span,a,button){text-shadow:0 1px 2px rgba(0,0,0,.08)}
 @media(prefers-reduced-transparency:reduce){:where(.topbar,.mobile-nav,.filter-chip,.toast,.side-menu,.notification-panel,.glass-dialog)::after{display:none}}
 @media(prefers-contrast:more){
  :root{--glass-fill-a:rgba(30,32,36,.97);--glass-fill-b:rgba(30,32,36,.97);--glass-fill-c:rgba(30,32,36,.97);--glass-fill-sheet:rgba(30,32,36,.99);--rim-hi:rgba(255,255,255,1);--rim-mid:rgba(255,255,255,1);--rim-lo:rgba(255,255,255,.8)}
