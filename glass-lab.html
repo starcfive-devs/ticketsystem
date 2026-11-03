@@ -49,55 +49,83 @@ body{padding:18px}.lab-tools,.grid,.report-wrap,.map-wrap{max-width:1200px;margi
 <script>
 (()=>{'use strict';
 const root=document.documentElement,themeButton=document.querySelector('#theme');
-const tokens=['--text','--text-muted','--text-quiet','--text-soft','--text-strong','--control-ink','--text-grad-start','--text-grad-end','--saved-ink','--badge-ink'];
+const general=['--text','--text-muted','--text-quiet','--text-soft','--text-strong'];
+const pageSamples={
+dark:[['page base','#050505'],['ambient blue-grey','#20242c'],['ambient pale glow','#252525'],['ambient mid-grey','#17191d']],
+light:[['page base','#eceef2'],['pale blue-grey','#cdd4e5'],['pale warm','#ece7e1'],['mid-grey','#d9dade'],['deepest ambient','#d5d7dd']]
+};
+const photos=[['photo dark sample','#20242c'],['photo bright sample','#e8c18b']];
 const surfaces=[
-{name:'Header',selector:'.topbar',fill:'--glass-fill-a',floor:true,real:['page','photo']},
-{name:'Category chip',selector:'.filter-chip',fill:'--glass-fill-a',floor:true,real:['page','photo']},
-{name:'Dock',selector:'.mobile-nav',fill:'--glass-fill-a',floor:true,real:['page','photo']},
-{name:'Toast',selector:'.toast',fill:'--glass-fill-a',real:['page']},
-{name:'Side sheet',selector:'.side-menu',fill:'--glass-fill-sheet',real:['page']},
-{name:'Notification sheet',selector:'.notification-panel',fill:'--glass-fill-sheet',real:['page']},
-{name:'Dialog',selector:'.glass-dialog',fill:'--glass-fill-sheet',real:['page']},
-{name:'Event card',selector:'.event-card',fill:'--glass-fill-b',real:['page']},
-{name:'Trust item',selector:'.trust-item',fill:'--glass-fill-b',real:['page']},
-{name:'Organizer banner',selector:'.organizer-banner',fill:'--glass-fill-b',real:['page']},
-{name:'Empty state',selector:'.empty-state',fill:'--glass-fill-b',real:['page']},
-{name:'Ticket type',selector:'.ticket-type',fill:'--glass-fill-b',real:['page']},
-{name:'Footer',selector:'.site-footer',fill:'--glass-fill-b',real:['page']},
-{name:'Image badge',selector:'.featured-label',fill:'--badge-bg',badge:true,real:['photo']},
-{name:'Saved heart',selector:'.save-event.saved',fill:'--saved-bg',real:['photo']},
-{name:'Search control',selector:'.search-box',fill:'--glass-fill-c',real:['page']},
-{name:'Menu control',selector:'.menu-button',fill:'--glass-fill-c',real:['page']},
-{name:'Icon control',selector:'.icon-button',fill:'--glass-fill-c',real:['page']},
-{name:'Close control',selector:'.menu-close',fill:'--glass-fill-c',real:['page']},
-{name:'Notification close',selector:'.notification-close',fill:'--glass-fill-c',real:['page']},
-{name:'Secondary button',selector:'.secondary-button',fill:'--glass-fill-c',real:['page']},
-{name:'Round arrow',selector:'.round-arrow',fill:'--badge-bg',badge:true,real:['photo']},
-{name:'Quantity control',selector:'.quantity-control button',fill:'--glass-fill-c',real:['page']},
-{name:'Card action',selector:'.card-book',fill:'--glass-fill-c',real:['page']}
+{name:'Header',selector:'.topbar',fill:'--glass-fill-a',floor:true,backs:'sticky',tokens:general},
+{name:'Category chip',selector:'.filter-chip',fill:'--glass-fill-a',floor:true,backs:'sticky',tokens:general},
+{name:'Dock',selector:'.mobile-nav',fill:'--glass-fill-a',floor:true,backs:'sticky',tokens:general},
+{name:'Toast',selector:'.toast',fill:'--glass-fill-a',backs:'page',tokens:general},
+{name:'Side sheet',selector:'.side-menu',fill:'--glass-fill-sheet',backs:'page',tokens:general},
+{name:'Notification sheet',selector:'.notification-panel',fill:'--glass-fill-sheet',backs:'page',tokens:general},
+{name:'Dialog',selector:'.glass-dialog',fill:'--glass-fill-sheet',backs:'page',tokens:general},
+{name:'Event card',selector:'.event-card',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Trust item',selector:'.trust-item',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Organizer banner',selector:'.organizer-banner',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Empty state',selector:'.empty-state',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Ticket type',selector:'.ticket-type',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Footer',selector:'.site-footer',fill:'--glass-fill-b',backs:'page',tokens:general},
+{name:'Image label',selector:'.featured-label',fill:'--badge-bg',badge:true,backs:'photo',tokens:['--badge-ink']},
+{name:'Image date',selector:'.featured-date',fill:'--badge-bg',badge:true,backs:'photo',tokens:['--badge-ink']},
+{name:'Image category',selector:'.event-category',fill:'--badge-bg',badge:true,backs:'photo',tokens:['--badge-ink']},
+{name:'Saved heart',selector:'.save-event.saved',fill:'--saved-bg',backs:'photo',tokens:['--saved-ink']},
+{name:'Search field text',selector:'.search-box',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-muted','--text-quiet']},
+{name:'Search submit',selector:'.search-box button',fill:'--glass-fill-b',backs:'page',tokens:['--control-ink']},
+{name:'Menu control',selector:'.menu-button',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Icon control',selector:'.icon-button',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Close control',selector:'.menu-close',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Notification close',selector:'.notification-close',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Secondary button',selector:'.secondary-button',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Round arrow',selector:'.round-arrow',fill:'--badge-bg',badge:true,backs:'photo',tokens:['--badge-ink']},
+{name:'Quantity control',selector:'.quantity-control button',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Card action',selector:'.card-book',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Dock lens',selector:'.nav-lens',fill:'--glass-fill-c',backs:'page',tokens:['--text','--text-strong']},
+{name:'Primary button',selector:'.primary-button',button:true,backs:'page',tokens:['--btn-primary-ink']},
+{name:'Mobile add',selector:'.mobile-add',button:true,backs:'page',tokens:['--btn-primary-ink']},
+{name:'Hero gradient start',selector:'.hero h1 span',gradient:'--text-grad-start',backs:'page',tokens:['--text-grad-start']},
+{name:'Hero gradient end',selector:'.hero h1 span',gradient:'--text-grad-end',backs:'page',tokens:['--text-grad-end']}
 ];
-const backdrops={page:[236,238,242],photo:[45,54,67],white:[255,255,255],black:[0,0,0]};
 function parse(v){const m=v.match(/rgba?\(([^)]+)\)/i);if(m){const a=m[1].split(/[\s,\/]+/).filter(Boolean).map(Number);return[a[0],a[1],a[2],a[3]??1]}const h=v.trim().replace('#','');if(h.length===3)return h.split('').map(x=>parseInt(x+x,16)).concat(1);if(h.length===6)return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),1];return[0,0,0,1]}
 function over(front,back){return[0,1,2].map(i=>front[i]*front[3]+back[i]*(1-front[3])).concat(1)}
 function lum(c){const v=c.slice(0,3).map(x=>{x/=255;return x<=.04045?x/12.92:Math.pow((x+.055)/1.055,2.4)});return .2126*v[0]+.7152*v[1]+.0722*v[2]}
 function contrast(a,b){const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
-function cssVar(name){return getComputedStyle(root).getPropertyValue(name).trim()}
+function variable(name){return getComputedStyle(root).getPropertyValue(name).trim()}
 function cell(row,value,tag='td',cls=''){const el=document.createElement(tag);el.textContent=value;if(cls)el.className=cls;row.append(el)}
-function report(){const oldTheme=root.dataset.theme,oldPreference=root.dataset.themePreference,host=document.querySelector('#report'),rows=[],extremeRows=[];let failures=0,lowest=Infinity;
-for(const theme of ['dark','light']){root.dataset.theme=theme;const style=getComputedStyle(root);const page=parse(cssVar('--page-bg'));const floor=parse(theme==='light'?cssVar('--glass-floor'):cssVar('--glass-floor'));
-for(const surface of surfaces){const el=document.querySelector(surface.selector);if(!el)continue;const fill=parse(cssVar(surface.fill));const textTokens=tokens.filter(t=>t!=='--saved-ink'||surface.name==='Saved heart').filter(t=>t!=='--badge-ink'||surface.badge);const applicable=surface.real;
-for(const backName of applicable){const base=backName==='page'?page:backdrops.photo;const composite=surface.badge?over(fill,base):surface.floor?over(floor,over(fill,base)):over(fill,base);
-for(const token of textTokens){const fg=parse(cssVar(token));const ratio=contrast(fg,composite);const threshold=token==='--text-grad-start'||token==='--text-grad-end'?3:4.5;const pass=ratio>=threshold;if(!pass)failures++;lowest=Math.min(lowest,ratio);rows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','halo-free',pass?'PASS':'FAIL',pass?'pass':'fail']);}
-if(surface.floor){const halo=parse(cssVar('--text-halo'));const haloColor=halo.includes('255,255,255')?[255,255,255,.5]:[0,0,0,.28];const haloComposite=over(haloColor,composite);for(const token of ['--text','--text-muted']){const ratio=contrast(parse(cssVar(token)),haloComposite);rows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','with halo','INFO','pass'])}}
+function rgb(c){return'('+c.slice(0,3).map(x=>Math.round(x)).join(', ')+')'}
+function pageBase(){return parse(variable('--page-bg'))}
+function pageBackdropSamples(theme){return pageSamples[theme].map(([name,color])=>({name,color:parse(color)}))}
+function fillFor(surface,theme){if(surface.button){return(theme==='light'?['#29292e','#111114']:['#ffffff','#dedee2']).map(parse)}if(surface.gradient)return[parse(variable(surface.gradient))];return[parse(variable(surface.fill))]}
+function report(){
+const oldTheme=root.dataset.theme,oldPreference=root.dataset.themePreference,host=document.querySelector('#report'),rows=[],extremes=[];let failures=0,lowest=Infinity;
+for(const theme of ['dark','light']){
+root.dataset.theme=theme;
+for(const surface of surfaces){
+if(!document.querySelector(surface.selector))continue;
+const bases=surface.backs==='sticky'?[...pageBackdropSamples(theme),...photos.map(([name,color])=>({name,color:parse(color)}))]:surface.backs==='photo'?photos:pageBackdropSamples(theme);
+for(const base of bases){
+const fills=fillFor(surface,theme);
+for(let fi=0;fi<fills.length;fi++){
+const fill=fills[fi],floor=surface.floor?parse(variable('--glass-floor')):[0,0,0,0];
+const composite=surface.gradient?base.color:surface.badge?over(fill,base.color):surface.floor?over(floor,over(fill,base.color)):over(fill,base.color);
+for(const token of surface.tokens){
+const fg=parse(variable(token)),ratio=contrast(fg,composite),threshold=token==='--text-grad-start'||token==='--text-grad-end'?3:4.5,pass=ratio>=threshold;
+if(!surface.gradient&&token!=='--control-ink'&&token!=='--btn-primary-ink'&&token!=='--badge-ink'&&token!=='--saved-ink'){if(!pass)failures++;lowest=Math.min(lowest,ratio)}
+rows.push([theme,surface.name,base.name,token,ratio.toFixed(2)+':1',rgb(composite),surface.floor?variable('--text-halo')+' (decorative; not credited)':'none',pass?'PASS':'FAIL',pass?'pass':'fail']);
 }
-for(const backName of ['white','black']){const composite=surface.badge?over(fill,backdrops[backName]):surface.floor?over(floor,over(fill,backdrops[backName])):over(fill,backdrops[backName]);for(const token of ['--text','--text-muted','--text-strong','--control-ink']){const ratio=contrast(parse(cssVar(token)),composite);extremeRows.push([theme,surface.name,backName,token,ratio.toFixed(2)+':1','contrived']);}}
 }
+}
+const extBase=[['contrived pure white',[255,255,255,1]],['contrived pure black',[0,0,0,1]]];
+for(const [name,color] of extBase){for(const surface of surfaces){if(!document.querySelector(surface.selector))continue;const fills=fillFor(surface,theme);const fill=fills[0];const composite=surface.badge?over(fill,color):surface.floor?over(parse(variable('--glass-floor')),over(fill,color)):surface.button?over(fill,color):over(fill,color);const token=surface.tokens[0];extremes.push([theme,surface.name,name,token,contrast(parse(variable(token)),composite).toFixed(2)+':1',rgb(composite)])}}
 }
 root.dataset.theme=oldTheme;root.dataset.themePreference=oldPreference;host.replaceChildren();
-function tableFor(title,records,heads){const heading=document.createElement('h3');heading.textContent=title;host.append(heading);const wrap=document.createElement('div');wrap.className='report-table-wrap';const table=document.createElement('table');table.className='table';const thead=document.createElement('thead'),tr=document.createElement('tr');heads.forEach(x=>cell(tr,x,'th'));thead.append(tr);table.append(thead);const tbody=document.createElement('tbody');records.forEach(values=>{const tr=document.createElement('tr');values.forEach((v,i)=>cell(tr,v,'td',i===6?values[7]||'': ''));tbody.append(tr)});table.append(tbody);wrap.append(table);host.append(wrap)}
-const summary=document.createElement('p');summary.className='report-summary';summary.textContent='Computed halo-free text combinations below threshold: '+failures+' · Lowest sampled ratio: '+(Number.isFinite(lowest)?lowest.toFixed(2):'—')+':1. A FAIL identifies a token/surface pair requiring a local semantic token or layout treatment.';host.append(summary);
-tableFor('Realistic backdrops — halo-free text and final composite',rows,['Theme','Surface','Backdrop','Text token','Contrast','Treatment','Result','Status']);
-tableFor('Contrived extremes — pure white and pure black',extremeRows,['Theme','Surface','Extreme backdrop','Text token','Contrast','Classification']);
+const summary=document.createElement('p');summary.className='report-summary';summary.textContent='Computed realistic combinations below their target: '+failures+' · Lowest reported halo-free ratio: '+(Number.isFinite(lowest)?lowest.toFixed(2):'—')+':1. Text-shadow halos are listed but never credited toward WCAG contrast. Page samples are modeled ambient regions; photo samples are representative dark and bright values, not measured photo pixels.';host.append(summary);
+function table(title,records,heads){const h=document.createElement('h3');h.textContent=title;host.append(h);const wrap=document.createElement('div');wrap.className='report-table-wrap';const t=document.createElement('table');t.className='table';const thead=document.createElement('thead'),hr=document.createElement('tr');heads.forEach(x=>cell(hr,x,'th'));thead.append(hr);t.append(thead);const body=document.createElement('tbody');records.forEach(values=>{const tr=document.createElement('tr');values.forEach((v,i)=>cell(tr,v,'td',i===7?values[8]||'': ''));body.append(tr)});t.append(body);wrap.append(t);host.append(wrap)}
+table('Realistic backdrops — final composite and halo-free text',rows,['Theme','Surface','Backdrop sample','Text token','Contrast','Final composite RGB','Halo treatment','Result','Status']);
+table('Contrived extremes — not realistic page conditions',extremes,['Theme','Surface','Extreme backdrop','Text token','Contrast','Final composite RGB']);
 }
 themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='light'?'dark':'light';root.dataset.themePreference=root.dataset.theme;document.querySelector('#themeColorMeta').content=root.dataset.theme==='light'?'#eceef2':'#050505';document.querySelector('#colorSchemeMeta').content=root.dataset.theme;report()});
 const refraction=document.querySelector('#refraction'),disp=document.querySelector('#disp'),off=document.querySelector('#off'),flip=document.querySelector('#flip');
@@ -106,7 +134,7 @@ refraction.addEventListener('input',()=>{document.querySelector('#refractionValu
 disp.addEventListener('input',()=>{root.style.setProperty('--lg-dispersion',disp.value);document.querySelector('#dispValue').value=disp.value});
 off.addEventListener('change',updateRefraction);flip.addEventListener('change',()=>root.style.setProperty('--lg-flip',flip.checked?'-1':'1'));
 const mapWrap=document.querySelector('#mapWrap'),mapPreview=document.querySelector('#mapPreview'),showMap=document.querySelector('#showMap');
-function syncMap(){const topbar=document.querySelector('.backdrop .topbar');const uri=topbar?.dataset.lgMap;if(uri&&showMap.checked){mapPreview.src=uri;mapWrap.hidden=false}else if(!showMap.checked){mapWrap.hidden=true}}
+function syncMap(){const topbar=document.querySelector('.backdrop .topbar'),uri=topbar?.dataset.lgMap;if(uri&&showMap.checked){mapPreview.src=uri;mapWrap.hidden=false}else if(!showMap.checked)mapWrap.hidden=true}
 showMap.addEventListener('change',syncMap);new MutationObserver(syncMap).observe(document.body,{subtree:true,attributes:true,attributeFilter:['data-lg-map']});
 root.style.setProperty('--lg-refraction',refraction.value);root.style.setProperty('--lg-dispersion',disp.value);root.style.setProperty('--lg-flip','1');report();
 })();
