@@ -483,3 +483,13 @@ body{background:var(--page-bg)}
 
 /* Keep the existing hidden state authoritative without !important. */
 .hidden{display:none}
+
+/* Focus, footer and forced-colors defect repairs. */
+:root{--focus-ring:#fff;--focus-halo:#151515}
+:root[data-theme=light]{--focus-ring:#2457b8;--focus-halo:#fff}
+.page-shell{padding-bottom:24px}.site-footer{padding-bottom:calc(var(--dock-h) + 40px + var(--safe-bottom))}.footer-arc{top:0}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px;box-shadow:0 0 0 2px var(--focus-halo)}
+.search-box:focus-within{outline:2px solid var(--focus-ring);outline-offset:3px;box-shadow:0 0 0 2px var(--focus-halo)}
+.filter-chip:focus-visible,.card-book:focus-visible,.save-event:focus-visible,.menu-button:focus-visible,.icon-button:focus-visible,.mobile-nav button:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px;box-shadow:0 0 0 2px var(--focus-halo)}
+:root.theme-switching *,:root.theme-switching *::before,:root.theme-switching *::after{transition:none}
+@media(forced-colors:active){.hero h1 span,.section-heading h2 span{-webkit-text-fill-color:currentColor;background:none;color:CanvasText}}
