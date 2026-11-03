@@ -303,7 +303,6 @@ button:disabled{opacity:.4;cursor:not-allowed}
   position:relative;isolation:isolate;overflow:hidden;margin-top:12px;
   padding:58px max(var(--gutter),calc((100% - var(--content))/2)) calc(28px + var(--safe-bottom));
   background:linear-gradient(180deg,var(--glass-fill-a),transparent);
-  border-top:1px solid var(--glass-fill-a)
 }
 .footer-arc{
   position:absolute;left:-5%;right:-5%;top:-42px;height:72px;
