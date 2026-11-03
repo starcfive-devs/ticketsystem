@@ -100,6 +100,11 @@
         duration: 0.48,
         stagger: 0.055,
         ease: 'power2.out',
+        scrollTrigger: {
+          trigger: eventGrid,
+          start: 'top 88%',
+          once: true
+        },
         clearProps: 'transform'
       }
     );
