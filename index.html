@@ -5,8 +5,21 @@
   <!-- viewport-fit=cover lets the glass dock and header respect phone notches and home bars. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Discover memorable events across Ghana and find your next experience.">
-  <meta name="theme-color" content="#000000">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000" id="themeColorMeta">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" id="themeColorDark">
+  <meta name="theme-color" content="#f2f2f5" media="(prefers-color-scheme: light)" id="themeColorLight">
+  <meta name="color-scheme" content="dark" id="colorSchemeMeta">
+  <script>
+    (() => {
+      let choice = 'system';
+      try { choice = localStorage.getItem('theme') || 'system'; } catch (_) {}
+      if (!['system', 'light', 'dark'].includes(choice)) choice = 'system';
+      const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const resolved = choice === 'system' ? (systemLight ? 'light' : 'dark') : choice;
+      document.documentElement.dataset.theme = resolved;
+      document.documentElement.dataset.themePreference = choice;
+    })();
+  </script>
   <title>Events &amp; Tickets</title>
 
   <!-- Fonts load here (not via CSS @import) so they don't block the stylesheet. -->
@@ -20,6 +33,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="liquid-glass.css">
 
+  <script src="theme.js" defer></script>
   <script src="script.js" defer></script>
   <script src="liquid-glass.js" defer></script>
 </head>
@@ -78,6 +92,14 @@
     <span class="menu-label menu-label-spaced">YOUR SPACE</span>
     <button type="button" data-menu-view="account"><i class="fa-regular fa-user" aria-hidden="true"></i> Account</button>
     <button type="button" data-menu-view="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> About this site</button>
+    <div class="theme-menu-row">
+      <div class="theme-menu-label"><i class="fa-solid fa-sun" aria-hidden="true"></i><span>Appearance</span></div>
+      <div class="theme-segment" role="radiogroup" aria-label="Colour theme">
+        <button type="button" role="radio" data-theme-choice="system" aria-checked="true" tabindex="0">System</button>
+        <button type="button" role="radio" data-theme-choice="light" aria-checked="false" tabindex="-1">Light</button>
+        <button type="button" role="radio" data-theme-choice="dark" aria-checked="false" tabindex="-1">Dark</button>
+      </div>
+    </div>
     <div class="menu-bottom-note">Made for moments that matter</div>
   </aside>
   <button class="menu-scrim" id="menuScrim" type="button" aria-label="Close menu" tabindex="-1"></button>
